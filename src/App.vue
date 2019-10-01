@@ -1,8 +1,11 @@
 <template>
-  <div id="app">
+  <v-app>
     <Navbar />
-    <router-view />
-  </div>
+
+    <v-content>
+      <router-view />
+    </v-content>
+  </v-app>
 </template>
 
 <script>
@@ -10,13 +13,9 @@ import Navbar from "./components/Navbar"
 
 export default {
   name: "App",
-  methods: {
-    openKakao: function() {
-        window.open("https://open.kakao.com/o/g2FEzQ5")
-    }
-  },
   components: {
-    Navbar,
+    Navbar
   }
 };
+
 </script>

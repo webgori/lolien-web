@@ -11,8 +11,10 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.21",
     "@fortawesome/free-solid-svg-icons": "^5.10.1",
     "@fortawesome/vue-fontawesome": "^0.1.6",
+    "axios": "^0.19.0",
     "core-js": "^2.6.5",
     "vue": "^2.6.10",
+    "vue-gapi": "0.0.10",
     "vue-material-design-icons": "^3.3.1",
     "vue-router": "^3.0.3",
     "vuetify": "^2.0.0",
@@ -42,8 +44,8 @@
       "node": true
     },
     "extends": [
-      "plugin:vue/essential",
-      "@vue/prettier"
+      "plugin:vue/recommended",
+      "eslint:recommended"
     ],
     "rules": {},
     "parserOptions": {

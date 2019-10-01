@@ -3,6 +3,8 @@ import Router from "vue-router";
 import Index from "./views/Index.vue";
 import Intro from "./views/Intro.vue";
 import Join from "./views/Join.vue";
+import Member from "./views/Member.vue";
+import CustomGame from "./views/CustomGame.vue";
 
 Vue.use(Router);
 
@@ -24,6 +26,16 @@ export default new Router({
       path: "/join",
       name: "join",
       component: Join
+    },
+    {
+      path: "/member",
+      name: "member",
+      component: Member
+    },
+    {
+      path: "/custom-game",
+      name: "custom-game",
+      component: CustomGame
     },
     {
       path: "/about",

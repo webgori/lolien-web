@@ -1,15 +1,51 @@
 <template>
-  <v-toolbar>
-    <v-toolbar-title><router-link to="/">LoLien.kr</router-link></v-toolbar-title>
+  <v-app-bar
+    app
+  >
+    <v-toolbar-title>
+      <router-link to="/">
+        <!-- LoLien.kr -->
+        <span class="white--text navbar-logo">LoLien.kr</span>
+      </router-link>
+    </v-toolbar-title>
 
-    <div class="flex-grow-1"></div>
+    <div class="flex-grow-1" />
 
-    <v-toolbar-items>
-      <v-btn text to="/intro">소개</v-btn>
-      <v-btn text to="/join">가입</v-btn>
-      <v-btn text @click="openKakao()">대화방</v-btn>
-      <v-btn text>내전</v-btn>
-      <v-btn text>리그</v-btn>
+    <v-toolbar-items class="navbar">
+      <v-btn
+        text
+        to="/intro"
+      >
+        소개
+      </v-btn>
+      <v-btn
+        text
+        to="/join"
+      >
+        가입
+      </v-btn>
+      <v-btn
+        text
+        to="/member"
+      >
+        클랜원
+      </v-btn>
+      <v-btn
+        text
+        to="/custom-game"
+      >
+        내전
+      </v-btn>
+      <v-btn text>
+        리그
+      </v-btn>
+      <v-btn
+        v-blur
+        text
+        @click="openKakao()"
+      >
+        대화방
+      </v-btn>
     </v-toolbar-items>
 
     <template v-if="$vuetify.breakpoint.smAndUp">
@@ -23,5 +59,17 @@
         <v-icon>mdi-plus-circle</v-icon>
       </v-btn>
     </template>
-  </v-toolbar>
+  </v-app-bar>
 </template>
+
+<script>
+export default {
+  name: "App",
+  methods: {
+    openKakao: function() {
+      window.open("https://open.kakao.com/o/g2FEzQ5");
+      return;
+    }
+  }
+};
+</script>
