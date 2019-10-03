@@ -66,8 +66,6 @@
 </template>
 
 <script>
-  import axios from 'axios'; 
-
   export default {
     name: "Member",
     components: {},
@@ -78,11 +76,11 @@
       },
     },
     data: () => ({
-            items: [
+      items: [
         {
           color: '#1F7087',
           src: 'https://cdn.vuetifyjs.com/images/cards/foster.jpg',
-          title: 'Supermodel',
+          title: 'Supermodel11111111111',
           artist: 'Foster the People',
         },
         {
@@ -94,23 +92,22 @@
       ],
     }),
     mounted () {
-      this.getData().then(function (result) {
-        this.console.log(result);
-        throw new Error("Error in then()"); // Uncaught (in promise) Error: Error in then()
-      }, function (err) {
-        this.console.log('then error : ', err);
-      });
+      this.getData();
     },
     methods: {
       getData() {
-        return new Promise(function (resolve, reject) {
-          axios.get('http://webgori.kr:8080/league', function (response) {
-            if (response) {
-              resolve(response);
-            }
+        this.$http.get('http://webgori.kr:8080/custom-game').then(response => {
+          let responseBody = response.body;
+          let customGames = responseBody['customGames'];
 
-            reject(new Error("Request is failed"));
+          console.log(responseBody);
+
+          customGames.forEach(function(customGame) {
+            let idx = customGame['idx'];
+            console.log(idx);
           });
+        }, response => {
+          alert(response);
         });
       }
     },
