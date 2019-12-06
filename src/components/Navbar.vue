@@ -25,8 +25,9 @@
         가입
       </v-btn>
       <v-btn
+        v-blur
         text
-        to="/member"
+        @click="openMembers()"
       >
         클랜원
       </v-btn>
@@ -68,6 +69,10 @@ export default {
   methods: {
     openKakao: function() {
       window.open("https://open.kakao.com/o/g2FEzQ5");
+      return;
+    },
+    openMembers: function() {
+      window.open("https://docs.google.com/spreadsheets/d/1QEoTuk_e7HLsSX9pnKJvKEt8yjxJJB1lS3aCwUottY4/edit#gid=139641232");
       return;
     }
   }
