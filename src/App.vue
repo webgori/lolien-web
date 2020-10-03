@@ -94,7 +94,7 @@
   </v-app>
 
   <v-app v-else>
-    <v-app-bar app color="light-blue">
+    <v-app-bar app color="light-blue" dense>
       <v-toolbar-title>
         <router-link to="/">
           <!-- LoLien.kr -->
