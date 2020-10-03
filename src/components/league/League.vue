@@ -1,0 +1,178 @@
+<template>
+  <v-app>
+    <v-container class="contents" fluid>
+      <v-row dense>
+        <v-col lg="12">
+          <v-row dense>
+            <v-col cols="12" lg="2">
+              <v-btn
+                large
+                v-if="resultComponent"
+                color="white"
+                @click="goToIntro()"
+              >
+                <v-icon left color="blue">fas fa-arrow-left</v-icon>
+                <span class="body-1">리그 설명 보러 가기</span>
+              </v-btn>
+            </v-col>
+            <v-col cols="12" lg="2" offset-lg="8">
+              <v-select
+                dense
+                :items="leagues"
+                solo
+                item-text="title"
+                item-value="idx"
+                v-model="leagues[leagues.length - 1]"
+                return-object
+                v-on:input="changeLeague(leagues[leagues.length - 1])"
+              ></v-select>
+            </v-col>
+          </v-row>
+        </v-col>
+      </v-row>
+      <v-row dense>
+        <v-col cols="12" lg="12">
+          <LeagueIntro
+            v-if="!resultComponent"
+            :leagueIndex="currentLeagueIndex"
+            @setLoading="setLoading"
+            @showResult="showResult"
+          />
+
+          <LeagueResult
+            v-if="resultComponent"
+            :leagueIndex="currentLeagueIndex"
+            :scheduleIndex="scheduleIndex"
+            @setLoading="setLoading"
+            @goToIntro="goToIntro"
+          />
+        </v-col>
+      </v-row>
+      <v-row dense>
+        <v-col cols="12" lg="12">
+          <v-dialog v-model="fileUploadDialog" max-width="900px">
+            <v-card>
+              <v-card-title>
+                <template>
+                  <v-icon style="margin-right:10px;" large color="light-blue"
+                    >fas fa-cloud-upload-alt</v-icon
+                  >
+                  <span class="headline" large>파일 업로드</span>
+                </template>
+                <v-spacer></v-spacer>
+                <v-btn icon @click="hideFileUPloadDialog()">
+                  <v-icon>fas fa-times</v-icon>
+                </v-btn>
+              </v-card-title>
+              <v-card-text>
+                <v-row>
+                  <v-col
+                    cols="12"
+                    sm="12"
+                    md="12"
+                    style="position: relative; border:1px solid #2196F3; border-style:dashed; "
+                  >
+                    <LeagueResultFileUpload
+                      :leagueIndex="currentLeagueIndex"
+                      :subMenuIndex="subMenuIndex"
+                      @addedLeagueResult="addedLeagueResult"
+                    />
+                  </v-col>
+                </v-row>
+              </v-card-text>
+            </v-card>
+          </v-dialog>
+        </v-col>
+      </v-row>
+    </v-container>
+  </v-app>
+</template>
+
+<script>
+import axios from "axios";
+import LeagueIntro from "@/components/league/LeagueIntro";
+import LeagueResult from "@/components/league/LeagueResult";
+import LeagueResultFileUpload from "@/components/league/LeagueResultFileUpload";
+
+export default {
+  name: "Member",
+  components: { LeagueIntro, LeagueResult, LeagueResultFileUpload },
+  props: {},
+  created() {
+    this.$eventBus.$on("hideFileUPloadDialog", this.hideFileUPloadDialog);
+
+    this.subMenuIndex =
+      this.$route.query.subMenuIndex == null
+        ? 1
+        : this.$route.query.subMenuIndex;
+
+    this.getLeagues().then(response => {
+      this.leagues = response.data.leagues;
+      this.currentLeagueIndex = this.leagues[this.leagues.length - 1].idx;
+    });
+  },
+  data: () => ({
+    subMenuIndex: null,
+    leagues: [],
+    currentLeagueIndex: null,
+    fileUploadDialog: false,
+    resultComponent: false
+  }),
+  methods: {
+    setLoading: function(loading) {
+      this.$emit("setLoading", loading);
+    },
+    getLeagues() {
+      var _this = this;
+
+      return new Promise(function(resolve, reject) {
+        _this.$emit("setLoading", true);
+        //_this.loading = true;
+
+        axios
+          .get("https://api.lolien.kr/v1/leagues")
+          .then(response => {
+            resolve(response);
+          })
+          .catch(error => {
+            // handle error
+            console.log(error);
+            reject(error);
+          })
+          .then(function() {
+            // always executed
+            // _this.$emit("setLoading", false);
+            //_this.loading = false;
+          });
+      });
+    },
+    changeLeague(league) {
+      this.currentLeagueIndex = league.idx;
+    },
+    setSubMenuIndex(subMenuIndex) {
+      this.subMenuIndex = subMenuIndex;
+    },
+    showFileUPloadDialog() {
+      this.fileUploadDialog = true;
+    },
+    hideFileUPloadDialog() {
+      this.fileUploadDialog = false;
+    },
+    addedLeagueResult() {
+      if (this.subMenuIndex === 2) {
+        this.subMenuIndex = 1;
+        this.subMenuIndex = 2;
+      }
+    },
+    showResult(scheduleIndex) {
+      scroll(0, 0);
+      this.resultComponent = true;
+      this.scheduleIndex = scheduleIndex;
+    },
+    goToIntro() {
+      scroll(0, 0);
+      this.resultComponent = false;
+    }
+  }
+};
+</script>
