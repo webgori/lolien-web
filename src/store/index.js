@@ -13,10 +13,18 @@ export default new Vuex.Store({
     size: 10,
     totalPages: null
   },
+  getters: {
+    getLoading(state) {
+      return state.loading;
+    }
+  },
   mutations: {
     setLeagueResults(state, response) {
       state.leagueResults = response.data.results;
       state.totalPages = response.data.totalPages;
+    },
+    setLoading(state, loading) {
+      state.loading = loading;
     }
   },
   actions: {

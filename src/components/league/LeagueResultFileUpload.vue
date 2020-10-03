@@ -143,9 +143,6 @@ export default {
         })
         .then(() => {
           // always executed
-          // _this.$emit("setLoading", false);
-          //_this.loading = false;
-
           this.clearFiles();
         });
     },

@@ -1,5 +1,5 @@
 <template>
-  <League @setLoading="setLoading" />
+  <League />
 </template>
 
 <script>
@@ -9,10 +9,6 @@ export default {
   components: {
     League
   },
-  methods: {
-    setLoading: function(loading) {
-      this.$emit("setLoading", loading);
-    }
-  }
+  methods: {}
 };
 </script>

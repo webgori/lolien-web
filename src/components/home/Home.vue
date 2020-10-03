@@ -205,6 +205,7 @@
 import axios from "axios";
 import MatchesChart from "../home/charts/Matches";
 import StatisticsCard from "../home/cards/StatisticsCard";
+import { mapMutations } from "vuex";
 
 export default {
   name: "Index",
@@ -223,7 +224,6 @@ export default {
     page: 1,
     totalPages: null,
     size: 3,
-    loading: false,
     summonerName: "",
     startDateOfMonth: "",
     endDateOfMonth: "",
@@ -491,8 +491,8 @@ export default {
       var _this = this;
 
       return new Promise(function(resolve, reject) {
-        _this.$emit("setLoading", true);
-        //_this.loading = true;
+        _this.setLoading(true);
+
         axios
           .get("https://api.lolien.kr/v1/custom-game/statistics")
           .then(response => {
@@ -505,8 +505,7 @@ export default {
           })
           .then(function() {
             // always executed
-            _this.$emit("setLoading", false);
-            //_this.loading = false;
+            _this.setLoading(false);
           });
       });
     },
@@ -515,7 +514,10 @@ export default {
     },
     numberWithCommas(x) {
       return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
+    },
+    ...mapMutations({
+      setLoading: "setLoading"
+    })
   }
 };
 </script>

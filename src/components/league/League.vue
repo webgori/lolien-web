@@ -35,7 +35,6 @@
           <LeagueIntro
             v-if="!resultComponent"
             :leagueIndex="currentLeagueIndex"
-            @setLoading="setLoading"
             @showResult="showResult"
           />
 
@@ -43,7 +42,6 @@
             v-if="resultComponent"
             :leagueIndex="currentLeagueIndex"
             :scheduleIndex="scheduleIndex"
-            @setLoading="setLoading"
             @goToIntro="goToIntro"
           />
         </v-col>
@@ -93,6 +91,7 @@ import axios from "axios";
 import LeagueIntro from "@/components/league/LeagueIntro";
 import LeagueResult from "@/components/league/LeagueResult";
 import LeagueResultFileUpload from "@/components/league/LeagueResultFileUpload";
+import { mapMutations } from "vuex";
 
 export default {
   name: "Member",
@@ -119,15 +118,11 @@ export default {
     resultComponent: false
   }),
   methods: {
-    setLoading: function(loading) {
-      this.$emit("setLoading", loading);
-    },
     getLeagues() {
       var _this = this;
 
       return new Promise(function(resolve, reject) {
-        _this.$emit("setLoading", true);
-        //_this.loading = true;
+        _this.setLoading(true);
 
         axios
           .get("https://api.lolien.kr/v1/leagues")
@@ -141,8 +136,6 @@ export default {
           })
           .then(function() {
             // always executed
-            // _this.$emit("setLoading", false);
-            //_this.loading = false;
           });
       });
     },
@@ -172,7 +165,10 @@ export default {
     goToIntro() {
       scroll(0, 0);
       this.resultComponent = false;
-    }
+    },
+    ...mapMutations({
+      setLoading: "setLoading"
+    })
   }
 };
 </script>

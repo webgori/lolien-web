@@ -306,6 +306,7 @@
 import axios from "axios";
 import LeagueResultFileUpload from "@/components/league/LeagueResultFileUpload";
 import moment from "moment";
+import { mapMutations } from "vuex";
 
 export default {
   name: "Member",
@@ -331,11 +332,7 @@ export default {
   }),
   methods: {
     getSummonersForParticipation() {
-      var _this = this;
-
       return new Promise(function(resolve, reject) {
-        _this.$emit("setLoading", true);
-        //_this.loading = true;
         axios
           .get("https://api.lolien.kr/v1/leagues/summoners/participation")
           .then(response => {
@@ -348,8 +345,6 @@ export default {
           })
           .then(function() {
             // always executed
-            _this.$emit("setLoading", false);
-            //_this.loading = false;
           });
       });
     },
@@ -385,6 +380,8 @@ export default {
         });
     },
     getSchedules() {
+      var _this = this;
+
       axios
         .get("https://api.lolien.kr/v1/leagues/schedule")
         .then(response => {
@@ -396,6 +393,7 @@ export default {
         })
         .then(function() {
           // always executed
+          _this.setLoading(false);
         });
     },
     showResult(scheduleIndex) {
@@ -418,7 +416,10 @@ export default {
         enemyTeamName;
 
       return text;
-    }
+    },
+    ...mapMutations({
+      setLoading: "setLoading"
+    })
   }
 };
 </script>

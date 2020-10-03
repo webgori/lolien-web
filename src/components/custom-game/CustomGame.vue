@@ -25,23 +25,23 @@
 import axios from "axios";
 import CustomGameCard from "@/components/custom-game/CustomGameCard";
 import CustomGamePagination from "@/components/custom-game/CustomGamePagination";
+import { mapGetters, mapMutations } from "vuex";
 
 export default {
   name: "Member",
   components: { CustomGameCard, CustomGamePagination },
-  props: {
-    source: {
-      type: String,
-      default: ""
-    }
-  },
+  props: {},
   created() {
     this.summonerName = this.$route.query.summonerName;
     this.getCustomGames();
   },
+  computed: {
+    ...mapGetters({
+      loading: "getLoading"
+    })
+  },
   data: () => {
     return {
-      loading: false,
       page: 1,
       totalPages: null,
       size: 3,
@@ -63,8 +63,7 @@ export default {
     getCustomGames() {
       var _this = this;
       return new Promise(function(resolve, reject) {
-        _this.$emit("setLoading", true);
-        _this.loading = true;
+        _this.setLoading(true);
 
         if (_this.summonerName == null) {
           axios
@@ -86,9 +85,8 @@ export default {
               reject(error);
             })
             .then(function() {
-              _this.$emit("setLoading", false);
-              _this.loading = false;
               // always executed
+              _this.setLoading(false);
             });
         } else {
           axios
@@ -118,10 +116,8 @@ export default {
               reject(error);
             })
             .then(function() {
-              setTimeout(function() {
-                _this.$emit("setLoading", false);
-              }, 500);
               // always executed
+              _this.setLoading(false);
             });
         }
       });
@@ -135,7 +131,10 @@ export default {
       //this.summonerName = summonerName;
       //this.getCustomGames();
       scroll(0, 0);
-    }
+    },
+    ...mapMutations({
+      setLoading: "setLoading"
+    })
   }
 };
 </script>

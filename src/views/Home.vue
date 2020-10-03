@@ -1,5 +1,5 @@
 <template>
-  <Home @setLoading="setLoading" />
+  <Home />
 </template>
 
 <script>
@@ -9,10 +9,6 @@ export default {
   components: {
     Home
   },
-  methods: {
-    setLoading: function(loading) {
-      this.$emit("setLoading", loading);
-    }
-  }
+  methods: {}
 };
 </script>

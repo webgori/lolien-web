@@ -85,7 +85,7 @@
         height="5"
         style="top: 1px;"
       />
-      <router-view :key="$route.fullPath" @setLoading="setLoading" />
+      <router-view :key="$route.fullPath" />
     </v-main>
 
     <v-footer app color="light-blue">
@@ -159,7 +159,7 @@
         </v-btn>
       </v-toolbar-items>
 
-      <template v-if="$vuetify.breakpoint.smAndUp">
+      <template>
         <v-btn icon>
           <v-icon>fas fa-sign-in-alt</v-icon>
         </v-btn>
@@ -181,7 +181,7 @@
         height="5"
         style="top: 1px;"
       />
-      <router-view :key="$route.fullPath" @setLoading="setLoading" />
+      <router-view :key="$route.fullPath" />
     </v-main>
 
     <v-footer app color="light-blue">
@@ -191,11 +191,17 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   name: "App",
+  computed: {
+    ...mapGetters({
+      loading: "getLoading"
+    })
+  },
   data: () => ({
-    drawer: null,
-    loading: false
+    drawer: null
   }),
   methods: {
     openKakao: function() {
@@ -207,9 +213,6 @@ export default {
         "https://docs.google.com/spreadsheets/d/1QEoTuk_e7HLsSX9pnKJvKEt8yjxJJB1lS3aCwUottY4/edit#gid=139641232"
       );
       return;
-    },
-    setLoading: function(loading) {
-      this.loading = loading;
     }
   }
 };

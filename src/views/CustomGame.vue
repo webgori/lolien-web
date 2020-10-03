@@ -1,5 +1,5 @@
 <template>
-  <CustomGame @setLoading="setLoading" />
+  <CustomGame />
 </template>
 
 <script>
@@ -9,10 +9,6 @@ export default {
   components: {
     CustomGame
   },
-  methods: {
-    setLoading: function(loading) {
-      this.$emit("setLoading", loading);
-    }
-  }
+  methods: {}
 };
 </script>

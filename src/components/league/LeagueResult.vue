@@ -45,6 +45,7 @@
 <script>
 import axios from "axios";
 import LeagueResultCard from "@/components/league/LeagueResultCard";
+import { mapMutations } from "vuex";
 
 export default {
   name: "Member",
@@ -59,7 +60,6 @@ export default {
   },
   data: () => {
     return {
-      loading: false,
       page: 1,
       totalPages: null,
       size: 3,
@@ -98,8 +98,7 @@ export default {
     getLeagueResults() {
       var _this = this;
       return new Promise(function(resolve, reject) {
-        _this.$emit("setLoading", true);
-        _this.loading = true;
+        _this.setLoading(true);
 
         axios
           .get("https://api.lolien.kr/v1/leagues/" + _this.leagueIndex, {
@@ -119,17 +118,15 @@ export default {
             reject(error);
           })
           .then(function() {
-            _this.$emit("setLoading", false);
-            _this.loading = false;
             // always executed
+            _this.setLoading(false);
           });
       });
     },
     getLeagueResultsBySummonerName() {
       var _this = this;
       return new Promise(function(resolve, reject) {
-        _this.$emit("setLoading", true);
-        _this.loading = true;
+        _this.setLoading(true);
 
         axios
           .get("https://api.lolien.kr/v1/custom-game/" + _this.summonerName, {
@@ -156,10 +153,8 @@ export default {
             reject(error);
           })
           .then(function() {
-            setTimeout(function() {
-              _this.$emit("setLoading", false);
-            }, 500);
             // always executed
+            _this.setLoading(false);
           });
       });
     },
@@ -204,7 +199,10 @@ export default {
     },
     goToIntro() {
       this.$emit("goToIntro");
-    }
+    },
+    ...mapMutations({
+      setLoading: "setLoading"
+    })
   }
 };
 </script>
