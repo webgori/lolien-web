@@ -69,6 +69,9 @@ Vue.filter("formatSize", function(size) {
 new Vue({
   router,
   store,
+  beforeCreate() {
+    //this.$store.dispatch("getUserInfo");
+  },
   vuetify,
   render: h => h(App)
 }).$mount("#app");

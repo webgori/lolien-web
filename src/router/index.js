@@ -7,6 +7,8 @@ import Member from "@/views/Member";
 import CustomGame from "@/views/CustomGame";
 import CustomGameTest from "@/views/CustomGameTest";
 import League from "@/views/League";
+import Login from "@/views/Login";
+import store from "../store";
 
 Vue.use(VueRouter);
 
@@ -47,13 +49,18 @@ const routes = [
     component: League
   },
   {
-    path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue")
+    path: "/login",
+    name: "login",
+    beforeEnter: (from, to, next) => {
+      let userInfo = store.getters.getUserInfo;
+
+      if (userInfo == null) {
+        next();
+      } else {
+        next("/");
+      }
+    },
+    component: Login
   }
 ];
 

@@ -4,6 +4,8 @@ import axios from "axios";
 
 Vue.use(Vuex);
 
+import user from "@/store/user.js";
+
 export default new Vuex.Store({
   state: {
     loading: false,
@@ -58,5 +60,5 @@ export default new Vuex.Store({
       this.getLeagueResults();
     }
   },
-  modules: {}
+  modules: { user: user }
 });

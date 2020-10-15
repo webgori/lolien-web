@@ -160,8 +160,11 @@
       </v-toolbar-items>
 
       <template>
-        <v-btn icon>
-          <v-icon>fas fa-sign-in-alt</v-icon>
+        <v-btn v-if="login" text @click="logout" color="white">
+          <v-icon left>fas fa-sign-out-alt</v-icon> Logout
+        </v-btn>
+        <v-btn v-else text to="/login" color="white">
+          <v-icon left>fas fa-sign-in-alt</v-icon> Login
         </v-btn>
         <!-- <v-btn icon>
           <v-icon>mdi-delete-circle</v-icon>
@@ -191,13 +194,20 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
+import Cookies from "js-cookie";
+import VueJwtDecode from "vue-jwt-decode";
 
 export default {
   name: "App",
+  created() {
+    this.autoLogin();
+  },
   computed: {
     ...mapGetters({
-      loading: "getLoading"
+      loading: "getLoading",
+      login: "getLogin",
+      accessToken: "getAccessToken"
     })
   },
   data: () => ({
@@ -213,6 +223,35 @@ export default {
         "https://docs.google.com/spreadsheets/d/1QEoTuk_e7HLsSX9pnKJvKEt8yjxJJB1lS3aCwUottY4/edit#gid=139641232"
       );
       return;
+    },
+    ...mapActions(["getUserInfo", "generateAccessToken", "logout"]),
+    autoLogin() {
+      let autoLogin = Cookies.get("autoLogin") === "true";
+
+      if (this.login == false && autoLogin) {
+        let accessToken = Cookies.get("accessToken");
+
+        if (accessToken == null) {
+          let email = Cookies.get("email");
+          let refreshToken = Cookies.get("refreshToken");
+
+          this.generateAccessToken({
+            email: email,
+            refreshToken: refreshToken
+          });
+        } else {
+          let jwt = VueJwtDecode.decode(accessToken);
+          let expire = jwt.exp;
+          let timestamp = this.getTimestamp();
+
+          if (expire > timestamp) {
+            this.getUserInfo();
+          }
+        }
+      }
+    },
+    getTimestamp() {
+      return +new Date() / 1000;
     }
   }
 };
