@@ -3,9 +3,9 @@
     <v-row align="center" justify="center">
       <v-col lg="4">
         <v-card class="elevation-4">
-          <!-- <v-toolbar dark color="primary">
+          <v-toolbar dark color="cyan">
             <v-toolbar-title>로그인</v-toolbar-title>
-          </v-toolbar> -->
+          </v-toolbar>
           <v-card-text>
             <v-form>
               <v-row dense>
@@ -68,7 +68,7 @@
                         autoLogin: autoLogin
                       })
                     "
-                    >로그인</v-btn
+                    >확인</v-btn
                   >
                 </v-col></v-row
               >

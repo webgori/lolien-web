@@ -48,8 +48,8 @@ export default {
     }
   },
   actions: {
-    register: (userId, password, nickname) => {
-      return api.register(userId, password, nickname);
+    register: request => {
+      return api.register(request);
     },
     login: ({ commit, dispatch }, request) => {
       return api

@@ -28,11 +28,15 @@ axios.interceptors.request.use(function(config) {
 
 export default {
   BASE_URL: "https://api.lolien.kr",
-  register(email, password, nickname) {
+  register(request) {
     return axios.post(this.BASE_URL + "/v1/users/register", {
-      email: email,
-      password: password,
-      nickname: nickname
+      email: request.email,
+      emailAuthNumber: request.emailAuthNumber,
+      nickname: request.nickname,
+      password: request.password,
+      clienId: request.clienId,
+      clienIdAuthNumber: request.clienIdAuthNumber,
+      summonerName: request.summonerName
     });
   },
   login(request) {

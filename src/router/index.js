@@ -8,6 +8,7 @@ import CustomGame from "@/views/CustomGame";
 import CustomGameTest from "@/views/CustomGameTest";
 import League from "@/views/League";
 import Login from "@/views/Login";
+import Register from "@/views/Register";
 import store from "../store";
 
 Vue.use(VueRouter);
@@ -61,6 +62,20 @@ const routes = [
       }
     },
     component: Login
+  },
+  {
+    path: "/register",
+    name: "register",
+    beforeEnter: (from, to, next) => {
+      let userInfo = store.getters.getUserInfo;
+
+      if (userInfo == null) {
+        next();
+      } else {
+        next("/");
+      }
+    },
+    component: Register
   }
 ];
 
