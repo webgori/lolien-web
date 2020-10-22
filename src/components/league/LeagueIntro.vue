@@ -97,9 +97,41 @@
       <p class="title font-weight-bold mb-0">팀</p>
       <v-divider class="mb-2"></v-divider>
 
-      <p v-for="team in teams" :key="team.idx">
-        {{ team.englishName }} ({{ team.koreanName }})
-      </p>
+      <div v-for="team in teams" :key="team.idx">
+        <p>{{ team.englishName }} ({{ team.koreanName }})</p>
+
+        <ul v-if="team.englishName == 'Demacia'" class="pb-5">
+          <li>꿈꾸는발라당</li>
+          <li>크로누스</li>
+          <li>하르크</li>
+          <li>bom 네드베드</li>
+          <li>Malkuth</li>
+        </ul>
+
+        <ul v-if="team.englishName == 'Noxus'" class="pb-5">
+          <li>용찐찌</li>
+          <li>MFC ATL Module</li>
+          <li>IF YeTam</li>
+          <li>kkomi kim</li>
+          <li>Zella Day</li>
+        </ul>
+
+        <ul v-if="team.englishName == 'Freljord'" class="pb-5">
+          <li>뭐하는고니</li>
+          <li>아미스시마</li>
+          <li>영블러드</li>
+          <li>LUNA 에릭</li>
+          <li>Shee</li>
+        </ul>
+
+        <ul v-if="team.englishName == 'Shadow Isles'" class="pb-5">
+          <li>역시수저</li>
+          <li>Cooltea</li>
+          <li>Jajoon</li>
+          <li>Range of Xerath</li>
+          <li>김갓난</li>
+        </ul>
+      </div>
 
       <p class="title font-weight-bold mb-0">대진표</p>
       <v-divider class="mb-2"></v-divider>
