@@ -98,6 +98,8 @@ export default {
   components: { CustomGameCard, CustomGamePagination, ResultFileUpload },
   props: {},
   created() {
+    this.$eventBus.$on("hideFileUploadDialog", this.hideFileUploadDialog);
+
     this.summonerName = this.$route.query.summonerName;
     this.getCustomGames();
   },
