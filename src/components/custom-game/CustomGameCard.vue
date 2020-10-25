@@ -29,7 +29,7 @@
     </v-row>
 
     <v-row dense>
-      <v-col cols="12" lg="6">
+      <v-col cols="12" lg="6" class="pr-5">
         <v-card color="blue">
           <v-card-title class="subheading font-weight-bold white--text pa-2"
             >Blue팀
@@ -450,7 +450,7 @@
         </v-card>
       </v-col>
 
-      <v-col cols="12" lg="6">
+      <v-col cols="12" lg="6" class="pl-5">
         <v-card color="red">
           <v-card-title class="subheading font-weight-bold white--text pa-2"
             >Red팀
