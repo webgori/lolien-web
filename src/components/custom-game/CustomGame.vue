@@ -71,6 +71,7 @@
           v-bind:customGame="customGame"
           @searchBySummonerName="searchBySummonerName"
           :summonerName="summonerName"
+          @setDeleteResultDialog="setDeleteResultDialog"
         />
       </v-col>
     </v-row>
