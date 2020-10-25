@@ -338,7 +338,7 @@
 import axios from "axios";
 import LeagueResultFileUpload from "@/components/league/LeagueResultFileUpload";
 import moment from "moment";
-import { mapMutations } from "vuex";
+import { mapMutations, mapGetters } from "vuex";
 
 export default {
   name: "Member",
@@ -353,6 +353,11 @@ export default {
 
     this.getTeams();
     this.getSchedules();
+  },
+  computed: {
+    ...mapGetters({
+      login: "getLogin"
+    })
   },
   data: () => ({
     isEntryConditionReadMore: false,
@@ -385,7 +390,12 @@ export default {
       event.preventDefault();
     },
     showFileUploadDialog() {
-      this.fileUploadDialog = true;
+      if (this.login) {
+        this.fileUploadDialog = true;
+      } else {
+        alert("로그인이 필요합니다.");
+      }
+
       event.preventDefault();
     },
     hideFileUploadDialog() {

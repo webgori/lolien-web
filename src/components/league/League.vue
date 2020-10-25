@@ -55,10 +55,10 @@
                   <v-icon style="margin-right:10px;" large color="light-blue"
                     >fas fa-cloud-upload-alt</v-icon
                   >
-                  <span class="headline" large>파일 업로드</span>
+                  <span class="headline" large>리플레이 파일 업로드</span>
                 </template>
                 <v-spacer></v-spacer>
-                <v-btn icon @click="hideFileUPloadDialog()">
+                <v-btn icon @click="hideFileUploadDialog()">
                   <v-icon>fas fa-times</v-icon>
                 </v-btn>
               </v-card-title>
@@ -98,7 +98,7 @@ export default {
   components: { LeagueIntro, LeagueResult, LeagueResultFileUpload },
   props: {},
   created() {
-    this.$eventBus.$on("hideFileUPloadDialog", this.hideFileUPloadDialog);
+    this.$eventBus.$on("hideFileUploadDialog", this.hideFileUploadDialog);
 
     this.subMenuIndex =
       this.$route.query.subMenuIndex == null
@@ -145,10 +145,10 @@ export default {
     setSubMenuIndex(subMenuIndex) {
       this.subMenuIndex = subMenuIndex;
     },
-    showFileUPloadDialog() {
+    showFileUploadDialog() {
       this.fileUploadDialog = true;
     },
-    hideFileUPloadDialog() {
+    hideFileUploadDialog() {
       this.fileUploadDialog = false;
     },
     addedLeagueResult() {

@@ -1,23 +1,88 @@
 <template>
-  <v-app>
-    <v-container class="content" bg fill-height grid-list-lg text-lg-left>
-      <v-layout row wrap align-content-start>
-        <v-flex lg12 v-for="customGame in customGames" :key="customGame.idx">
-          <CustomGameCard
-            v-bind:customGame="customGame"
-            @searchBySummonerName="searchBySummonerName"
-            :summonerName="summonerName"
-          />
-        </v-flex>
-        <v-flex lg12>
-          <CustomGamePagination
-            v-show="!loading"
-            :totalPages="totalPages"
-            @updatePage="updatePage"
-          />
-        </v-flex>
-      </v-layout>
-    </v-container>
+  <v-app class="px-5">
+    <v-row v-if="login">
+      <v-col lg="12" class="text-lg-right">
+        <v-btn icon color="black" @click="showFileUploadDialog()">
+          <v-icon>fas fa-plus</v-icon>
+        </v-btn>
+      </v-col>
+    </v-row>
+    <v-row dense>
+      <v-col cols="12" lg="12">
+        <v-dialog v-model="fileUploadDialog" max-width="900px">
+          <v-card>
+            <v-card-title>
+              <template>
+                <v-icon style="margin-right:10px;" large color="light-blue"
+                  >fas fa-cloud-upload-alt</v-icon
+                >
+                <span class="headline" large>리플레이 파일 업로드</span>
+              </template>
+              <v-spacer></v-spacer>
+              <v-btn icon @click="hideFileUploadDialog()">
+                <v-icon>fas fa-times</v-icon>
+              </v-btn>
+            </v-card-title>
+            <v-card-text>
+              <v-row>
+                <v-col
+                  cols="12"
+                  sm="12"
+                  md="12"
+                  style="position: relative; border:1px solid #2196F3; border-style:dashed; "
+                >
+                  <ResultFileUpload />
+                </v-col>
+              </v-row>
+            </v-card-text>
+          </v-card>
+        </v-dialog>
+      </v-col>
+      <v-col>
+        <v-dialog v-model="deleteResultDialog" max-width="290">
+          <v-card>
+            <v-card-title class="headline">확인</v-card-title>
+
+            <v-card-text>
+              내전 결과를 삭제하시겠습니까?
+            </v-card-text>
+
+            <v-card-actions>
+              <v-spacer></v-spacer>
+
+              <v-btn color="green darken-1" text @click="acceptDeleteResult">
+                예
+              </v-btn>
+
+              <v-btn color="green darken-1" text @click="cancelDeleteResult">
+                아니요
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      </v-col>
+      <v-col
+        cols="12"
+        lg="12"
+        v-for="customGame in customGames"
+        :key="customGame.idx"
+      >
+        <CustomGameCard
+          v-bind:customGame="customGame"
+          @searchBySummonerName="searchBySummonerName"
+          :summonerName="summonerName"
+        />
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col cols="12" lg="12">
+        <CustomGamePagination
+          v-show="!loading"
+          :totalPages="totalPages"
+          @updatePage="updatePage"
+        />
+      </v-col>
+    </v-row>
   </v-app>
 </template>
 
@@ -25,11 +90,12 @@
 import axios from "axios";
 import CustomGameCard from "@/components/custom-game/CustomGameCard";
 import CustomGamePagination from "@/components/custom-game/CustomGamePagination";
+import ResultFileUpload from "@/components/custom-game/ResultFileUpload";
 import { mapGetters, mapMutations } from "vuex";
 
 export default {
   name: "Member",
-  components: { CustomGameCard, CustomGamePagination },
+  components: { CustomGameCard, CustomGamePagination, ResultFileUpload },
   props: {},
   created() {
     this.summonerName = this.$route.query.summonerName;
@@ -37,7 +103,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      loading: "getLoading"
+      loading: "getLoading",
+      login: "getLogin"
     })
   },
   data: () => {
@@ -51,7 +118,9 @@ export default {
       championData: {},
       customGames: [],
       itemData: {},
-      summonerName: null
+      summonerName: null,
+      deleteResultDialog: false,
+      fileUploadDialog: false
     };
   },
   methods: {
@@ -131,6 +200,42 @@ export default {
       //this.summonerName = summonerName;
       //this.getCustomGames();
       scroll(0, 0);
+    },
+    acceptDeleteResult() {
+      var _this = this;
+
+      axios
+        .delete(
+          "https://api.lolien.kr/v1/custom-game/result/" +
+            this.deleteResultGameId
+        )
+        .then(response => {
+          let status = response.status;
+
+          if (status === 204) {
+            // TODO 리그 결과 삭제 event-bus
+            this.$eventBus.$emit("getLeagueResults");
+          }
+        })
+        .then(function() {
+          // always executed
+          _this.deleteResultDialog = false;
+          _this.deleteResultGameId = null;
+        });
+    },
+    cancelDeleteResult() {
+      this.deleteResultDialog = false;
+      this.deleteResultGameId = null;
+    },
+    setDeleteResultDialog(deleteResultDialog, gameId) {
+      this.deleteResultDialog = deleteResultDialog;
+      this.deleteResultGameId = gameId;
+    },
+    showFileUploadDialog() {
+      this.fileUploadDialog = true;
+    },
+    hideFileUploadDialog() {
+      this.fileUploadDialog = false;
     },
     ...mapMutations({
       setLoading: "setLoading"

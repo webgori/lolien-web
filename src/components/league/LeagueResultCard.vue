@@ -16,7 +16,12 @@
         </div>
       </v-col>
 
-      <v-col cols="12" lg="4" class="text-lg-right">
+      <v-col
+        v-if="leagueResult.deleteAble"
+        cols="12"
+        lg="4"
+        class="text-lg-right"
+      >
         <v-btn icon color="pink" @click="deleteResult(leagueResult.gameId)">
           <v-icon>fas fa-trash-alt</v-icon>
         </v-btn>

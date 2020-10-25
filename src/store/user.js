@@ -132,6 +132,16 @@ export default {
           router.push("/");
         }
       });
+    },
+    checkLogin: ({ state }) => {
+      let login = state.login;
+
+      if (!login) {
+        let errorMessage = "로그인이 필요합니다.";
+
+        alert(errorMessage);
+        throw new TypeError(errorMessage);
+      }
     }
   }
 };
