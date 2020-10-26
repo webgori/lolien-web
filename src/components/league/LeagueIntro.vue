@@ -26,7 +26,7 @@
 
       <p v-if="!isEntryConditionReadMore"
         ><a class="" @click="setEntryConditionReadMore(true, $event)" href="#">
-          내전 참여 횟수 조건을 충족한 당원 목록
+          올해 (2020년) 당원별 내전 참여 횟수
         </a>
       </p>
 
