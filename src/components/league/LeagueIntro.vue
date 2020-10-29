@@ -9,6 +9,141 @@
       <p>LOLIEN LUPIN LEAGUE Winter 2020</p>
       <p>롤리앙 내전 리그제</p>
 
+      <p class="title font-weight-bold mb-0">개최 인사말</p>
+      <v-divider class="mb-2"></v-divider>
+      <p>안녕하십니까?</p>
+      <p>LLL Winter 2020 총책임자 당주 크리카메 입니다.</p>
+      <p>존경하는 롤리앙 당원 여러분, </p>
+      <p
+        >여러분이 모처럼 한마음으로 펼치는 축제인 " LLL Winter 2020 " 모두 함께
+        즐길 수 있는 한 시즌이 될 수 있으면 좋겠고,</p
+      >
+      <p
+        >경쟁력과 동업정신, 즐거운 마음가짐을 갖춘 수준 높은 2020 시즌이 되길
+        바랍니다.</p
+      >
+      <p
+        >각팀의 선수들 또한 이번 시즌 잘 준비하여 좋은 활약상을 통해 롤리앙
+        미래에 큰 도움이 될 수 있기를 염원합니다.</p
+      >
+      <p
+        >2020 시즌에는 각 팀들이 다양한 목표를 위해 본인 스스로 만족하고 좋은
+        경기들을 보여주기를 기원 합니다.</p
+      >
+      <p>우리 롤리앙 당원들이 함께 하여 하나 되는 LLL Winter 2020에</p>
+      <p>여러분들의 적극적인 관심과 참여, 그리고 협조를 부탁드립니다.</p>
+      <p>감사합니다.</p>
+      <p>2020-10-29</p>
+
+      <p class="title font-weight-bold mb-0">리그 개막전</p>
+      <v-divider class="mb-2"></v-divider>
+
+      <v-row v-if="schedules.length > 0">
+        <v-col lg="4">
+          <v-simple-table class="pt-0 pb-3">
+            <template v-slot:default>
+              <thead>
+                <tr>
+                  <th
+                    v-if="$vuetify.breakpoint.xs"
+                    class="text-center"
+                    width="50%"
+                    >경기 날짜</th
+                  >
+                  <th
+                    v-if="$vuetify.breakpoint.xs"
+                    class="text-center"
+                    width="50%"
+                    >대진</th
+                  >
+
+                  <th
+                    v-if="$vuetify.breakpoint.smAndUp"
+                    class="text-center"
+                    width="30%"
+                    >경기 날짜</th
+                  >
+                  <th
+                    v-if="$vuetify.breakpoint.smAndUp"
+                    class="text-center"
+                    width="40%"
+                    >대진</th
+                  >
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="text-center">{{
+                    schedules[0].matchDateTime | moment("YYYY-MM-DD a hh:mm:ss")
+                  }}</td>
+                  <td class="text-center">
+                    <img
+                      v-if="schedules[0].team.englishName === 'Demacia'"
+                      class="pt-0"
+                      src="https://vignette.wikia.nocookie.net/leagueoflegends/images/e/e3/Demacia_Crest_icon.png/revision/latest/scale-to-width-down/15?cb=20190720005456"
+                    />
+
+                    <img
+                      v-if="schedules[0].team.englishName === 'Noxus'"
+                      class="pt-0"
+                      src="https://vignette.wikia.nocookie.net/leagueoflegends/images/3/38/Noxus_Crest_icon.png/revision/latest/scale-to-width-down/15?cb=20161117055828"
+                    />
+
+                    <img
+                      v-if="schedules[0].team.englishName === 'Freljord'"
+                      class="pt-0"
+                      src="https://vignette.wikia.nocookie.net/leagueoflegends/images/4/4e/Freljord_Crest_icon.png/revision/latest/scale-to-width-down/15?cb=20190720005359"
+                    />
+
+                    <img
+                      v-if="schedules[0].team.englishName === 'Shadow Isles'"
+                      class="pt-0"
+                      src="https://vignette.wikia.nocookie.net/leagueoflegends/images/7/72/Shadow_Isles_Crest_icon.png/revision/latest/scale-to-width-down/15?cb=20190720005424"
+                    />
+
+                    <span class="title">{{
+                      schedules[0].team.englishName
+                    }}</span>
+
+                    vs
+
+                    <img
+                      v-if="schedules[0].enemyTeam.englishName === 'Demacia'"
+                      class="pt-0"
+                      src="https://vignette.wikia.nocookie.net/leagueoflegends/images/e/e3/Demacia_Crest_icon.png/revision/latest/scale-to-width-down/15?cb=20190720005456"
+                    />
+
+                    <img
+                      v-if="schedules[0].enemyTeam.englishName === 'Noxus'"
+                      class="pt-0"
+                      src="https://vignette.wikia.nocookie.net/leagueoflegends/images/3/38/Noxus_Crest_icon.png/revision/latest/scale-to-width-down/15?cb=20161117055828"
+                    />
+
+                    <img
+                      v-if="schedules[0].enemyTeam.englishName === 'Freljord'"
+                      class="pt-0"
+                      src="https://vignette.wikia.nocookie.net/leagueoflegends/images/4/4e/Freljord_Crest_icon.png/revision/latest/scale-to-width-down/15?cb=20190720005359"
+                    />
+
+                    <img
+                      v-if="
+                        schedules[0].enemyTeam.englishName === 'Shadow Isles'
+                      "
+                      class="pt-0"
+                      src="https://vignette.wikia.nocookie.net/leagueoflegends/images/7/72/Shadow_Isles_Crest_icon.png/revision/latest/scale-to-width-down/15?cb=20190720005424"
+                    />
+
+                    <span class="title">{{
+                      schedules[0].enemyTeam.englishName
+                    }}</span></td
+                  >
+                </tr>
+              </tbody>
+            </template>
+          </v-simple-table>
+        </v-col>
+      </v-row>
+
       <p class="title font-weight-bold mb-0">리그 기간</p>
       <v-divider class="mb-2"></v-divider>
       <p>2020년 11월 ~ 2020년 12월</p>
