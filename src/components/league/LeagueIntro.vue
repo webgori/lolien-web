@@ -232,6 +232,55 @@
       <p class="title font-weight-bold mb-0">팀</p>
       <v-divider class="mb-2"></v-divider>
 
+      <p>
+        <img src="@/assets/images/demacia.png" />
+      </p>
+
+      <p class="font-weight-bold">
+        데마시아팀
+      </p>
+
+      <p>
+        <img src="@/assets/images/demaciaTeam.jpg" />
+      </p>
+
+      <p>
+        <img src="@/assets/images/noxus.png" />
+      </p>
+
+      <p class="font-weight-bold">
+        녹서스팀
+      </p>
+
+      <p>
+        <img src="@/assets/images/noxusTeam.jpg" />
+      </p>
+
+      <p>
+        <img src="@/assets/images/freljord.png" />
+      </p>
+
+      <p class="font-weight-bold">
+        프렐요드팀
+      </p>
+
+      <p>
+        <img src="@/assets/images/freljordTeam.jpg" />
+      </p>
+
+      <p>
+        <img src="@/assets/images/shadowIsles.png" />
+      </p>
+
+      <p class="font-weight-bold">
+        그림자 군도팀
+      </p>
+
+      <p>
+        <img src="@/assets/images/shadowIslesTeam.jpg" />
+      </p>
+
+      <!--
       <div v-for="team in teams" :key="team.idx">
         <p>{{ team.englishName }} ({{ team.koreanName }})</p>
 
@@ -267,6 +316,7 @@
           <li>김갓난</li>
         </ul>
       </div>
+      -->
 
       <p class="title font-weight-bold mb-0">대진표</p>
       <v-divider class="mb-2"></v-divider>
@@ -293,16 +343,28 @@
                   <th
                     v-if="$vuetify.breakpoint.smAndUp"
                     class="text-center"
-                    width="30%"
+                    width="25%"
                     >경기 날짜</th
                   >
                   <th
                     v-if="$vuetify.breakpoint.smAndUp"
                     class="text-center"
-                    width="40%"
+                    width="30%"
                     >대진</th
                   >
-                  <th class="text-center" width="30%">결과</th>
+                  <th
+                    v-if="$vuetify.breakpoint.smAndUp"
+                    class="text-center"
+                    width="15%"
+                    >방송</th
+                  >
+                  <th
+                    v-if="$vuetify.breakpoint.smAndUp"
+                    class="text-center"
+                    width="15%"
+                    >심판</th
+                  >
+                  <th class="text-center" width="15%">결과</th>
                 </tr>
               </thead>
               <tbody>
@@ -335,7 +397,7 @@
                       src="https://vignette.wikia.nocookie.net/leagueoflegends/images/7/72/Shadow_Isles_Crest_icon.png/revision/latest/scale-to-width-down/15?cb=20190720005424"
                     />
 
-                    <span class="title">{{ schedule.team.englishName }}</span>
+                    <span class="title">{{ schedule.team.koreanName }}</span>
 
                     vs
 
@@ -364,9 +426,13 @@
                     />
 
                     <span class="title">{{
-                      schedule.enemyTeam.englishName
+                      schedule.enemyTeam.koreanName
                     }}</span></td
                   >
+                  <td class="text-center">{{ schedule.description1 }}</td>
+
+                  <td class="text-center">{{ schedule.description2 }}</td>
+
                   <td class="text-center"
                     ><a href="#" @click="showResult(schedule.idx)"
                       >바로 가기</a
@@ -391,15 +457,9 @@
       <p class="title font-weight-bold mb-0">후원</p>
       <v-divider class="mb-2"></v-divider>
 
-      <p
-        >롤리앙 루팡리그 지원사업을 함께 할 스폰서를 모집 하고 있으니, 관심 있는
-        분들은
-        <a
-          href="https://www.clien.net/service/board/cm_lol/15362338"
-          target="_blank"
-          >해당 글</a
-        >에 댓글 달아주세요.</p
-      >
+      <p>
+        <img src="@/assets/images/donator.jpg" />
+      </p>
 
       <p class="font-weight-bold mb-0">혜택</p>
 
