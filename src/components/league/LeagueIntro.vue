@@ -47,13 +47,13 @@
                   <th
                     v-if="$vuetify.breakpoint.xs"
                     class="text-center"
-                    width="50%"
+                    width="35%"
                     >경기 날짜</th
                   >
                   <th
                     v-if="$vuetify.breakpoint.xs"
                     class="text-center"
-                    width="50%"
+                    width="65%"
                     >대진</th
                   >
 
@@ -101,9 +101,7 @@
                       src="https://vignette.wikia.nocookie.net/leagueoflegends/images/7/72/Shadow_Isles_Crest_icon.png/revision/latest/scale-to-width-down/15?cb=20190720005424"
                     />
 
-                    <span class="title">{{
-                      schedules[0].team.englishName
-                    }}</span>
+                    <span>{{ schedules[0].team.koreanName }}</span>
 
                     vs
 
@@ -133,9 +131,7 @@
                       src="https://vignette.wikia.nocookie.net/leagueoflegends/images/7/72/Shadow_Isles_Crest_icon.png/revision/latest/scale-to-width-down/15?cb=20190720005424"
                     />
 
-                    <span class="title">{{
-                      schedules[0].enemyTeam.englishName
-                    }}</span></td
+                    <span>{{ schedules[0].enemyTeam.koreanName }}</span></td
                   >
                 </tr>
               </tbody>
@@ -241,7 +237,10 @@
       </p>
 
       <p>
-        <img src="@/assets/images/demaciaTeam.jpg" />
+        <img
+          src="@/assets/images/demaciaTeam.jpg"
+          :class="{ 'image-fit': $vuetify.breakpoint.xs }"
+        />
       </p>
 
       <p>
@@ -253,7 +252,10 @@
       </p>
 
       <p>
-        <img src="@/assets/images/noxusTeam.jpg" />
+        <img
+          src="@/assets/images/noxusTeam.jpg"
+          :class="{ 'image-fit': $vuetify.breakpoint.xs }"
+        />
       </p>
 
       <p>
@@ -265,7 +267,10 @@
       </p>
 
       <p>
-        <img src="@/assets/images/freljordTeam.jpg" />
+        <img
+          src="@/assets/images/freljordTeam.jpg"
+          :class="{ 'image-fit': $vuetify.breakpoint.xs }"
+        />
       </p>
 
       <p>
@@ -277,7 +282,10 @@
       </p>
 
       <p>
-        <img src="@/assets/images/shadowIslesTeam.jpg" />
+        <img
+          src="@/assets/images/shadowIslesTeam.jpg"
+          :class="{ 'image-fit': $vuetify.breakpoint.xs }"
+        />
       </p>
 
       <!--
@@ -330,13 +338,13 @@
                   <th
                     v-if="$vuetify.breakpoint.xs"
                     class="text-center"
-                    width="50%"
+                    width="35%"
                     >경기 날짜</th
                   >
                   <th
                     v-if="$vuetify.breakpoint.xs"
                     class="text-center"
-                    width="50%"
+                    width="45%"
                     >대진</th
                   >
 
@@ -364,7 +372,7 @@
                     width="15%"
                     >심판</th
                   >
-                  <th class="text-center" width="15%">결과</th>
+                  <th class="text-center" width="30%">결과</th>
                 </tr>
               </thead>
               <tbody>
@@ -397,7 +405,7 @@
                       src="https://vignette.wikia.nocookie.net/leagueoflegends/images/7/72/Shadow_Isles_Crest_icon.png/revision/latest/scale-to-width-down/15?cb=20190720005424"
                     />
 
-                    <span class="title">{{ schedule.team.koreanName }}</span>
+                    <span>{{ schedule.team.koreanName }}</span>
 
                     vs
 
@@ -425,18 +433,18 @@
                       src="https://vignette.wikia.nocookie.net/leagueoflegends/images/7/72/Shadow_Isles_Crest_icon.png/revision/latest/scale-to-width-down/15?cb=20190720005424"
                     />
 
-                    <span class="title">{{
-                      schedule.enemyTeam.koreanName
-                    }}</span></td
+                    <span>{{ schedule.enemyTeam.koreanName }}</span></td
                   >
-                  <td class="text-center">{{ schedule.description1 }}</td>
+                  <td v-if="$vuetify.breakpoint.smAndUp" class="text-center">{{
+                    schedule.description1
+                  }}</td>
 
-                  <td class="text-center">{{ schedule.description2 }}</td>
+                  <td v-if="$vuetify.breakpoint.smAndUp" class="text-center">{{
+                    schedule.description2
+                  }}</td>
 
                   <td class="text-center"
-                    ><a href="#" @click="showResult(schedule.idx)"
-                      >바로 가기</a
-                    ></td
+                    ><a href="#" @click="showResult(schedule.idx)">보기</a></td
                   >
                 </tr>
               </tbody>
@@ -458,7 +466,10 @@
       <v-divider class="mb-2"></v-divider>
 
       <p>
-        <img src="@/assets/images/donator.jpg" />
+        <img
+          src="@/assets/images/donator.jpg"
+          :class="{ 'image-fit': $vuetify.breakpoint.xs }"
+        />
       </p>
 
       <p class="font-weight-bold mb-0">혜택</p>
@@ -660,3 +671,11 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.image-fit {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+</style>
