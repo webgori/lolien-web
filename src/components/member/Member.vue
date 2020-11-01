@@ -7,62 +7,18 @@
             <template v-slot:default>
               <thead>
                 <tr>
-                  <th
-                    v-if="$vuetify.breakpoint.lgAndUp"
-                    class="text-center"
-                    width="5%"
-                    >가입 순서</th
-                  >
-                  <th
-                    v-if="$vuetify.breakpoint.lgAndUp"
-                    class="text-center"
-                    width="10%"
-                    >가입일</th
-                  >
-                  <th
-                    v-if="$vuetify.breakpoint.lgAndUp"
-                    class="text-center"
-                    width="10%"
-                    >클리앙 닉네임</th
-                  >
-                  <th class="text-center" width="10%">소환사명</th>
-                  <th
-                    v-if="$vuetify.breakpoint.lgAndUp"
-                    class="text-center"
-                    width="10%"
-                    >가입일 기준 티어</th
-                  >
-                  <th class="text-center" width="10%">포지션</th>
-                  <th
-                    v-if="$vuetify.breakpoint.lgAndUp"
-                    class="text-center"
-                    width="45%"
-                    >하고싶은 말</th
-                  >
+                  <th class="text-center" width="25%">가입일</th>
+                  <th class="text-center" width="35%">닉네임</th>
+                  <th class="text-center" width="40%">소환사명</th>
                 </tr>
               </thead>
               <tbody>
-                <tr
-                  v-for="(member, index) in members"
-                  :key="member.registerDate"
-                >
-                  <td v-if="$vuetify.breakpoint.lgAndUp" class="text-center">
-                    {{ index + 1 }}
+                <tr v-for="user in users" :key="user.createdAt">
+                  <td class="text-center">
+                    {{ user.createdAt | moment("YYYY년 MM월 DD일") }}
                   </td>
-                  <td v-if="$vuetify.breakpoint.lgAndUp" class="text-center">
-                    {{ member.registerDate | moment("YYYY년 MM월 DD일") }}
-                  </td>
-                  <td v-if="$vuetify.breakpoint.lgAndUp" class="text-center">{{
-                    member.clienNickname
-                  }}</td>
-                  <td class="text-center">{{ member.summonerName }}</td>
-                  <td v-if="$vuetify.breakpoint.lgAndUp" class="text-center">{{
-                    member.tier
-                  }}</td>
-                  <td class="text-center">{{ member.position }}</td>
-                  <td v-if="$vuetify.breakpoint.lgAndUp" class="text-center">{{
-                    member.comment
-                  }}</td>
+                  <td class="text-center">{{ user.nickname }}</td>
+                  <td class="text-center">{{ user.summonerName }}</td>
                 </tr>
               </tbody>
             </template>
@@ -74,24 +30,29 @@
 </template>
 
 <script>
-import members from "../../assets/json/members.json";
+import axios from "axios";
 
 export default {
   name: "Member",
   components: {},
-  props: {
-    source: {
-      type: String,
-      default: ""
-    }
-  },
-  data: () => ({ members: members }),
+  data: () => ({ users: [] }),
   created() {
-    /*this.$vuetify.theme.dark = true*/
+    this.getUsers();
   },
   methods: {
-    test: function(event) {
-      alert(event);
+    getUsers() {
+      axios
+        .get("https://api.lolien.kr/v1/users")
+        .then(response => {
+          this.users = response.data.users;
+        })
+        .catch(error => {
+          // handle error
+          console.log(error);
+        })
+        .then(function() {
+          // always executed
+        });
     }
   }
 };

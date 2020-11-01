@@ -57,6 +57,6 @@ export default {
     });
   },
   getUserInfo() {
-    return axios.get(this.BASE_URL + "/v1/users");
+    return axios.get(this.BASE_URL + "/v1/users/info");
   }
 };
