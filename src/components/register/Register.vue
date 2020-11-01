@@ -235,8 +235,8 @@ export default {
       }
     },
     checkPassword() {
-      if (this.password.length < 6) {
-        let errorMessage = "비밀번호는 최소 6자부터 사용 가능합니다.";
+      if (this.password.length < 8) {
+        let errorMessage = "비밀번호는 최소 8자부터 사용 가능합니다.";
 
         alert(errorMessage);
         throw new TypeError(errorMessage);
@@ -260,6 +260,19 @@ export default {
         throw new TypeError(errorMessage);
       } else if (this.clienIdAuthNumber.length != 6) {
         let errorMessage = "클리앙 아이디 인증 번호가 올바르지 않습니다.";
+
+        alert(errorMessage);
+        throw new TypeError(errorMessage);
+      }
+    },
+    checkSummonerName() {
+      if (this.summonerName.length < 3) {
+        let errorMessage = "소환사 이름은 최소 3자부터 사용 가능합니다.";
+
+        alert(errorMessage);
+        throw new TypeError(errorMessage);
+      } else if (this.summonerName.length > 20) {
+        let errorMessage = "소환사 이름은 최대 20자까지 사용 가능합니다.";
 
         alert(errorMessage);
         throw new TypeError(errorMessage);
@@ -339,6 +352,7 @@ export default {
       this.checkEmail();
       this.checkAuthNumber();
       this.checkPassword();
+      this.checkSummonerName();
 
       this.loadingRegister = true;
 
