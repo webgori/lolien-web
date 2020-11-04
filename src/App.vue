@@ -175,7 +175,56 @@
       </template>
     </v-app-bar>
 
-    <v-main>
+    <v-main
+      v-if="
+        leagueSubMenus.map(e => e.routeName).includes($router.currentRoute.name)
+      "
+      class="grey lighten-5"
+    >
+      <v-container fluid>
+        <v-row>
+          <v-col cols="2">
+            <v-sheet rounded="lg">
+              <v-list color="transparent">
+                <v-list-item
+                  v-for="subMenu in leagueSubMenus"
+                  :key="subMenu.text"
+                  link
+                  :to="subMenu.to"
+                >
+                  <v-list-item-content>
+                    <v-list-item-title>
+                      {{ subMenu.text }}
+                    </v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
+
+                <!--
+                <v-divider class="my-2"></v-divider>
+
+                <v-list-item link color="grey lighten-5">
+                  <v-list-item-content>
+                    <v-list-item-title>
+                      Refresh
+                    </v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
+                -->
+              </v-list>
+            </v-sheet>
+          </v-col>
+
+          <v-col>
+            <v-sheet min-height="70vh" rounded="lg">
+              <router-view :key="$route.fullPath" />
+              <!--  -->
+            </v-sheet>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-main>
+
+    <v-main v-else>
       <v-progress-linear
         :active="loading"
         color="primary"
@@ -211,7 +260,38 @@ export default {
     })
   },
   data: () => ({
-    drawer: null
+    drawer: null,
+    leagueSubMenus: [
+      {
+        text: "소개",
+        to: "/league",
+        routeName: "league"
+      },
+      {
+        text: "통계",
+        to: "/league-statistics",
+        routeName: "league-statistics"
+      }
+      /*{
+        text: "리그 결과 등록",
+        to: "/"
+      }
+      {
+        text: "통계",
+        to: "/league-statistics",
+        routeName: "league"
+      },
+      {
+        text: "소환사명으로 검색",
+        to: "/",
+        routeName: "league"
+      },
+      {
+        text: "챔피언으로 검색",
+        to: "/",
+        routeName: "league"
+      }*/
+    ]
   }),
   methods: {
     openKakao: function() {
