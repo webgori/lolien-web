@@ -181,6 +181,14 @@
       "
       class="grey lighten-5"
     >
+      <v-progress-linear
+        :active="loading"
+        color="primary"
+        :indeterminate="true"
+        class="ma-0"
+        height="5"
+        style="top: 1px;"
+      />
       <v-container fluid>
         <v-row>
           <v-col cols="2">
