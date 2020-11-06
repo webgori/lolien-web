@@ -20,7 +20,7 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item link to="/join" hidden>
+        <v-list-item v-if="false" link to="/join">
           <v-list-item-action>
             <v-icon>fas fa-user-plus</v-icon>
           </v-list-item-action>
@@ -109,10 +109,10 @@
           소개
         </v-btn>
         <v-btn
+          v-if="false"
           text
           to="/join"
           class="white--text font-weight-bold title"
-          hidden
         >
           가입
         </v-btn>
