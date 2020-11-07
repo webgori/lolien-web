@@ -284,6 +284,11 @@ export default {
         text: "통계",
         to: "/league-statistics",
         routeName: "league-statistics"
+      },
+      {
+        text: "픽 통계",
+        to: "/league-statistics-pick",
+        routeName: "league-statistics-pick"
       }
       /*{
         text: "리그 결과 등록",

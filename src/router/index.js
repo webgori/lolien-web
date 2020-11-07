@@ -8,6 +8,7 @@ import CustomGame from "@/views/CustomGame";
 import CustomGameTest from "@/views/CustomGameTest";
 import League from "@/views/league/League";
 import LeagueStatistics from "@/views/league/Statistics";
+import LeagueStatisticsPick from "@/views/league/StatisticsPick";
 import Login from "@/views/Login";
 import Register from "@/views/Register";
 import store from "../store";
@@ -54,6 +55,11 @@ const routes = [
     path: "/league-statistics",
     name: "league-statistics",
     component: LeagueStatistics
+  },
+  {
+    path: "/league-statistics-pick",
+    name: "league-statistics-pick",
+    component: LeagueStatisticsPick
   },
   {
     path: "/login",
