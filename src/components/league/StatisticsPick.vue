@@ -8,8 +8,8 @@
       >
     </v-row>
 
-    <v-row>
-      <v-col lg="12" v-for="team in statisticsPick.teams" :key="team.teamName"
+    <v-row v-for="team in statisticsPick.teams" :key="team.teamName">
+      <v-col lg="12"
         ><p class="text-center">
           <span class="font-weight-bold headline">{{ team.teamName }}</span>
 
