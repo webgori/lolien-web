@@ -16,9 +16,9 @@
                     name="login"
                     label="이메일"
                     type="text"
-                    @keyup.enter="keyupEnter()"
                     autocomplete="off"
                     :disabled="requestedVerifyEmail"
+                    @keyup.enter="keyupEnter()"
                   ></v-text-field>
                 </v-col>
 
@@ -29,14 +29,14 @@
                         requestedVerifyEmail == true ||
                         loadingVerifyEmail
                     "
-                    @click="this.verifyEmail"
                     :loading="loadingVerifyEmail"
+                    @click="this.verifyEmail"
                     >인증하기</v-btn
                   >
                 </v-col>
               </v-row>
 
-              <v-row dense v-if="this.requestedVerifyEmail">
+              <v-row v-if="this.requestedVerifyEmail" dense>
                 <v-col lg="12">
                   <v-text-field
                     v-model="emailAuthNumber"
@@ -44,8 +44,8 @@
                     name="emailAuthNumber"
                     label="이메일 인증 번호"
                     type="text"
-                    @keyup.enter="keyupEnter()"
                     autocomplete="off"
+                    @keyup.enter="keyupEnter()"
                   ></v-text-field>
                 </v-col>
               </v-row>
@@ -58,8 +58,8 @@
                     name="nickname"
                     label="닉네임"
                     type="text"
-                    @keyup.enter="keyupEnter()"
                     autocomplete="off"
+                    @keyup.enter="keyupEnter()"
                   ></v-text-field>
                 </v-col>
               </v-row>
@@ -67,14 +67,14 @@
               <v-row dense>
                 <v-col lg="12">
                   <v-text-field
-                    v-model="password"
                     id="password"
+                    v-model="password"
                     prepend-icon="fas fa-lock"
                     name="password"
                     label="비밀번호"
                     type="password"
-                    @keyup.enter="keyupEnter()"
                     autocomplete="off"
+                    @keyup.enter="keyupEnter()"
                   ></v-text-field>
                 </v-col>
               </v-row>
@@ -82,14 +82,14 @@
               <v-row dense>
                 <v-col lg="12">
                   <v-text-field
-                    v-model="passwordConfirm"
                     id="passwordConfirm"
+                    v-model="passwordConfirm"
                     prepend-icon="fas fa-lock"
                     name="passwordConfirm"
                     label="비밀번호 확인"
                     type="password"
-                    @keyup.enter="keyupEnter()"
                     autocomplete="off"
+                    @keyup.enter="keyupEnter()"
                   ></v-text-field>
                 </v-col>
               </v-row>
@@ -102,9 +102,9 @@
                     name="clienId"
                     label="클리앙 아이디"
                     type="text"
-                    @keyup.enter="keyupEnter()"
                     autocomplete="off"
                     :disabled="requestedVerifyClienId"
+                    @keyup.enter="keyupEnter()"
                   ></v-text-field>
                 </v-col>
 
@@ -115,14 +115,14 @@
                         requestedVerifyClienId == true ||
                         loadingVerifyClienId
                     "
-                    @click="this.verifyClienId"
                     :loading="loadingVerifyClienId"
+                    @click="this.verifyClienId"
                     >인증하기</v-btn
                   >
                 </v-col>
               </v-row>
 
-              <v-row dense v-if="this.requestedVerifyClienId">
+              <v-row v-if="this.requestedVerifyClienId" dense>
                 <v-col lg="12">
                   <v-text-field
                     v-model="clienIdAuthNumber"
@@ -130,8 +130,8 @@
                     name="clienIdAuthNumber"
                     label="클리앙 인증 번호"
                     type="text"
-                    @keyup.enter="keyupEnter()"
                     autocomplete="off"
+                    @keyup.enter="keyupEnter()"
                   ></v-text-field>
                 </v-col>
               </v-row>
@@ -144,9 +144,9 @@
                     name="summonerName"
                     label="소환사 이름"
                     type="text"
+                    autocomplete="off"
                     @keyup.enter="keyupEnter()"
                     @keydown.space="event => event.preventDefault()"
-                    autocomplete="off"
                   ></v-text-field>
                 </v-col>
               </v-row>
@@ -156,8 +156,8 @@
                   <v-btn
                     color="primary"
                     block
-                    @click="register()"
                     :loading="loadingRegister"
+                    @click="register()"
                     >확인</v-btn
                   >
                 </v-col></v-row
@@ -175,7 +175,6 @@ import axios from "axios";
 import router from "../../router";
 
 export default {
-  created() {},
   data() {
     return {
       email: "",
@@ -207,6 +206,7 @@ export default {
       autoLogin: false
     };
   },
+  created() {},
   methods: {
     keyupEnter() {
       this.register({
@@ -229,6 +229,19 @@ export default {
         throw new TypeError(errorMessage);
       } else if (this.email.length > 50) {
         let errorMessage = "이메일은 최대 50자까지 사용 가능합니다.";
+
+        alert(errorMessage);
+        throw new TypeError(errorMessage);
+      }
+    },
+    checkNickname() {
+      if (this.nickname.length < 3) {
+        let errorMessage = "닉네임은 최소 3자부터 사용 가능합니다.";
+
+        alert(errorMessage);
+        throw new TypeError(errorMessage);
+      } else if (this.nickname.length > 12) {
+        let errorMessage = "닉네임은 최대 12자까지 사용 가능합니다.";
 
         alert(errorMessage);
         throw new TypeError(errorMessage);
@@ -351,6 +364,7 @@ export default {
     register() {
       this.checkEmail();
       this.checkAuthNumber();
+      this.checkNickname();
       this.checkPassword();
       this.checkSummonerName();
 
