@@ -2,7 +2,7 @@
   <!-- <v-app> -->
   <!-- <v-container class="contents"> -->
   <v-row>
-    <v-col lg="12" v-if="leagueIndex == 2">
+    <v-col v-if="leagueIndex == 2" lg="12">
       <p class="display-1 mb-0">LLL Winter 2020</p>
       <v-divider class="mb-2"></v-divider>
 
@@ -156,7 +156,7 @@
       </ol>
 
       <p v-if="!isEntryConditionReadMore"
-        ><a class="" @click="setEntryConditionReadMore(true, $event)" href="#">
+        ><a class="" href="#" @click="setEntryConditionReadMore(true, $event)">
           올해 (2020년) 당원별 내전 참여 횟수
         </a>
       </p>
@@ -173,7 +173,7 @@
             회)</li
           >
         </ul>
-        <a class="" @click="setEntryConditionReadMore(false, $event)" href="#">
+        <a class="" href="#" @click="setEntryConditionReadMore(false, $event)">
           접기
         </a></div
       >
@@ -330,7 +330,7 @@
       <v-divider class="mb-2"></v-divider>
 
       <v-row>
-        <v-col lg="6">
+        <v-col lg="8" cols="12">
           <v-simple-table class="pt-0 pb-3">
             <template v-slot:default>
               <thead>
@@ -351,13 +351,13 @@
                   <th
                     v-if="$vuetify.breakpoint.smAndUp"
                     class="text-center"
-                    width="25%"
+                    width="20%"
                     >경기 날짜</th
                   >
                   <th
                     v-if="$vuetify.breakpoint.smAndUp"
                     class="text-center"
-                    width="30%"
+                    width="20%"
                     >대진</th
                   >
                   <th
@@ -370,9 +370,26 @@
                     v-if="$vuetify.breakpoint.smAndUp"
                     class="text-center"
                     width="15%"
+                    >해설</th
+                  >
+                  <th
+                    v-if="$vuetify.breakpoint.smAndUp"
+                    class="text-center"
+                    width="15%"
                     >심판</th
                   >
-                  <th class="text-center" width="30%">결과</th>
+                  <th
+                    v-if="$vuetify.breakpoint.xs"
+                    class="text-center"
+                    width="30%"
+                    >결과</th
+                  >
+                  <th
+                    v-if="$vuetify.breakpoint.smAndUp"
+                    class="text-center"
+                    width="10%"
+                    >결과</th
+                  >
                 </tr>
               </thead>
               <tbody>
@@ -443,6 +460,10 @@
                     schedule.description2
                   }}</td>
 
+                  <td v-if="$vuetify.breakpoint.smAndUp" class="text-center">{{
+                    schedule.description3
+                  }}</td>
+
                   <td class="text-center"
                     ><a href="#" @click="showResult(schedule.idx)">보기</a></td
                   >
@@ -505,6 +526,7 @@
 
           <v-col lg="7" offset-lg="5">
             <v-select
+              v-model="schedule"
               dense
               :items="schedules"
               solo
@@ -512,7 +534,6 @@
               item-value="idx"
               return-object
               label="진행하신 경기를 선택해주세요."
-              v-model="schedule"
             ></v-select>
           </v-col>
 
@@ -525,7 +546,7 @@
                 style="position: relative; border:1px solid #2196F3; border-style:dashed; "
               >
                 <LeagueResultFileUpload
-                  :leagueIndex="leagueIndex"
+                  :league-index="leagueIndex"
                   :schedule="schedule"
                   @addedLeagueResult="addedLeagueResult"
                 />
@@ -549,7 +570,20 @@ import { mapMutations, mapGetters } from "vuex";
 export default {
   name: "Member",
   components: { LeagueResultFileUpload },
-  props: { leagueIndex: { type: Number } },
+  props: { leagueIndex: { default: 0, type: Number } },
+  data: () => ({
+    isEntryConditionReadMore: false,
+    summonersForParticipation: [],
+    fileUploadDialog: false,
+    teams: [],
+    schedules: [],
+    schedule: {}
+  }),
+  computed: {
+    ...mapGetters({
+      login: "getLogin"
+    })
+  },
   created() {
     this.$eventBus.$on("hideFileUploadDialog", this.hideFileUploadDialog);
 
@@ -560,19 +594,6 @@ export default {
     this.getTeams();
     this.getSchedules();
   },
-  computed: {
-    ...mapGetters({
-      login: "getLogin"
-    })
-  },
-  data: () => ({
-    isEntryConditionReadMore: false,
-    summonersForParticipation: [],
-    fileUploadDialog: false,
-    teams: [],
-    schedules: [],
-    schedule: {}
-  }),
   methods: {
     getSummonersForParticipation() {
       return new Promise(function(resolve, reject) {
