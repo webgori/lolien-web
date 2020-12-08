@@ -30,13 +30,13 @@
                         loadingVerifyEmail
                     "
                     :loading="loadingVerifyEmail"
-                    @click="this.verifyEmail"
+                    @click="verifyEmail"
                     >인증하기</v-btn
                   >
                 </v-col>
               </v-row>
 
-              <v-row v-if="this.requestedVerifyEmail" dense>
+              <v-row v-if="requestedVerifyEmail" dense>
                 <v-col lg="12">
                   <v-text-field
                     v-model="emailAuthNumber"
@@ -116,13 +116,13 @@
                         loadingVerifyClienId
                     "
                     :loading="loadingVerifyClienId"
-                    @click="this.verifyClienId"
+                    @click="verifyClienId"
                     >인증하기</v-btn
                   >
                 </v-col>
               </v-row>
 
-              <v-row v-if="this.requestedVerifyClienId" dense>
+              <v-row v-if="requestedVerifyClienId" dense>
                 <v-col lg="12">
                   <v-text-field
                     v-model="clienIdAuthNumber"
