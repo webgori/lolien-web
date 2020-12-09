@@ -13,10 +13,10 @@
     <v-row>
       <v-col lg="12"
         ><matches-chart
-          v-if="this.matchesChartData.labels.length"
+          v-if="matchesChartData.labels.length"
           :height="200"
-          :data="this.matchesChartData"
-          :options="this.matchesChartOptions"
+          :data="matchesChartData"
+          :options="matchesChartOptions"
         ></matches-chart
       ></v-col>
     </v-row>
@@ -24,11 +24,11 @@
     <v-row>
       <v-col lg="3" cols="sm" class="pb-2">
         <statistics-card
-          v-if="this.mostBannedChampionName != ''"
+          v-if="mostBannedChampionName != ''"
           title="가장 많이 밴을 당한 챔피언"
-          :text="this.mostBannedChampionName"
-          :championUrl="this.mostBannedChampionUrl"
-          :detail="this.mostBannedCount"
+          :text="mostBannedChampionName"
+          :champion-url="mostBannedChampionUrl"
+          :detail="mostBannedCount"
           color="secondary"
         >
         </statistics-card>
@@ -36,11 +36,11 @@
 
       <v-col lg="3">
         <statistics-card
-          v-if="this.mostPlayedChampionName != ''"
+          v-if="mostPlayedChampionName != ''"
           title="가장 많이 플레이한 챔피언"
           :text="mostPlayedChampionName"
-          :championUrl="this.mostPlayedChampionUrl"
-          :detail="this.mostPlayedCount"
+          :champion-url="mostPlayedChampionUrl"
+          :detail="mostPlayedCount"
           color="accent"
         >
         </statistics-card>
@@ -48,11 +48,11 @@
 
       <v-col lg="3">
         <statistics-card
-          v-if="this.mostWinningChampionName != ''"
+          v-if="mostWinningChampionName != ''"
           title="가장 승률이 높은 챔피언"
-          :text="this.mostWinningChampionName"
-          :championUrl="this.mostWinningChampionUrl"
-          :detail="this.mostWinningWinRate"
+          :text="mostWinningChampionName"
+          :champion-url="mostWinningChampionUrl"
+          :detail="mostWinningWinRate"
           color="error"
         >
         </statistics-card>
@@ -60,11 +60,11 @@
 
       <v-col lg="3">
         <statistics-card
-          v-if="this.mostWinningChampionName != ''"
+          v-if="mostWinningChampionName != ''"
           title="가장 많이 내전에 참여한 소환사"
-          :championName="this.mostPlayedSummonerName"
-          :text="this.mostPlayedSummonerName"
-          :detail="this.mostPlayedSummonerDetail"
+          :champion-name="mostPlayedSummonerName"
+          :text="mostPlayedSummonerName"
+          :detail="mostPlayedSummonerDetail"
           color="info"
         >
         </statistics-card
@@ -74,10 +74,10 @@
     <v-row>
       <v-col lg="3" cols="sm" class="pb-2">
         <statistics-card
-          v-if="this.mostKdaSummonerName != ''"
+          v-if="mostKdaSummonerName != ''"
           title="KDA가 가장 좋은 소환사"
-          :text="this.mostKdaSummonerName"
-          :detail="this.mostKdaSummonerDetail"
+          :text="mostKdaSummonerName"
+          :detail="mostKdaSummonerDetail"
           color="success"
         >
         </statistics-card>
@@ -85,10 +85,10 @@
 
       <v-col lg="3" cols="sm" class="pb-2">
         <statistics-card
-          v-if="this.mostKillSummonerName != ''"
+          v-if="mostKillSummonerName != ''"
           title="가장 많이 처치한 소환사"
-          :text="this.mostKillSummonerName"
-          :detail="this.mostKillSummonerDetail"
+          :text="mostKillSummonerName"
+          :detail="mostKillSummonerDetail"
           color="warning"
         >
         </statistics-card>
@@ -96,10 +96,10 @@
 
       <v-col lg="3" cols="sm" class="pb-2">
         <statistics-card
-          v-if="this.mostDeathSummonerName != ''"
+          v-if="mostDeathSummonerName != ''"
           title="가장 많이 죽은 소환사"
-          :text="this.mostDeathSummonerName"
-          :detail="this.mostDeathSummonerDetail"
+          :text="mostDeathSummonerName"
+          :detail="mostDeathSummonerDetail"
           color="pink"
         >
         </statistics-card>
@@ -107,10 +107,10 @@
 
       <v-col lg="3" cols="sm" class="pb-2">
         <statistics-card
-          v-if="this.mostAssistSummonerName != ''"
+          v-if="mostAssistSummonerName != ''"
           title="가장 많이 처치 기여한 소환사"
-          :text="this.mostAssistSummonerName"
-          :detail="this.mostAssistSummonerDetail"
+          :text="mostAssistSummonerName"
+          :detail="mostAssistSummonerDetail"
           color="purple"
         >
         </statistics-card>
@@ -120,10 +120,10 @@
     <v-row>
       <v-col lg="3" cols="sm" class="pb-2">
         <statistics-card
-          v-if="this.mostVisionScoreSummonerName != ''"
+          v-if="mostVisionScoreSummonerName != ''"
           title="시야 점수가 가장 높은 소환사"
-          :text="this.mostVisionScoreSummonerName"
-          :detail="this.mostVisionScoreSummonerDetail"
+          :text="mostVisionScoreSummonerName"
+          :detail="mostVisionScoreSummonerDetail"
           color="deep-purple"
         >
         </statistics-card>
@@ -131,10 +131,10 @@
 
       <v-col lg="3" cols="sm" class="pb-2">
         <statistics-card
-          v-if="this.mostTotalDamageDealtToChampionsSummonerName != ''"
+          v-if="mostTotalDamageDealtToChampionsSummonerName != ''"
           title="총 챔피언에게 가한 피해량이 가장 높은 소환사"
-          :text="this.mostTotalDamageDealtToChampionsSummonerName"
-          :detail="this.mostTotalDamageDealtToChampionsSummonerDetail"
+          :text="mostTotalDamageDealtToChampionsSummonerName"
+          :detail="mostTotalDamageDealtToChampionsSummonerDetail"
           color="indigo"
         >
         </statistics-card>
@@ -142,10 +142,10 @@
 
       <v-col lg="3" cols="sm" class="pb-2">
         <statistics-card
-          v-if="this.mostTotalDamageTakenSummonerName != ''"
+          v-if="mostTotalDamageTakenSummonerName != ''"
           title="총 받은 피해량이 가장 높은 소환사"
-          :text="this.mostTotalDamageTakenSummonerName"
-          :detail="this.mostTotalDamageTakenSummonerDetail"
+          :text="mostTotalDamageTakenSummonerName"
+          :detail="mostTotalDamageTakenSummonerDetail"
           color="blue"
         >
         </statistics-card>
@@ -153,10 +153,10 @@
 
       <v-col lg="3" cols="sm" class="pb-2">
         <statistics-card
-          v-if="this.mostGoldEarnedSummonerName != ''"
+          v-if="mostGoldEarnedSummonerName != ''"
           title="획득한 골드가 가장 높은 소환사"
-          :text="this.mostGoldEarnedSummonerName"
-          :detail="this.mostGoldEarnedSummonerDetail"
+          :text="mostGoldEarnedSummonerName"
+          :detail="mostGoldEarnedSummonerDetail"
           color="light-blue"
         >
         </statistics-card>
@@ -166,10 +166,10 @@
     <v-row>
       <v-col lg="3" cols="sm" class="pb-2">
         <statistics-card
-          v-if="this.mostNeutralMinionsKilledSummonerName != ''"
+          v-if="mostNeutralMinionsKilledSummonerName != ''"
           title="CS가 가장 많은 소환사"
-          :text="this.mostNeutralMinionsKilledSummonerName"
-          :detail="this.mostNeutralMinionsKilledSummonerDetail"
+          :text="mostNeutralMinionsKilledSummonerName"
+          :detail="mostNeutralMinionsKilledSummonerDetail"
           color="cyan"
         >
         </statistics-card>
@@ -177,10 +177,10 @@
 
       <v-col lg="3" cols="sm" class="pb-2">
         <statistics-card
-          v-if="this.mostFirstBloodKillSummonerName != ''"
+          v-if="mostFirstBloodKillSummonerName != ''"
           title="FIRST BLOOD가 가장 많은 소환사"
-          :text="this.mostFirstBloodKillSummonerName"
-          :detail="this.mostFirstBloodKillSummonerDetail"
+          :text="mostFirstBloodKillSummonerName"
+          :detail="mostFirstBloodKillSummonerDetail"
           color="teal"
         >
         </statistics-card>
@@ -188,10 +188,10 @@
 
       <v-col lg="3" cols="sm" class="pb-2">
         <statistics-card
-          v-if="this.mostFirstTowerKillSummonerName != ''"
+          v-if="mostFirstTowerKillSummonerName != ''"
           title="첫 포탑을 가장 많이 파괴한 소환사"
-          :text="this.mostFirstTowerKillSummonerName"
-          :detail="this.mostFirstTowerKillSummonerDetail"
+          :text="mostFirstTowerKillSummonerName"
+          :detail="mostFirstTowerKillSummonerDetail"
           color="green"
         >
         </statistics-card>

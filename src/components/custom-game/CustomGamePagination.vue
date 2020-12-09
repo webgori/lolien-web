@@ -14,7 +14,7 @@
 
 export default {
   props: {
-    totalPages: { type: Number }
+    totalPages: { default: 0, type: Number }
   },
   data() {
     return {

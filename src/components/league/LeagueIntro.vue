@@ -357,7 +357,7 @@
                   <th
                     v-if="$vuetify.breakpoint.smAndUp"
                     class="text-center"
-                    width="20%"
+                    width="25%"
                     >대진</th
                   >
                   <th
@@ -369,26 +369,14 @@
                   <th
                     v-if="$vuetify.breakpoint.smAndUp"
                     class="text-center"
-                    width="15%"
+                    width="20%"
                     >해설</th
                   >
                   <th
                     v-if="$vuetify.breakpoint.smAndUp"
                     class="text-center"
-                    width="15%"
+                    width="20%"
                     >심판</th
-                  >
-                  <th
-                    v-if="$vuetify.breakpoint.xs"
-                    class="text-center"
-                    width="30%"
-                    >결과</th
-                  >
-                  <th
-                    v-if="$vuetify.breakpoint.smAndUp"
-                    class="text-center"
-                    width="10%"
-                    >결과</th
                   >
                 </tr>
               </thead>
@@ -463,10 +451,6 @@
                   <td v-if="$vuetify.breakpoint.smAndUp" class="text-center">{{
                     schedule.description3
                   }}</td>
-
-                  <td class="text-center"
-                    ><a href="#" @click="showResult(schedule.idx)">보기</a></td
-                  >
                 </tr>
               </tbody>
             </template>
@@ -664,10 +648,6 @@ export default {
           // always executed
           _this.setLoading(false);
         });
-    },
-    showResult(scheduleIndex) {
-      this.$emit("showResult", scheduleIndex);
-      event.preventDefault();
     },
     getScheduleText(item) {
       if (item.idx == null) {

@@ -41,12 +41,12 @@
     <template v-else>
       <!-- 파일이 없을때 -->
       <FileUpload
+        ref="upload"
+        v-model="files"
         class="btn btn-primary"
         :multiple="true"
         :drop="true"
         :drop-directory="true"
-        v-model="files"
-        ref="upload"
         extensions="rofl"
         accept=".rofl"
         :size="1024 * 1024 * 15"
@@ -91,7 +91,6 @@ export default {
   name: "Member",
   components: { FileUpload },
   props: {},
-  created() {},
   data: () => ({
     files: [], //파일 변수
     headers: [
@@ -101,6 +100,7 @@ export default {
     ],
     addedResultDialog: false
   }),
+  created() {},
   methods: {
     resultFileUpload() {
       //업로드 처리로직

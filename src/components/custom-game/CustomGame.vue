@@ -62,15 +62,15 @@
         </v-dialog>
       </v-col>
       <v-col
-        cols="12"
-        lg="12"
         v-for="customGame in customGames"
         :key="customGame.idx"
+        cols="12"
+        lg="12"
       >
         <CustomGameCard
-          v-bind:customGame="customGame"
+          :custom-game="customGame"
+          :summoner-name="summonerName"
           @searchBySummonerName="searchBySummonerName"
-          :summonerName="summonerName"
           @setDeleteResultDialog="setDeleteResultDialog"
         />
       </v-col>
@@ -79,7 +79,7 @@
       <v-col cols="12" lg="12">
         <CustomGamePagination
           v-show="!loading"
-          :totalPages="totalPages"
+          :total-pages="totalPages"
           @updatePage="updatePage"
         />
       </v-col>
@@ -98,18 +98,6 @@ export default {
   name: "Member",
   components: { CustomGameCard, CustomGamePagination, ResultFileUpload },
   props: {},
-  created() {
-    this.$eventBus.$on("hideFileUploadDialog", this.hideFileUploadDialog);
-
-    this.summonerName = this.$route.query.summonerName;
-    this.getCustomGames();
-  },
-  computed: {
-    ...mapGetters({
-      loading: "getLoading",
-      login: "getLogin"
-    })
-  },
   data: () => {
     return {
       page: 1,
@@ -125,6 +113,18 @@ export default {
       deleteResultDialog: false,
       fileUploadDialog: false
     };
+  },
+  computed: {
+    ...mapGetters({
+      loading: "getLoading",
+      login: "getLogin"
+    })
+  },
+  created() {
+    this.$eventBus.$on("hideFileUploadDialog", this.hideFileUploadDialog);
+
+    this.summonerName = this.$route.query.summonerName;
+    this.getCustomGames();
   },
   methods: {
     updatePage: function(page) {

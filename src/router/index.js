@@ -7,6 +7,7 @@ import Member from "@/views/Member";
 import CustomGame from "@/views/CustomGame";
 import CustomGameTest from "@/views/CustomGameTest";
 import League from "@/views/league/League";
+import LeagueResult from "@/views/league/LeagueResult";
 import LeagueStatistics from "@/views/league/Statistics";
 import LeagueStatisticsPick from "@/views/league/StatisticsPick";
 import Login from "@/views/Login";
@@ -50,6 +51,11 @@ const routes = [
     path: "/league",
     name: "league",
     component: League
+  },
+  {
+    path: "/league-result",
+    name: "league-result",
+    component: LeagueResult
   },
   {
     path: "/league-statistics",

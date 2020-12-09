@@ -45,9 +45,9 @@
           <v-list class="pa-0">
             <v-container class="pt-1 pl-1 pb-0" fluid grid-list-sm>
               <v-row
-                dense
                 v-for="(number, idx) in 5"
                 :key="idx"
+                dense
                 align-center
                 justify-center
                 :class="{
@@ -62,8 +62,8 @@
                       <template v-slot:activator="{ on, attrs }">
                         <v-img
                           v-bind="attrs"
-                          v-on="on"
                           :src="leagueResult.blueTeamSummoners[idx].championUrl"
+                          v-on="on"
                         ></v-img>
                       </template>
                       <span>{{
@@ -79,8 +79,8 @@
                       <template v-slot:activator="{ on, attrs }">
                         <v-img
                           v-bind="attrs"
-                          v-on="on"
                           :src="leagueResult.blueTeamSummoners[idx].championUrl"
+                          v-on="on"
                         ></v-img>
                       </template>
                       <span>{{
@@ -100,8 +100,8 @@
                         }"
                         class="spell1"
                         v-bind="attrs"
-                        v-on="on"
                         :src="leagueResult.blueTeamSummoners[idx].spell1Url"
+                        v-on="on"
                       />
                     </template>
                     <span class="yellow--text">{{
@@ -122,8 +122,8 @@
                           'spell-lg-xl': $vuetify.breakpoint.lgAndUp
                         }"
                         v-bind="attrs"
-                        v-on="on"
                         :src="leagueResult.blueTeamSummoners[idx].spell2Url"
+                        v-on="on"
                       />
                     </template>
                     <span class="yellow--text">{{
@@ -147,10 +147,10 @@
                         }"
                         class="spell1"
                         v-bind="attrs"
-                        v-on="on"
                         :src="
                           leagueResult.blueTeamSummoners[idx].primaryRuneUrl
                         "
+                        v-on="on"
                       />
                     </template>
                     <span class="yellow--text">{{
@@ -172,8 +172,8 @@
                           'spell-lg-xl': $vuetify.breakpoint.lgAndUp
                         }"
                         v-bind="attrs"
-                        v-on="on"
                         :src="leagueResult.blueTeamSummoners[idx].subRuneUrl"
+                        v-on="on"
                       />
                     </template>
                     <span class="yellow--text">{{
@@ -196,10 +196,10 @@
                         }"
                         class="spell1"
                         v-bind="attrs"
-                        v-on="on"
                         :src="
                           leagueResult.blueTeamSummoners[idx].primaryRuneUrl
                         "
+                        v-on="on"
                       />
                     </template>
                     <span class="yellow--text">{{
@@ -221,8 +221,8 @@
                           'spell-lg-xl': $vuetify.breakpoint.lgAndUp
                         }"
                         v-bind="attrs"
-                        v-on="on"
                         :src="leagueResult.blueTeamSummoners[idx].subRuneUrl"
+                        v-on="on"
                       />
                     </template>
                     <span class="yellow--text">{{
@@ -280,17 +280,17 @@
                       <v-tooltip top>
                         <template v-slot:activator="{ on, attrs }">
                           <img
+                            v-if="
+                              leagueResult.blueTeamSummoners[idx].item0Name !=
+                                ''
+                            "
                             :class="{
                               'item-xs': $vuetify.breakpoint.xs,
                               'item-lg-xl': $vuetify.breakpoint.lgAndUp
                             }"
                             v-bind="attrs"
-                            v-on="on"
-                            v-if="
-                              leagueResult.blueTeamSummoners[idx].item0Name !=
-                                ''
-                            "
                             :src="leagueResult.blueTeamSummoners[idx].item0Url"
+                            v-on="on"
                           />
                         </template>
                         <span class="yellow--text">{{
@@ -306,17 +306,17 @@
                       <v-tooltip top>
                         <template v-slot:activator="{ on, attrs }">
                           <img
+                            v-if="
+                              leagueResult.blueTeamSummoners[idx].item1Name !=
+                                ''
+                            "
                             :class="{
                               'item-xs': $vuetify.breakpoint.xs,
                               'item-lg-xl': $vuetify.breakpoint.lgAndUp
                             }"
                             v-bind="attrs"
-                            v-on="on"
-                            v-if="
-                              leagueResult.blueTeamSummoners[idx].item1Name !=
-                                ''
-                            "
                             :src="leagueResult.blueTeamSummoners[idx].item1Url"
+                            v-on="on"
                           />
                         </template>
                         <span class="yellow--text">{{
@@ -332,17 +332,17 @@
                       <v-tooltip top>
                         <template v-slot:activator="{ on, attrs }">
                           <img
+                            v-if="
+                              leagueResult.blueTeamSummoners[idx].item2Name !=
+                                ''
+                            "
                             :class="{
                               'item-xs': $vuetify.breakpoint.xs,
                               'item-lg-xl': $vuetify.breakpoint.lgAndUp
                             }"
                             v-bind="attrs"
-                            v-on="on"
-                            v-if="
-                              leagueResult.blueTeamSummoners[idx].item2Name !=
-                                ''
-                            "
                             :src="leagueResult.blueTeamSummoners[idx].item2Url"
+                            v-on="on"
                           />
                         </template>
                         <span class="yellow--text">{{
@@ -358,17 +358,17 @@
                       <v-tooltip top>
                         <template v-slot:activator="{ on, attrs }">
                           <img
+                            v-if="
+                              leagueResult.blueTeamSummoners[idx].item3Name !=
+                                ''
+                            "
                             :class="{
                               'item-xs': $vuetify.breakpoint.xs,
                               'item-lg-xl': $vuetify.breakpoint.lgAndUp
                             }"
                             v-bind="attrs"
-                            v-on="on"
-                            v-if="
-                              leagueResult.blueTeamSummoners[idx].item3Name !=
-                                ''
-                            "
                             :src="leagueResult.blueTeamSummoners[idx].item3Url"
+                            v-on="on"
                           />
                         </template>
                         <span class="yellow--text">{{
@@ -384,17 +384,17 @@
                       <v-tooltip top>
                         <template v-slot:activator="{ on, attrs }">
                           <img
+                            v-if="
+                              leagueResult.blueTeamSummoners[idx].item4Name !=
+                                ''
+                            "
                             :class="{
                               'item-xs': $vuetify.breakpoint.xs,
                               'item-lg-xl': $vuetify.breakpoint.lgAndUp
                             }"
                             v-bind="attrs"
-                            v-on="on"
-                            v-if="
-                              leagueResult.blueTeamSummoners[idx].item4Name !=
-                                ''
-                            "
                             :src="leagueResult.blueTeamSummoners[idx].item4Url"
+                            v-on="on"
                           />
                         </template>
                         <span class="yellow--text">{{
@@ -410,17 +410,17 @@
                       <v-tooltip top>
                         <template v-slot:activator="{ on, attrs }">
                           <img
+                            v-if="
+                              leagueResult.blueTeamSummoners[idx].item5Name !=
+                                ''
+                            "
                             :class="{
                               'item-xs': $vuetify.breakpoint.xs,
                               'item-lg-xl': $vuetify.breakpoint.lgAndUp
                             }"
                             v-bind="attrs"
-                            v-on="on"
-                            v-if="
-                              leagueResult.blueTeamSummoners[idx].item5Name !=
-                                ''
-                            "
                             :src="leagueResult.blueTeamSummoners[idx].item5Url"
+                            v-on="on"
                           />
                         </template>
                         <span class="yellow--text">{{
@@ -436,17 +436,17 @@
                       <v-tooltip top>
                         <template v-slot:activator="{ on, attrs }">
                           <img
+                            v-if="
+                              leagueResult.blueTeamSummoners[idx].item6Name !=
+                                ''
+                            "
                             :class="{
                               'item-xs': $vuetify.breakpoint.xs,
                               'item-lg-xl': $vuetify.breakpoint.lgAndUp
                             }"
                             v-bind="attrs"
-                            v-on="on"
-                            v-if="
-                              leagueResult.blueTeamSummoners[idx].item6Name !=
-                                ''
-                            "
                             :src="leagueResult.blueTeamSummoners[idx].item6Url"
+                            v-on="on"
                           />
                         </template>
                         <span class="yellow--text">{{
@@ -483,9 +483,9 @@
           <v-list class="pa-0">
             <v-container class="pt-1 pl-1 pb-0" fluid grid-list-sm>
               <v-row
-                dense
                 v-for="(number, idx) in 5"
                 :key="idx"
+                dense
                 align-center
                 justify-center
                 :class="{
@@ -500,8 +500,8 @@
                       <template v-slot:activator="{ on, attrs }">
                         <v-img
                           v-bind="attrs"
-                          v-on="on"
                           :src="leagueResult.redTeamSummoners[idx].championUrl"
+                          v-on="on"
                         ></v-img>
                       </template>
                       <span>{{
@@ -517,8 +517,8 @@
                       <template v-slot:activator="{ on, attrs }">
                         <v-img
                           v-bind="attrs"
-                          v-on="on"
                           :src="leagueResult.redTeamSummoners[idx].championUrl"
+                          v-on="on"
                         ></v-img>
                       </template>
                       <span>{{
@@ -538,8 +538,8 @@
                         }"
                         class="spell1"
                         v-bind="attrs"
-                        v-on="on"
                         :src="leagueResult.redTeamSummoners[idx].spell1Url"
+                        v-on="on"
                       />
                     </template>
                     <span class="yellow--text">{{
@@ -560,8 +560,8 @@
                           'spell-lg-xl': $vuetify.breakpoint.lgAndUp
                         }"
                         v-bind="attrs"
-                        v-on="on"
                         :src="leagueResult.redTeamSummoners[idx].spell2Url"
+                        v-on="on"
                       />
                     </template>
                     <span class="yellow--text">{{
@@ -584,8 +584,8 @@
                         }"
                         class="spell1"
                         v-bind="attrs"
-                        v-on="on"
                         :src="leagueResult.redTeamSummoners[idx].primaryRuneUrl"
+                        v-on="on"
                       />
                     </template>
                     <span class="yellow--text">{{
@@ -607,8 +607,8 @@
                           'spell-lg-xl': $vuetify.breakpoint.lgAndUp
                         }"
                         v-bind="attrs"
-                        v-on="on"
                         :src="leagueResult.redTeamSummoners[idx].subRuneUrl"
+                        v-on="on"
                       />
                     </template>
                     <span class="yellow--text">{{
@@ -660,16 +660,16 @@
                   <v-tooltip top>
                     <template v-slot:activator="{ on, attrs }">
                       <img
+                        v-if="
+                          leagueResult.redTeamSummoners[idx].item0Name != ''
+                        "
                         :class="{
                           'item-xs': $vuetify.breakpoint.xs,
                           'item-lg-xl': $vuetify.breakpoint.lgAndUp
                         }"
                         v-bind="attrs"
-                        v-on="on"
-                        v-if="
-                          leagueResult.redTeamSummoners[idx].item0Name != ''
-                        "
                         :src="leagueResult.redTeamSummoners[idx].item0Url"
+                        v-on="on"
                       />
                     </template>
                     <span class="yellow--text">{{
@@ -685,16 +685,16 @@
                   <v-tooltip top>
                     <template v-slot:activator="{ on, attrs }">
                       <img
+                        v-if="
+                          leagueResult.redTeamSummoners[idx].item1Name != ''
+                        "
                         :class="{
                           'item-xs': $vuetify.breakpoint.xs,
                           'item-lg-xl': $vuetify.breakpoint.lgAndUp
                         }"
                         v-bind="attrs"
-                        v-on="on"
-                        v-if="
-                          leagueResult.redTeamSummoners[idx].item1Name != ''
-                        "
                         :src="leagueResult.redTeamSummoners[idx].item1Url"
+                        v-on="on"
                       />
                     </template>
                     <span class="yellow--text">{{
@@ -710,16 +710,16 @@
                   <v-tooltip top>
                     <template v-slot:activator="{ on, attrs }">
                       <img
+                        v-if="
+                          leagueResult.redTeamSummoners[idx].item2Name != ''
+                        "
                         :class="{
                           'item-xs': $vuetify.breakpoint.xs,
                           'item-lg-xl': $vuetify.breakpoint.lgAndUp
                         }"
                         v-bind="attrs"
-                        v-on="on"
-                        v-if="
-                          leagueResult.redTeamSummoners[idx].item2Name != ''
-                        "
                         :src="leagueResult.redTeamSummoners[idx].item2Url"
+                        v-on="on"
                       />
                     </template>
                     <span class="yellow--text">{{
@@ -735,16 +735,16 @@
                   <v-tooltip top>
                     <template v-slot:activator="{ on, attrs }">
                       <img
+                        v-if="
+                          leagueResult.redTeamSummoners[idx].item3Name != ''
+                        "
                         :class="{
                           'item-xs': $vuetify.breakpoint.xs,
                           'item-lg-xl': $vuetify.breakpoint.lgAndUp
                         }"
                         v-bind="attrs"
-                        v-on="on"
-                        v-if="
-                          leagueResult.redTeamSummoners[idx].item3Name != ''
-                        "
                         :src="leagueResult.redTeamSummoners[idx].item3Url"
+                        v-on="on"
                       />
                     </template>
                     <span class="yellow--text">{{
@@ -760,16 +760,16 @@
                   <v-tooltip top>
                     <template v-slot:activator="{ on, attrs }">
                       <img
+                        v-if="
+                          leagueResult.redTeamSummoners[idx].item4Name != ''
+                        "
                         :class="{
                           'item-xs': $vuetify.breakpoint.xs,
                           'item-lg-xl': $vuetify.breakpoint.lgAndUp
                         }"
                         v-bind="attrs"
-                        v-on="on"
-                        v-if="
-                          leagueResult.redTeamSummoners[idx].item4Name != ''
-                        "
                         :src="leagueResult.redTeamSummoners[idx].item4Url"
+                        v-on="on"
                       />
                     </template>
                     <span class="yellow--text">{{
@@ -785,16 +785,16 @@
                   <v-tooltip top>
                     <template v-slot:activator="{ on, attrs }">
                       <img
+                        v-if="
+                          leagueResult.redTeamSummoners[idx].item5Name != ''
+                        "
                         :class="{
                           'item-xs': $vuetify.breakpoint.xs,
                           'item-lg-xl': $vuetify.breakpoint.lgAndUp
                         }"
                         v-bind="attrs"
-                        v-on="on"
-                        v-if="
-                          leagueResult.redTeamSummoners[idx].item5Name != ''
-                        "
                         :src="leagueResult.redTeamSummoners[idx].item5Url"
+                        v-on="on"
                       />
                     </template>
                     <span class="yellow--text">{{
@@ -810,16 +810,16 @@
                   <v-tooltip top>
                     <template v-slot:activator="{ on, attrs }">
                       <img
+                        v-if="
+                          leagueResult.redTeamSummoners[idx].item6Name != ''
+                        "
                         :class="{
                           'item-xs': $vuetify.breakpoint.xs,
                           'item-lg-xl': $vuetify.breakpoint.lgAndUp
                         }"
                         v-bind="attrs"
-                        v-on="on"
-                        v-if="
-                          leagueResult.redTeamSummoners[idx].item6Name != ''
-                        "
                         :src="leagueResult.redTeamSummoners[idx].item6Url"
+                        v-on="on"
                       />
                     </template>
                     <span class="yellow--text">{{

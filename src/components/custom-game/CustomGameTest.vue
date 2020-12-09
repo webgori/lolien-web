@@ -11,15 +11,15 @@
       />
 
       <v-layout row wrap align-content-start>
-        <v-flex lg12 v-for="customGame in customGames" :key="customGame.idx">
+        <v-flex v-for="customGame in customGames" :key="customGame.idx" lg12>
           <CustomGameCardTest
-            v-bind:customGame="customGame"
-            :summonerName="summonerName"
+            :custom-game="customGame"
+            :summoner-name="summonerName"
           />
         </v-flex>
         <v-flex lg12>
           <CustomGamePagination
-            :totalPages="totalPages"
+            :total-pages="totalPages"
             @updatePage="updatePage"
           />
         </v-flex>
@@ -40,10 +40,6 @@ export default {
       type: String,
       default: ""
     }
-  },
-  created() {
-    this.summonerName = this.$route.query.summonerName;
-    // this.getCustomGames();
   },
   data: () => {
     return {
@@ -1415,6 +1411,10 @@ export default {
       itemData: {},
       summonerName: null
     };
+  },
+  created() {
+    this.summonerName = this.$route.query.summonerName;
+    // this.getCustomGames();
   },
   methods: {
     updatePage: function(page) {

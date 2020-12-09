@@ -157,15 +157,15 @@
         </v-btn> -->
         <v-btn
           text
-          @click="openKakao()"
           class="white--text font-weight-bold title"
+          @click="openKakao()"
         >
           대화방
         </v-btn>
       </v-toolbar-items>
 
       <template>
-        <v-btn v-if="login" text @click="logout" color="white">
+        <v-btn v-if="login" text color="white" @click="logout">
           <v-icon left>fas fa-sign-out-alt</v-icon> Logout
         </v-btn>
         <v-btn v-else text to="/login" color="white">
@@ -262,16 +262,6 @@ import VueJwtDecode from "vue-jwt-decode";
 
 export default {
   name: "App",
-  created() {
-    this.autoLogin();
-  },
-  computed: {
-    ...mapGetters({
-      loading: "getLoading",
-      login: "getLogin",
-      accessToken: "getAccessToken"
-    })
-  },
   data: () => ({
     drawer: null,
     leagueSubMenus: [
@@ -279,6 +269,11 @@ export default {
         text: "소개",
         to: "/league",
         routeName: "league"
+      },
+      {
+        text: "결과",
+        to: "/league-result",
+        routeName: "league-result"
       },
       {
         text: "통계",
@@ -311,6 +306,16 @@ export default {
       }*/
     ]
   }),
+  computed: {
+    ...mapGetters({
+      loading: "getLoading",
+      login: "getLogin",
+      accessToken: "getAccessToken"
+    })
+  },
+  created() {
+    this.autoLogin();
+  },
   methods: {
     openKakao: function() {
       window.open("https://open.kakao.com/o/g2FEzQ5");

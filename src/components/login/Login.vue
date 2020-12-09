@@ -16,8 +16,8 @@
                     name="login"
                     label="이메일"
                     type="text"
-                    @keyup.enter="keyupEnter()"
                     autocomplete="off"
+                    @keyup.enter="keyupEnter()"
                   ></v-text-field>
                 </v-col>
               </v-row>
@@ -25,14 +25,14 @@
               <v-row dense>
                 <v-col lg="12">
                   <v-text-field
-                    v-model="password"
                     id="password"
+                    v-model="password"
                     prepend-icon="fas fa-lock"
                     name="password"
                     label="비밀번호"
                     type="password"
-                    @keyup.enter="keyupEnter()"
                     autocomplete="off"
+                    @keyup.enter="keyupEnter()"
                   ></v-text-field>
                 </v-col>
               </v-row>
@@ -133,9 +133,6 @@ import { mapActions } from "vuex";
 import Cookies from "js-cookie";
 
 export default {
-  created() {
-    this.getRememberEmailFromCookie();
-  },
   data() {
     return {
       email: "",
@@ -155,6 +152,9 @@ export default {
       rememberEmail: false,
       autoLogin: false
     };
+  },
+  created() {
+    this.getRememberEmailFromCookie();
   },
   methods: {
     ...mapActions(["login"]),

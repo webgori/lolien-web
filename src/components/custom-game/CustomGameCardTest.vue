@@ -64,9 +64,9 @@
             <v-list>
               <v-container fluid grid-list-sm>
                 <v-layout
-                  row
                   v-for="(number, idx) in 5"
                   :key="idx"
+                  row
                   align-center
                   justify-center
                 >
@@ -76,8 +76,8 @@
                         <template v-slot:activator="{ on, attrs }">
                           <v-img
                             v-bind="attrs"
-                            v-on="on"
                             :src="customGame.blueTeamSummoners[idx].championUrl"
+                            v-on="on"
                           ></v-img>
                         </template>
                         <span>{{
@@ -97,8 +97,8 @@
                           }"
                           class="spell1"
                           v-bind="attrs"
-                          v-on="on"
                           :src="customGame.blueTeamSummoners[idx].spell1Url"
+                          v-on="on"
                         />
                       </template>
                       <span class="primary--text">{{
@@ -119,8 +119,8 @@
                             'spell-lg-xl': $vuetify.breakpoint.lgAndUp
                           }"
                           v-bind="attrs"
-                          v-on="on"
                           :src="customGame.blueTeamSummoners[idx].spell2Url"
+                          v-on="on"
                         />
                       </template>
                       <span class="primary--text">{{
@@ -201,14 +201,14 @@
                     <v-tooltip top>
                       <template v-slot:activator="{ on, attrs }">
                         <img
+                          v-if="customGame.blueTeamSummoners[idx].item0 > 0"
                           :class="{
                             'item-xs': $vuetify.breakpoint.xs,
                             'item-lg-xl': $vuetify.breakpoint.lgAndUp
                           }"
                           v-bind="attrs"
-                          v-on="on"
-                          v-if="customGame.blueTeamSummoners[idx].item0 > 0"
                           :src="customGame.blueTeamSummoners[idx].item0Url"
+                          v-on="on"
                         />
                       </template>
                       <span class="primary--text">{{
@@ -224,14 +224,14 @@
                     <v-tooltip top>
                       <template v-slot:activator="{ on, attrs }">
                         <img
+                          v-if="customGame.blueTeamSummoners[idx].item1 > 0"
                           :class="{
                             'item-xs': $vuetify.breakpoint.xs,
                             'item-lg-xl': $vuetify.breakpoint.lgAndUp
                           }"
                           v-bind="attrs"
-                          v-on="on"
-                          v-if="customGame.blueTeamSummoners[idx].item1 > 0"
                           :src="customGame.blueTeamSummoners[idx].item1Url"
+                          v-on="on"
                         />
                       </template>
                       <span class="primary--text">{{
@@ -247,14 +247,14 @@
                     <v-tooltip top>
                       <template v-slot:activator="{ on, attrs }">
                         <img
+                          v-if="customGame.blueTeamSummoners[idx].item2 > 0"
                           :class="{
                             'item-xs': $vuetify.breakpoint.xs,
                             'item-lg-xl': $vuetify.breakpoint.lgAndUp
                           }"
                           v-bind="attrs"
-                          v-on="on"
-                          v-if="customGame.blueTeamSummoners[idx].item2 > 0"
                           :src="customGame.blueTeamSummoners[idx].item2Url"
+                          v-on="on"
                         />
                       </template>
                       <span class="primary--text">{{
@@ -270,14 +270,14 @@
                     <v-tooltip top>
                       <template v-slot:activator="{ on, attrs }">
                         <img
+                          v-if="customGame.blueTeamSummoners[idx].item3 > 0"
                           :class="{
                             'item-xs': $vuetify.breakpoint.xs,
                             'item-lg-xl': $vuetify.breakpoint.lgAndUp
                           }"
                           v-bind="attrs"
-                          v-on="on"
-                          v-if="customGame.blueTeamSummoners[idx].item3 > 0"
                           :src="customGame.blueTeamSummoners[idx].item3Url"
+                          v-on="on"
                         />
                       </template>
                       <span class="primary--text">{{
@@ -293,14 +293,14 @@
                     <v-tooltip top>
                       <template v-slot:activator="{ on, attrs }">
                         <img
+                          v-if="customGame.blueTeamSummoners[idx].item4 > 0"
                           :class="{
                             'item-xs': $vuetify.breakpoint.xs,
                             'item-lg-xl': $vuetify.breakpoint.lgAndUp
                           }"
                           v-bind="attrs"
-                          v-on="on"
-                          v-if="customGame.blueTeamSummoners[idx].item4 > 0"
                           :src="customGame.blueTeamSummoners[idx].item4Url"
+                          v-on="on"
                         />
                       </template>
                       <span class="primary--text">{{
@@ -316,14 +316,14 @@
                     <v-tooltip top>
                       <template v-slot:activator="{ on, attrs }">
                         <img
+                          v-if="customGame.blueTeamSummoners[idx].item5 > 0"
                           :class="{
                             'item-xs': $vuetify.breakpoint.xs,
                             'item-lg-xl': $vuetify.breakpoint.lgAndUp
                           }"
                           v-bind="attrs"
-                          v-on="on"
-                          v-if="customGame.blueTeamSummoners[idx].item5 > 0"
                           :src="customGame.blueTeamSummoners[idx].item5Url"
+                          v-on="on"
                         />
                       </template>
                       <span class="primary--text">{{
@@ -339,14 +339,14 @@
                     <v-tooltip top>
                       <template v-slot:activator="{ on, attrs }">
                         <img
+                          v-if="customGame.blueTeamSummoners[idx].item6 > 0"
                           :class="{
                             'item-xs': $vuetify.breakpoint.xs,
                             'item-lg-xl': $vuetify.breakpoint.lgAndUp
                           }"
                           v-bind="attrs"
-                          v-on="on"
-                          v-if="customGame.blueTeamSummoners[idx].item6 > 0"
                           :src="customGame.blueTeamSummoners[idx].item6Url"
+                          v-on="on"
                         />
                       </template>
                       <span class="primary--text">{{
@@ -381,9 +381,9 @@
             <v-list>
               <v-container fluid grid-list-sm>
                 <v-layout
-                  row
                   v-for="(number, idx) in 5"
                   :key="idx"
+                  row
                   align-center
                   justify-center
                 >
@@ -393,8 +393,8 @@
                         <template v-slot:activator="{ on, attrs }">
                           <v-img
                             v-bind="attrs"
-                            v-on="on"
                             :src="customGame.redTeamSummoners[idx].championUrl"
+                            v-on="on"
                           ></v-img>
                         </template>
                         <span>{{
@@ -414,8 +414,8 @@
                           }"
                           class="spell1"
                           v-bind="attrs"
-                          v-on="on"
                           :src="customGame.redTeamSummoners[idx].spell1Url"
+                          v-on="on"
                         />
                       </template>
                       <span class="primary--text">{{
@@ -436,8 +436,8 @@
                             'spell-lg-xl': $vuetify.breakpoint.lgAndUp
                           }"
                           v-bind="attrs"
-                          v-on="on"
                           :src="customGame.redTeamSummoners[idx].spell2Url"
+                          v-on="on"
                         />
                       </template>
                       <span class="primary--text">{{
@@ -513,14 +513,14 @@
                     <v-tooltip top>
                       <template v-slot:activator="{ on, attrs }">
                         <img
+                          v-if="customGame.redTeamSummoners[idx].item0 > 0"
                           :class="{
                             'item-xs': $vuetify.breakpoint.xs,
                             'item-lg-xl': $vuetify.breakpoint.lgAndUp
                           }"
                           v-bind="attrs"
-                          v-on="on"
-                          v-if="customGame.redTeamSummoners[idx].item0 > 0"
                           :src="customGame.redTeamSummoners[idx].item0Url"
+                          v-on="on"
                         />
                       </template>
                       <span class="primary--text">{{
@@ -536,14 +536,14 @@
                     <v-tooltip top>
                       <template v-slot:activator="{ on, attrs }">
                         <img
+                          v-if="customGame.redTeamSummoners[idx].item1 > 0"
                           :class="{
                             'item-xs': $vuetify.breakpoint.xs,
                             'item-lg-xl': $vuetify.breakpoint.lgAndUp
                           }"
                           v-bind="attrs"
-                          v-on="on"
-                          v-if="customGame.redTeamSummoners[idx].item1 > 0"
                           :src="customGame.redTeamSummoners[idx].item1Url"
+                          v-on="on"
                         />
                       </template>
                       <span class="primary--text">{{
@@ -559,14 +559,14 @@
                     <v-tooltip top>
                       <template v-slot:activator="{ on, attrs }">
                         <img
+                          v-if="customGame.redTeamSummoners[idx].item2 > 0"
                           :class="{
                             'item-xs': $vuetify.breakpoint.xs,
                             'item-lg-xl': $vuetify.breakpoint.lgAndUp
                           }"
                           v-bind="attrs"
-                          v-on="on"
-                          v-if="customGame.redTeamSummoners[idx].item2 > 0"
                           :src="customGame.redTeamSummoners[idx].item2Url"
+                          v-on="on"
                         />
                       </template>
                       <span class="primary--text">{{
@@ -582,14 +582,14 @@
                     <v-tooltip top>
                       <template v-slot:activator="{ on, attrs }">
                         <img
+                          v-if="customGame.redTeamSummoners[idx].item3 > 0"
                           :class="{
                             'item-xs': $vuetify.breakpoint.xs,
                             'item-lg-xl': $vuetify.breakpoint.lgAndUp
                           }"
                           v-bind="attrs"
-                          v-on="on"
-                          v-if="customGame.redTeamSummoners[idx].item3 > 0"
                           :src="customGame.redTeamSummoners[idx].item3Url"
+                          v-on="on"
                         />
                       </template>
                       <span class="primary--text">{{
@@ -605,14 +605,14 @@
                     <v-tooltip top>
                       <template v-slot:activator="{ on, attrs }">
                         <img
+                          v-if="customGame.redTeamSummoners[idx].item4 > 0"
                           :class="{
                             'item-xs': $vuetify.breakpoint.xs,
                             'item-lg-xl': $vuetify.breakpoint.lgAndUp
                           }"
                           v-bind="attrs"
-                          v-on="on"
-                          v-if="customGame.redTeamSummoners[idx].item4 > 0"
                           :src="customGame.redTeamSummoners[idx].item4Url"
+                          v-on="on"
                         />
                       </template>
                       <span class="primary--text">{{
@@ -628,14 +628,14 @@
                     <v-tooltip top>
                       <template v-slot:activator="{ on, attrs }">
                         <img
+                          v-if="customGame.redTeamSummoners[idx].item5 > 0"
                           :class="{
                             'item-xs': $vuetify.breakpoint.xs,
                             'item-lg-xl': $vuetify.breakpoint.lgAndUp
                           }"
                           v-bind="attrs"
-                          v-on="on"
-                          v-if="customGame.redTeamSummoners[idx].item5 > 0"
                           :src="customGame.redTeamSummoners[idx].item5Url"
+                          v-on="on"
                         />
                       </template>
                       <span class="primary--text">{{
@@ -651,14 +651,14 @@
                     <v-tooltip top>
                       <template v-slot:activator="{ on, attrs }">
                         <img
+                          v-if="customGame.redTeamSummoners[idx].item6 > 0"
                           :class="{
                             'item-xs': $vuetify.breakpoint.xs,
                             'item-lg-xl': $vuetify.breakpoint.lgAndUp
                           }"
                           v-bind="attrs"
-                          v-on="on"
-                          v-if="customGame.redTeamSummoners[idx].item6 > 0"
                           :src="customGame.redTeamSummoners[idx].item6Url"
+                          v-on="on"
                         />
                       </template>
                       <span class="primary--text">{{

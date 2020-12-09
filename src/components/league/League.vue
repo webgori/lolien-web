@@ -6,8 +6,8 @@
           <v-row dense>
             <v-col cols="12" lg="2">
               <v-btn
-                large
                 v-if="resultComponent"
+                large
                 color="white"
                 @click="goToIntro()"
               >
@@ -17,14 +17,14 @@
             </v-col>
             <v-col cols="12" lg="2" offset-lg="8">
               <v-select
+                v-model="leagues[leagues.length - 1]"
                 dense
                 :items="leagues"
                 solo
                 item-text="title"
                 item-value="idx"
-                v-model="leagues[leagues.length - 1]"
                 return-object
-                v-on:input="changeLeague(leagues[leagues.length - 1])"
+                @input="changeLeague(leagues[leagues.length - 1])"
               ></v-select>
             </v-col>
           </v-row>
@@ -34,14 +34,14 @@
         <v-col cols="12" lg="12">
           <LeagueIntro
             v-if="!resultComponent"
-            :leagueIndex="currentLeagueIndex"
+            :league-index="currentLeagueIndex"
             @showResult="showResult"
           />
 
           <LeagueResult
             v-if="resultComponent"
-            :leagueIndex="currentLeagueIndex"
-            :scheduleIndex="scheduleIndex"
+            :league-index="currentLeagueIndex"
+            :schedule-index="scheduleIndex"
             @goToIntro="goToIntro"
           />
         </v-col>
@@ -71,8 +71,8 @@
                     style="position: relative; border:1px solid #2196F3; border-style:dashed; "
                   >
                     <LeagueResultFileUpload
-                      :leagueIndex="currentLeagueIndex"
-                      :subMenuIndex="subMenuIndex"
+                      :league-index="currentLeagueIndex"
+                      :sub-menu-index="subMenuIndex"
                       @addedLeagueResult="addedLeagueResult"
                     />
                   </v-col>
@@ -97,6 +97,13 @@ export default {
   name: "Member",
   components: { LeagueIntro, LeagueResult, LeagueResultFileUpload },
   props: {},
+  data: () => ({
+    subMenuIndex: null,
+    leagues: [],
+    currentLeagueIndex: null,
+    fileUploadDialog: false,
+    resultComponent: false
+  }),
   created() {
     this.$eventBus.$on("hideFileUploadDialog", this.hideFileUploadDialog);
 
@@ -110,13 +117,6 @@ export default {
       this.currentLeagueIndex = this.leagues[this.leagues.length - 1].idx;
     });
   },
-  data: () => ({
-    subMenuIndex: null,
-    leagues: [],
-    currentLeagueIndex: null,
-    fileUploadDialog: false,
-    resultComponent: false
-  }),
   methods: {
     getLeagues() {
       var _this = this;

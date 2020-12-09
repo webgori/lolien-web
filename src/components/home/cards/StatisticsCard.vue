@@ -32,7 +32,7 @@
             <h1>{{ text }}</h1>
           </v-list-item-content>
 
-          <v-list-item-avatar v-if="championUrl != null" size="50">
+          <v-list-item-avatar v-if="championUrl != ''" size="50">
             <img :src="championUrl" alt="John" />
           </v-list-item-avatar>
         </v-list-item>
@@ -54,15 +54,15 @@
 <script>
 export default {
   props: {
-    title: { type: String },
-    subtitle: { type: String },
-    text: { type: String },
-    detail: { type: String },
-    color: { type: String },
-    titleColor: { type: String },
-    textColor: { type: String },
-    championName: { type: String },
-    championUrl: { type: String }
+    title: { default: "", type: String },
+    subtitle: { default: "", type: String },
+    text: { default: "", type: String },
+    detail: { default: "", type: String },
+    color: { default: "", type: String },
+    titleColor: { default: "", type: String },
+    textColor: { default: "", type: String },
+    championName: { default: "", type: String },
+    championUrl: { default: "", type: String }
   },
   data: () => {
     return {};
