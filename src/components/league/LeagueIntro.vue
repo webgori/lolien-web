@@ -458,6 +458,105 @@
         </v-col>
       </v-row>
 
+      <p class="title font-weight-bold mb-0">플레이오프</p>
+      <v-divider class="mb-2"></v-divider>
+
+      <p>
+        <img
+          src="@/assets/images/playOff.jpg"
+          :class="{ 'image-fit': $vuetify.breakpoint.xs }"
+        />
+      </p>
+
+      <v-row>
+        <v-col lg="8" cols="12">
+          <v-simple-table class="pt-0 pb-3">
+            <template v-slot:default>
+              <thead>
+                <tr>
+                  <th
+                    v-if="$vuetify.breakpoint.xs"
+                    class="text-center"
+                    width="35%"
+                    >경기 날짜</th
+                  >
+                  <th
+                    v-if="$vuetify.breakpoint.xs"
+                    class="text-center"
+                    width="45%"
+                    >대진</th
+                  >
+
+                  <th
+                    v-if="$vuetify.breakpoint.smAndUp"
+                    class="text-center"
+                    width="20%"
+                    >경기 날짜</th
+                  >
+                  <th
+                    v-if="$vuetify.breakpoint.smAndUp"
+                    class="text-center"
+                    width="25%"
+                    >대진</th
+                  >
+                  <th
+                    v-if="$vuetify.breakpoint.smAndUp"
+                    class="text-center"
+                    width="15%"
+                    >방송</th
+                  >
+                  <th
+                    v-if="$vuetify.breakpoint.smAndUp"
+                    class="text-center"
+                    width="20%"
+                    >해설</th
+                  >
+                  <th
+                    v-if="$vuetify.breakpoint.smAndUp"
+                    class="text-center"
+                    width="20%"
+                    >심판</th
+                  >
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="text-center">2020-12-06 오후 09:30:00</td>
+                  <td class="text-center">
+                    <img
+                      class="pt-0"
+                      src="https://vignette.wikia.nocookie.net/leagueoflegends/images/e/e3/Demacia_Crest_icon.png/revision/latest/scale-to-width-down/15?cb=20190720005456"
+                    />
+
+                    <span>데마시아</span>
+
+                    vs
+
+                    <img
+                      class="pt-0"
+                      src="https://vignette.wikia.nocookie.net/leagueoflegends/images/4/4e/Freljord_Crest_icon.png/revision/latest/scale-to-width-down/15?cb=20190720005359"
+                    />
+
+                    <span>프렐요드</span></td
+                  >
+                  <td v-if="$vuetify.breakpoint.smAndUp" class="text-center"
+                    >Leo레오</td
+                  >
+
+                  <td v-if="$vuetify.breakpoint.smAndUp" class="text-center"
+                    >Chaos만랩, 울고있다</td
+                  >
+
+                  <td v-if="$vuetify.breakpoint.smAndUp" class="text-center"
+                    >Chaos만랩</td
+                  >
+                </tr>
+              </tbody>
+            </template>
+          </v-simple-table>
+        </v-col>
+      </v-row>
+
       <p class="title font-weight-bold mb-0">리그 결과</p>
       <v-divider class="mb-2"></v-divider>
 
