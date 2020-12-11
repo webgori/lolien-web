@@ -557,6 +557,116 @@
         </v-col>
       </v-row>
 
+      <p>
+        <img
+          src="@/assets/images/playOffResult.jpg"
+          :class="{ 'image-fit': $vuetify.breakpoint.xs }"
+        />
+      </p>
+
+      <p class="title font-weight-bold mb-0">2020 롤리앙 시리즈</p>
+      <v-divider class="mb-2"></v-divider>
+
+      <p>
+        <img src="@/assets/images/seriesLogo.jpg" />
+      </p>
+
+      <p>
+        <img
+          src="@/assets/images/series.jpg"
+          :class="{ 'image-fit': $vuetify.breakpoint.xs }"
+        />
+      </p>
+
+      <v-row>
+        <v-col lg="8" cols="12">
+          <v-simple-table class="pt-0 pb-3">
+            <template v-slot:default>
+              <thead>
+                <tr>
+                  <th
+                    v-if="$vuetify.breakpoint.xs"
+                    class="text-center"
+                    width="35%"
+                    >경기 날짜</th
+                  >
+                  <th
+                    v-if="$vuetify.breakpoint.xs"
+                    class="text-center"
+                    width="45%"
+                    >대진</th
+                  >
+
+                  <th
+                    v-if="$vuetify.breakpoint.smAndUp"
+                    class="text-center"
+                    width="20%"
+                    >경기 날짜</th
+                  >
+                  <th
+                    v-if="$vuetify.breakpoint.smAndUp"
+                    class="text-center"
+                    width="25%"
+                    >대진</th
+                  >
+                  <th
+                    v-if="$vuetify.breakpoint.smAndUp"
+                    class="text-center"
+                    width="15%"
+                    >방송</th
+                  >
+                  <th
+                    v-if="$vuetify.breakpoint.smAndUp"
+                    class="text-center"
+                    width="20%"
+                    >해설</th
+                  >
+                  <th
+                    v-if="$vuetify.breakpoint.smAndUp"
+                    class="text-center"
+                    width="20%"
+                    >심판</th
+                  >
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="text-center">2020-12-13 오후 07:50:00</td>
+                  <td class="text-center">
+                    <img
+                      class="pt-0"
+                      src="https://vignette.wikia.nocookie.net/leagueoflegends/images/3/38/Noxus_Crest_icon.png/revision/latest/scale-to-width-down/15?cb=20161117055828"
+                    />
+
+                    <span>녹서스</span>
+
+                    vs
+
+                    <img
+                      class="pt-0"
+                      src="https://vignette.wikia.nocookie.net/leagueoflegends/images/4/4e/Freljord_Crest_icon.png/revision/latest/scale-to-width-down/15?cb=20190720005359"
+                    />
+
+                    <span>프렐요드</span></td
+                  >
+                  <td v-if="$vuetify.breakpoint.smAndUp" class="text-center"
+                    >Leo레오</td
+                  >
+
+                  <td v-if="$vuetify.breakpoint.smAndUp" class="text-center"
+                    >Chaos만랩, 울고있다</td
+                  >
+
+                  <td v-if="$vuetify.breakpoint.smAndUp" class="text-center"
+                    >Chaos만랩, Jrabbit</td
+                  >
+                </tr>
+              </tbody>
+            </template>
+          </v-simple-table>
+        </v-col>
+      </v-row>
+
       <p class="title font-weight-bold mb-0">리그 결과</p>
       <v-divider class="mb-2"></v-divider>
 
@@ -589,7 +699,88 @@
         <li>엔딩크래딧 명단 추가</li></ul
       >
 
-      <!-- LOLIEN LUPIN LEAGUE -->
+      <p class="title font-weight-bold mt-5 mb-0">상품</p>
+      <v-divider class="mb-2"></v-divider>
+      <p class="mb-0 font-weight-bold">우승팀</p>
+      <p class="mb-0">우승팀 5명</p>
+      <p>일반 수수께기 선물 (490RP x 5 = 2,450RP)</p>
+
+      <p class="mb-0 font-weight-bold">선수들 참가격려상</p>
+      <p class="mb-0">선수 전원 20명</p>
+      <p>준전설 스킨 선물 (1350RP x 20 = 27,000RP)</p>
+
+      <p class="mb-0 font-weight-bold">운영자 격려상</p>
+      <p class="mb-0">운영자 1명, 방송 2명, 해설 2명, 개발자 1명</p>
+      <p>일반스킨 선물 (975RP x 6 = 5850RP)</p>
+
+      <p class="mb-0 font-weight-bold">팀장 격려상</p>
+      <p class="mb-0">각 팀장 4명</p>
+      <p>명품상자 & 열쇠 선물 (225RP x 4 = 900RP)</p>
+
+      <p class="mb-0 font-weight-bold">각팀 MVP(결승전 제외)</p>
+      <p class="mb-0"
+        >각팀 MVP 1명 (매경기마다 팀원끼리 투표해서 1위)(결승전 제외)</p
+      >
+      <p>마법상자 & 열쇠 선물 (195 x 4 = 780RP)</p>
+
+      <p class="mb-0 font-weight-bold">최고의 플레이어 상(결승전만)</p>
+      <p class="mb-0">결승전만 MVP 운영자들끼리 결정</p>
+      <p>일반 수수께기 선물 (490RP)</p>
+
+      <p class="mb-0 font-weight-bold">하이라이트(전경기 포함)</p>
+      <p class="mb-0">시청자 투표 1위 팀 선수 5명 (선수, 해설, 포함)</p>
+      <p>마법상자 & 열쇠 선물 (195 x 5 = 975RP)</p>
+
+      <p class="mb-0 font-weight-bold"
+        >저격밴 횟수 MVP(우승팀, 결승전, 플레이오프 밴픽 제외)</p
+      >
+      <p class="mb-0"
+        >우승팀, 결승전, 플레이오프 제외- 전경기 저격밴 받는 횟수 1위</p
+      >
+      <p>마법상자 & 열쇠 선물 (195RP)</p>
+
+      <p class="mb-0 font-weight-bold"
+        >최다 고정픽 MVP(우승팀, 결승전, 플레이오프 제외)</p
+      >
+      <p class="mb-0"
+        >우승팀, 결승전, 플레이오프 제외- 전경기 최다 고정픽 횟수 1위</p
+      >
+      <p>마법상자 & 열쇠 선물 (195RP)</p>
+
+      <p class="mb-0 font-weight-bold"
+        >최다 멀티픽 MVP(우승팀, 결승전, 플레이오프 제외)</p
+      >
+      <p class="mb-0"
+        >우승팀, 결승전, 플레이오프 제외- 전경기 최다 멀티픽 횟수 1위 (다양한
+        챔피언 픽)</p
+      >
+      <p>마법상자 & 열쇠 선물 (195RP)</p>
+
+      <p class="mb-0 font-weight-bold"
+        >최다 사망왕 특별상(결승전, 플레이오프 제외)</p
+      >
+      <p class="mb-0">찡막사마님의 후원</p>
+      <p>1,350 준전설 스킨 (플레이오프때 스킨 공개)</p>
+
+      <p class="mb-0 font-weight-bold"
+        >시야왕 특별상(결승전, 플레이오프 제외)</p
+      >
+      <p class="mb-0">kkomi kim님의 후원</p>
+      <p>1,350 준전설 스킨 (플레이오프때 스킨 공개)</p>
+
+      <p class="mb-0 font-weight-bold">최장 경기 최다 사망왕 특별상(전경기)</p>
+      <p class="mb-0">CoolTea님의 후원</p>
+      <p>1,350 준전설 스킨 (결승전 종료 후 스킨 공개)</p>
+
+      <p class="mb-0 font-weight-bold">히든 퀘스트 특별상(리그, 결승 포함)</p>
+      <p class="mb-0">태랑님의 후원</p>
+      <p>1,200RP 선물 1 or 2회 (결승전 종료 후 퀘스트 내용 공개)</p>
+
+      <v-divider class="mb-2"></v-divider>
+
+      <p>후원금 총 39,000RP</p>
+      <p>특별상 포함시 (최소 5,250 최대 6,450RP)</p>
+      <p>총 45,450RP (최소 44,250RP)</p>
     </v-col>
     <v-col cols="12" lg="12">
       <v-dialog v-model="fileUploadDialog" max-width="900px">
