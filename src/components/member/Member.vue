@@ -7,9 +7,55 @@
             <template v-slot:default>
               <thead>
                 <tr>
-                  <th class="text-center" width="25%">가입일</th>
-                  <th class="text-center" width="35%">닉네임</th>
-                  <th class="text-center" width="40%">소환사명</th>
+                  <th
+                    v-if="$vuetify.breakpoint.xs"
+                    class="text-center"
+                    width="25%"
+                    >가입일</th
+                  >
+                  <th
+                    v-if="$vuetify.breakpoint.xs"
+                    class="text-center"
+                    width="35%"
+                    >닉네임</th
+                  >
+                  <th
+                    v-if="$vuetify.breakpoint.xs"
+                    class="text-center"
+                    width="40%"
+                    >소환사명</th
+                  >
+
+                  <th
+                    v-if="$vuetify.breakpoint.smAndUp"
+                    class="text-center"
+                    width="15%"
+                    >가입일</th
+                  >
+                  <th
+                    v-if="$vuetify.breakpoint.smAndUp"
+                    class="text-center"
+                    width="25%"
+                    >닉네임</th
+                  >
+                  <th
+                    v-if="$vuetify.breakpoint.smAndUp"
+                    class="text-center"
+                    width="20%"
+                    >소환사명</th
+                  >
+                  <th
+                    v-if="$vuetify.breakpoint.smAndUp"
+                    class="text-center"
+                    width="20%"
+                    >티어</th
+                  >
+                  <th
+                    v-if="$vuetify.breakpoint.smAndUp"
+                    class="text-center"
+                    width="20%"
+                    >내전 MMR</th
+                  >
                 </tr>
               </thead>
               <tbody>
@@ -19,6 +65,12 @@
                   </td>
                   <td class="text-center">{{ user.nickname }}</td>
                   <td class="text-center">{{ user.summonerName }}</td>
+                  <td v-if="$vuetify.breakpoint.smAndUp" class="text-center">{{
+                    user.tier
+                  }}</td>
+                  <td v-if="$vuetify.breakpoint.smAndUp" class="text-center">{{
+                    user.mmr
+                  }}</td>
                 </tr>
               </tbody>
             </template>
