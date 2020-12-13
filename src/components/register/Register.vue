@@ -235,8 +235,8 @@ export default {
       }
     },
     checkNickname() {
-      if (this.nickname.length < 3) {
-        let errorMessage = "닉네임은 최소 3자부터 사용 가능합니다.";
+      if (this.nickname.length < 2) {
+        let errorMessage = "닉네임은 최소 2자부터 사용 가능합니다.";
 
         alert(errorMessage);
         throw new TypeError(errorMessage);
@@ -279,8 +279,8 @@ export default {
       }
     },
     checkSummonerName() {
-      if (this.summonerName.length < 3) {
-        let errorMessage = "소환사 이름은 최소 3자부터 사용 가능합니다.";
+      if (this.summonerName.length < 2) {
+        let errorMessage = "소환사 이름은 최소 2자부터 사용 가능합니다.";
 
         alert(errorMessage);
         throw new TypeError(errorMessage);
