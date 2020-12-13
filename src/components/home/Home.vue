@@ -196,6 +196,30 @@
         >
         </statistics-card>
       </v-col>
+
+      <v-col lg="3" cols="sm" class="pb-2">
+        <statistics-card
+          v-if="minMmrSummonerName != ''"
+          title="내전 MMR이 가장 낮은 소환사"
+          :text="minMmrSummonerName"
+          :detail="minMmrDetail"
+          color="light-green"
+        >
+        </statistics-card>
+      </v-col>
+    </v-row>
+
+    <v-row>
+      <v-col lg="3" cols="sm" class="pb-2">
+        <statistics-card
+          v-if="maxMmrSummonerName != ''"
+          title="내전 MMR이 가장 높은 소환사"
+          :text="maxMmrSummonerName"
+          :detail="maxMmrDetail"
+          color="lime"
+        >
+        </statistics-card>
+      </v-col>
     </v-row>
   </v-container>
 </template>
@@ -270,6 +294,12 @@ export default {
 
     mostFirstBloodKillSummonerName: "",
     mostFirstBloodKillSummonerDetail: "",
+
+    minMmrSummonerName: "",
+    minMmrDetail: "",
+
+    maxMmrSummonerName: "",
+    maxMmrDetail: "",
     matchesChartData: {
       //Data to be represented on x-axis
       labels: [],
@@ -434,6 +464,12 @@ export default {
           response.data.mostFirstTowerKill.summonerName;
         this.mostFirstTowerKillSummonerDetail =
           response.data.mostFirstTowerKill.count + " 회";
+
+        this.minMmrSummonerName = response.data.minMmr.summonerName;
+        this.minMmrDetail = response.data.minMmr.mmr;
+
+        this.maxMmrSummonerName = response.data.maxMmr.summonerName;
+        this.maxMmrDetail = response.data.maxMmr.mmr;
       })
       .catch(error => {
         // handle error
