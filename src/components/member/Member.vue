@@ -3,78 +3,24 @@
     <v-container class="contents" bg fill-height grid-list-lg text-lg-left>
       <v-row>
         <v-col lg="12">
-          <v-simple-table dense>
-            <template v-slot:default>
-              <thead>
-                <tr>
-                  <th
-                    v-if="$vuetify.breakpoint.xs"
-                    class="text-center"
-                    width="25%"
-                    >가입일</th
-                  >
-                  <th
-                    v-if="$vuetify.breakpoint.xs"
-                    class="text-center"
-                    width="35%"
-                    >닉네임</th
-                  >
-                  <th
-                    v-if="$vuetify.breakpoint.xs"
-                    class="text-center"
-                    width="40%"
-                    >소환사명</th
-                  >
+          <v-card>
+            <v-card-title>
+              <v-text-field
+                v-model="search"
+                append-icon="fas fa-search"
+                label="소환사명을 입력해주세요."
+                single-line
+                hide-details
+              ></v-text-field>
+            </v-card-title>
 
-                  <th
-                    v-if="$vuetify.breakpoint.smAndUp"
-                    class="text-center"
-                    width="15%"
-                    >가입일</th
-                  >
-                  <th
-                    v-if="$vuetify.breakpoint.smAndUp"
-                    class="text-center"
-                    width="25%"
-                    >닉네임</th
-                  >
-                  <th
-                    v-if="$vuetify.breakpoint.smAndUp"
-                    class="text-center"
-                    width="20%"
-                    >소환사명</th
-                  >
-                  <th
-                    v-if="$vuetify.breakpoint.smAndUp"
-                    class="text-center"
-                    width="20%"
-                    >티어</th
-                  >
-                  <th
-                    v-if="$vuetify.breakpoint.smAndUp"
-                    class="text-center"
-                    width="20%"
-                    >내전 MMR</th
-                  >
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="user in users" :key="user.createdAt">
-                  <td class="text-center">
-                    {{ user.createdAt | moment("YYYY년 MM월 DD일") }}
-                  </td>
-                  <td class="text-center">{{ user.nickname }}</td>
-                  <td class="text-center">{{ user.summonerName }}</td>
-                  <td v-if="$vuetify.breakpoint.smAndUp" class="text-center">{{
-                    user.tier
-                  }}</td>
-                  <td v-if="$vuetify.breakpoint.smAndUp" class="text-center">{{
-                    user.mmr
-                  }}</td>
-                </tr>
-              </tbody>
-            </template>
-          </v-simple-table>
+            <v-data-table
+              :headers="headers"
+              :items="users"
+              :search="search"
+              :items-per-page="15"
+            ></v-data-table>
+          </v-card>
         </v-col>
       </v-row>
     </v-container>
@@ -87,7 +33,44 @@ import axios from "axios";
 export default {
   name: "Member",
   components: {},
-  data: () => ({ users: [] }),
+  data: () => ({
+    search: "",
+    mmr: "",
+    users: []
+  }),
+  computed: {
+    headers() {
+      return [
+        {
+          text: "가입일",
+          align: "center",
+          filterable: false,
+          value: "createdAt"
+        },
+        {
+          text: "닉네임",
+          align: "center",
+          filterable: false,
+          value: "nickname"
+        },
+        { text: "소환사명", align: "center", value: "summonerName" },
+        { text: "티어", align: "center", filterable: false, value: "tier" },
+        {
+          text: "내전 MMR",
+          align: "center",
+          filterable: false,
+          value: "mmr",
+          sort: function(a, b) {
+            if (a === "휴면" || a === "-") {
+              return -1;
+            }
+
+            return a - b;
+          }
+        }
+      ];
+    }
+  },
   created() {
     this.getUsers();
   },
@@ -105,6 +88,10 @@ export default {
         .then(function() {
           // always executed
         });
+    },
+    test(a, b) {
+      console.log(a);
+      console.log(b);
     }
   }
 };
