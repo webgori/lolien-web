@@ -19,7 +19,12 @@
               :items="users"
               :search="search"
               :items-per-page="15"
-            ></v-data-table>
+              :header-props="headerProps"
+            >
+              <template v-slot:[`item.createdAt`]="{ item }">
+                {{ item.createdAt | moment("YYYY년 MM월 DD일") }}
+              </template>
+            </v-data-table>
           </v-card>
         </v-col>
       </v-row>
@@ -39,6 +44,11 @@ export default {
     users: []
   }),
   computed: {
+    headerProps() {
+      return {
+        sortByText: "정렬"
+      };
+    },
     headers() {
       return [
         {
