@@ -64,7 +64,215 @@ export default {
           value: "nickname"
         },
         { text: "소환사명", align: "center", value: "summonerName" },
-        { text: "티어", align: "center", filterable: false, value: "tier" },
+        {
+          text: "티어",
+          align: "center",
+          filterable: false,
+          value: "tier",
+          sort: function(a, b) {
+            if (
+              a.includes("CHALLENGER") &&
+              (b.includes("GRANDMASTER") ||
+                b.includes("MASTER") ||
+                b.includes("DIAMOND") ||
+                b.includes("PLATINUM") ||
+                b.includes("GOLD") ||
+                b.includes("SILVER") ||
+                b.includes("BRONZE") ||
+                b.includes("IRON"))
+            ) {
+              return 1;
+            }
+
+            if (
+              a.includes("GRANDMASTER") &&
+              (b.includes("MASTER") ||
+                b.includes("DIAMOND") ||
+                b.includes("PLATINUM") ||
+                b.includes("GOLD") ||
+                b.includes("SILVER") ||
+                b.includes("BRONZE") ||
+                b.includes("IRON"))
+            ) {
+              return 1;
+            }
+
+            if (
+              a.includes("MASTER") &&
+              (b.includes("DIAMOND") ||
+                b.includes("PLATINUM") ||
+                b.includes("GOLD") ||
+                b.includes("SILVER") ||
+                b.includes("BRONZE") ||
+                b.includes("IRON"))
+            ) {
+              return 1;
+            }
+
+            if (
+              a.includes("DIAMOND") &&
+              (b.includes("PLATINUM") ||
+                b.includes("GOLD") ||
+                b.includes("SILVER") ||
+                b.includes("BRONZE") ||
+                b.includes("IRON"))
+            ) {
+              return 1;
+            }
+
+            if (
+              a.includes("PLATINUM") &&
+              (b.includes("GOLD") ||
+                b.includes("SILVER") ||
+                b.includes("BRONZE") ||
+                b.includes("IRON"))
+            ) {
+              return 1;
+            }
+
+            if (
+              a.includes("GOLD") &&
+              (b.includes("SILVER") ||
+                b.includes("BRONZE") ||
+                b.includes("IRON"))
+            ) {
+              return 1;
+            }
+
+            if (
+              a.includes("SILVER") &&
+              (b.includes("BRONZE") || b.includes("IRON"))
+            ) {
+              return 1;
+            }
+
+            if (a.includes("BRONZE") && b.includes("IRON")) {
+              return 1;
+            }
+
+            if (
+              b.includes("CHALLENGER") &&
+              (a.includes("GRANDMASTER") ||
+                a.includes("MASTER") ||
+                a.includes("DIAMOND") ||
+                a.includes("PLATINUM") ||
+                a.includes("GOLD") ||
+                a.includes("SILVER") ||
+                a.includes("BRONZE") ||
+                a.includes("IRON"))
+            ) {
+              return -1;
+            }
+
+            if (
+              b.includes("GRANDMASTER") &&
+              (a.includes("MASTER") ||
+                a.includes("DIAMOND") ||
+                a.includes("PLATINUM") ||
+                a.includes("GOLD") ||
+                a.includes("SILVER") ||
+                a.includes("BRONZE") ||
+                a.includes("IRON"))
+            ) {
+              return -1;
+            }
+
+            if (
+              b.includes("MASTER") &&
+              (a.includes("DIAMOND") ||
+                a.includes("PLATINUM") ||
+                a.includes("GOLD") ||
+                a.includes("SILVER") ||
+                a.includes("BRONZE") ||
+                a.includes("IRON"))
+            ) {
+              return -1;
+            }
+
+            if (
+              b.includes("DIAMOND") &&
+              (a.includes("PLATINUM") ||
+                a.includes("GOLD") ||
+                a.includes("SILVER") ||
+                a.includes("BRONZE") ||
+                a.includes("IRON"))
+            ) {
+              return -1;
+            }
+
+            if (
+              b.includes("PLATINUM") &&
+              (a.includes("GOLD") ||
+                a.includes("SILVER") ||
+                a.includes("BRONZE") ||
+                a.includes("IRON"))
+            ) {
+              return -1;
+            }
+
+            if (
+              b.includes("GOLD") &&
+              (a.includes("SILVER") ||
+                a.includes("BRONZE") ||
+                a.includes("IRON"))
+            ) {
+              return -1;
+            }
+
+            if (
+              b.includes("SILVER") &&
+              (a.includes("BRONZE") || a.includes("IRON"))
+            ) {
+              return -1;
+            }
+
+            if (b.includes("BRONZE") && a.includes("IRON")) {
+              return -1;
+            }
+
+            if (
+              a.endsWith("-I") &&
+              (b.endsWith("-II") || b.endsWith("-III") || b.endsWith("-IV"))
+            ) {
+              return 1;
+            }
+
+            if (
+              a.endsWith("-II") &&
+              (b.endsWith("-III") || b.endsWith("-IV"))
+            ) {
+              return 1;
+            }
+
+            if (a.endsWith("-III") && b.endsWith("-IV")) {
+              return 1;
+            }
+
+            if (
+              b.endsWith("-I") &&
+              (a.endsWith("-II") || a.endsWith("-III") || a.endsWith("-IV"))
+            ) {
+              return -1;
+            }
+
+            if (
+              b.endsWith("-II") &&
+              (a.endsWith("-III") || a.endsWith("-IV"))
+            ) {
+              return -1;
+            }
+
+            if (b.endsWith("-III") && a.endsWith("-IV")) {
+              return -1;
+            }
+
+            if (a === "" || a === "") {
+              return -1;
+            }
+
+            return 0;
+          }
+        },
         {
           text: "내전 MMR",
           align: "center",
