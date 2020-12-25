@@ -22,43 +22,18 @@
     </v-row>
 
     <v-row>
-      <v-col lg="3" cols="sm" class="pb-2">
+      <v-col cols="12" lg="3">
         <statistics-card
-          v-if="mostBannedChampionName != ''"
-          title="가장 많이 밴을 당한 챔피언"
-          :text="mostBannedChampionName"
-          :champion-url="mostBannedChampionUrl"
-          :detail="mostBannedCount"
-          color="secondary"
+          v-if="maxMmrSummonerName != ''"
+          title="내전 MMR이 가장 높은 소환사"
+          :text="maxMmrSummonerName"
+          :detail="maxMmrDetail"
+          color="lime"
         >
         </statistics-card>
       </v-col>
 
-      <v-col lg="3">
-        <statistics-card
-          v-if="mostPlayedChampionName != ''"
-          title="가장 많이 플레이한 챔피언"
-          :text="mostPlayedChampionName"
-          :champion-url="mostPlayedChampionUrl"
-          :detail="mostPlayedCount"
-          color="accent"
-        >
-        </statistics-card>
-      </v-col>
-
-      <v-col lg="3">
-        <statistics-card
-          v-if="mostWinningChampionName != ''"
-          title="가장 승률이 높은 챔피언"
-          :text="mostWinningChampionName"
-          :champion-url="mostWinningChampionUrl"
-          :detail="mostWinningWinRate"
-          color="error"
-        >
-        </statistics-card>
-      </v-col>
-
-      <v-col lg="3">
+      <v-col cols="12" lg="3">
         <statistics-card
           v-if="mostWinningChampionName != ''"
           title="가장 많이 내전에 참여한 소환사"
@@ -69,10 +44,8 @@
         >
         </statistics-card
       ></v-col>
-    </v-row>
 
-    <v-row>
-      <v-col lg="3" cols="sm" class="pb-2">
+      <v-col cols="12" lg="3">
         <statistics-card
           v-if="mostKdaSummonerName != ''"
           title="KDA가 가장 좋은 소환사"
@@ -83,7 +56,53 @@
         </statistics-card>
       </v-col>
 
-      <v-col lg="3" cols="sm" class="pb-2">
+      <v-col cols="12" lg="3">
+        <statistics-card
+          v-if="mostNeutralMinionsKilledSummonerName != ''"
+          title="CS가 가장 많은 소환사"
+          :text="mostNeutralMinionsKilledSummonerName"
+          :detail="mostNeutralMinionsKilledSummonerDetail"
+          color="cyan"
+        >
+        </statistics-card>
+      </v-col>
+    </v-row>
+
+    <v-row>
+      <v-col cols="12" lg="3">
+        <statistics-card
+          v-if="mostFirstBloodKillSummonerName != ''"
+          title="FIRST BLOOD가 가장 많은 소환사"
+          :text="mostFirstBloodKillSummonerName"
+          :detail="mostFirstBloodKillSummonerDetail"
+          color="teal"
+        >
+        </statistics-card>
+      </v-col>
+
+      <v-col cols="12" lg="3">
+        <statistics-card
+          v-if="mostFirstTowerKillSummonerName != ''"
+          title="첫 포탑을 가장 많이 파괴한 소환사"
+          :text="mostFirstTowerKillSummonerName"
+          :detail="mostFirstTowerKillSummonerDetail"
+          color="green"
+        >
+        </statistics-card>
+      </v-col>
+
+      <v-col cols="12" lg="3">
+        <statistics-card
+          v-if="mostAssistSummonerName != ''"
+          title="가장 많이 처치 기여한 소환사"
+          :text="mostAssistSummonerName"
+          :detail="mostAssistSummonerDetail"
+          color="purple"
+        >
+        </statistics-card>
+      </v-col>
+
+      <v-col cols="12" lg="3">
         <statistics-card
           v-if="mostKillSummonerName != ''"
           title="가장 많이 처치한 소환사"
@@ -93,8 +112,10 @@
         >
         </statistics-card>
       </v-col>
+    </v-row>
 
-      <v-col lg="3" cols="sm" class="pb-2">
+    <v-row>
+      <v-col cols="12" lg="3">
         <statistics-card
           v-if="mostDeathSummonerName != ''"
           title="가장 많이 죽은 소환사"
@@ -105,20 +126,7 @@
         </statistics-card>
       </v-col>
 
-      <v-col lg="3" cols="sm" class="pb-2">
-        <statistics-card
-          v-if="mostAssistSummonerName != ''"
-          title="가장 많이 처치 기여한 소환사"
-          :text="mostAssistSummonerName"
-          :detail="mostAssistSummonerDetail"
-          color="purple"
-        >
-        </statistics-card>
-      </v-col>
-    </v-row>
-
-    <v-row>
-      <v-col lg="3" cols="sm" class="pb-2">
+      <v-col cols="12" lg="3">
         <statistics-card
           v-if="mostVisionScoreSummonerName != ''"
           title="시야 점수가 가장 높은 소환사"
@@ -129,7 +137,7 @@
         </statistics-card>
       </v-col>
 
-      <v-col lg="3" cols="sm" class="pb-2">
+      <v-col cols="12" lg="3">
         <statistics-card
           v-if="mostTotalDamageDealtToChampionsSummonerName != ''"
           title="총 챔피언에게 가한 피해량이 가장 높은 소환사"
@@ -140,18 +148,7 @@
         </statistics-card>
       </v-col>
 
-      <v-col lg="3" cols="sm" class="pb-2">
-        <statistics-card
-          v-if="mostTotalDamageTakenSummonerName != ''"
-          title="총 받은 피해량이 가장 높은 소환사"
-          :text="mostTotalDamageTakenSummonerName"
-          :detail="mostTotalDamageTakenSummonerDetail"
-          color="blue"
-        >
-        </statistics-card>
-      </v-col>
-
-      <v-col lg="3" cols="sm" class="pb-2">
+      <v-col cols="12" lg="3">
         <statistics-card
           v-if="mostGoldEarnedSummonerName != ''"
           title="획득한 골드가 가장 높은 소환사"
@@ -164,40 +161,18 @@
     </v-row>
 
     <v-row>
-      <v-col lg="3" cols="sm" class="pb-2">
+      <v-col cols="12" lg="3">
         <statistics-card
-          v-if="mostNeutralMinionsKilledSummonerName != ''"
-          title="CS가 가장 많은 소환사"
-          :text="mostNeutralMinionsKilledSummonerName"
-          :detail="mostNeutralMinionsKilledSummonerDetail"
-          color="cyan"
+          v-if="mostTotalDamageTakenSummonerName != ''"
+          title="총 받은 피해량이 가장 높은 소환사"
+          :text="mostTotalDamageTakenSummonerName"
+          :detail="mostTotalDamageTakenSummonerDetail"
+          color="blue"
         >
         </statistics-card>
       </v-col>
 
-      <v-col lg="3" cols="sm" class="pb-2">
-        <statistics-card
-          v-if="mostFirstBloodKillSummonerName != ''"
-          title="FIRST BLOOD가 가장 많은 소환사"
-          :text="mostFirstBloodKillSummonerName"
-          :detail="mostFirstBloodKillSummonerDetail"
-          color="teal"
-        >
-        </statistics-card>
-      </v-col>
-
-      <v-col lg="3" cols="sm" class="pb-2">
-        <statistics-card
-          v-if="mostFirstTowerKillSummonerName != ''"
-          title="첫 포탑을 가장 많이 파괴한 소환사"
-          :text="mostFirstTowerKillSummonerName"
-          :detail="mostFirstTowerKillSummonerDetail"
-          color="green"
-        >
-        </statistics-card>
-      </v-col>
-
-      <v-col lg="3" cols="sm" class="pb-2">
+      <v-col cols="12" lg="3">
         <statistics-card
           v-if="minMmrSummonerName != ''"
           title="내전 MMR이 가장 낮은 소환사"
@@ -207,16 +182,40 @@
         >
         </statistics-card>
       </v-col>
-    </v-row>
 
-    <v-row>
-      <v-col lg="3" cols="sm" class="pb-2">
+      <v-col cols="12" lg="3">
         <statistics-card
-          v-if="maxMmrSummonerName != ''"
-          title="내전 MMR이 가장 높은 소환사"
-          :text="maxMmrSummonerName"
-          :detail="maxMmrDetail"
-          color="lime"
+          v-if="mostWinningChampionName != ''"
+          title="가장 승률이 높은 챔피언"
+          :text="mostWinningChampionName"
+          :champion-url="mostWinningChampionUrl"
+          :detail="mostWinningWinRate"
+          color="error"
+        >
+        </statistics-card>
+      </v-col>
+
+      <v-col cols="12" lg="3">
+        <statistics-card
+          v-if="mostPlayedChampionName != ''"
+          title="가장 많이 플레이한 챔피언"
+          :text="mostPlayedChampionName"
+          :champion-url="mostPlayedChampionUrl"
+          :detail="mostPlayedCount"
+          color="accent"
+        >
+        </statistics-card>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col cols="12" lg="3">
+        <statistics-card
+          v-if="mostBannedChampionName != ''"
+          title="가장 많이 밴을 당한 챔피언"
+          :text="mostBannedChampionName"
+          :champion-url="mostBannedChampionUrl"
+          :detail="mostBannedCount"
+          color="secondary"
         >
         </statistics-card>
       </v-col>
