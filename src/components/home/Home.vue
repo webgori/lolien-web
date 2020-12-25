@@ -465,10 +465,10 @@ export default {
           response.data.mostFirstTowerKill.count + " 회";
 
         this.minMmrSummonerName = response.data.minMmr.summonerName;
-        this.minMmrDetail = response.data.minMmr.mmr;
+        this.minMmrDetail = response.data.minMmr.mmr.toString();
 
         this.maxMmrSummonerName = response.data.maxMmr.summonerName;
-        this.maxMmrDetail = response.data.maxMmr.mmr;
+        this.maxMmrDetail = response.data.maxMmr.mmr.toString();
       })
       .catch(error => {
         // handle error
