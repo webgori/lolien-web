@@ -3,7 +3,7 @@
     <v-container class="contents" bg fill-height grid-list-lg text-lg-left>
       <v-row>
         <v-col lg="12">
-          <v-card>
+          <v-card v-show="!loading">
             <v-card-title>
               <v-text-field
                 v-model="search"
@@ -34,6 +34,7 @@
 
 <script>
 import axios from "axios";
+import { mapGetters, mapMutations } from "vuex";
 
 export default {
   name: "Member",
@@ -44,6 +45,10 @@ export default {
     users: []
   }),
   computed: {
+    ...mapGetters({
+      loading: "getLoading",
+      login: "getLogin"
+    }),
     headerProps() {
       return {
         sortByText: "정렬"
@@ -294,6 +299,10 @@ export default {
   },
   methods: {
     getUsers() {
+      this.setLoading(true);
+
+      var _this = this;
+
       axios
         .get("https://api.lolien.kr/v1/users")
         .then(response => {
@@ -305,12 +314,12 @@ export default {
         })
         .then(function() {
           // always executed
+          _this.setLoading(false);
         });
     },
-    test(a, b) {
-      console.log(a);
-      console.log(b);
-    }
+    ...mapMutations({
+      setLoading: "setLoading"
+    })
   }
 };
 </script>
