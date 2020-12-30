@@ -259,6 +259,7 @@
 import { mapGetters, mapActions } from "vuex";
 import Cookies from "js-cookie";
 import VueJwtDecode from "vue-jwt-decode";
+import moment from "moment";
 
 export default {
   name: "App",
@@ -344,17 +345,22 @@ export default {
           });
         } else {
           let jwt = VueJwtDecode.decode(accessToken);
-          let expire = jwt.exp;
-          let timestamp = this.getTimestamp();
+          let expire = moment.unix(jwt.exp);
+          let now = moment();
 
-          if (expire > timestamp) {
+          if (expire.isAfter(now)) {
             this.getUserInfo();
+          } else {
+            let email = Cookies.get("email");
+            let refreshToken = Cookies.get("refreshToken");
+
+            this.generateAccessToken({
+              email: email,
+              refreshToken: refreshToken
+            });
           }
         }
       }
-    },
-    getTimestamp() {
-      return +new Date() / 1000;
     }
   }
 };

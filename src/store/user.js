@@ -99,10 +99,16 @@ export default {
         });
     },
     getUserInfo: ({ commit }) => {
-      return api.getUserInfo().then(response => {
-        commit("setLogin", true);
-        commit("setUserInfo", response.data.userInfo);
-      });
+      return api
+        .getUserInfo()
+        .then(response => {
+          commit("setLogin", true);
+          commit("setUserInfo", response.data.userInfo);
+        })
+        .catch(error => {
+          console.log(error);
+          Cookies.remove("accessToken");
+        });
     },
     generateAccessToken: ({ dispatch }, request) => {
       return api.generateAccessToken(request).then(response => {
