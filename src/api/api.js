@@ -62,7 +62,8 @@ export default {
       nickname: request.nickname,
       currentPassword: request.currentPassword,
       alterPassword: request.alterPassword,
-      summonerName: request.summonerName
+      summonerName: request.summonerName,
+      positions: request.positions
     });
   },
   leave() {

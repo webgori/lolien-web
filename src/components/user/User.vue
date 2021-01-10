@@ -1,5 +1,13 @@
 <template>
   <v-container fluid fill-height class="contents">
+    <v-row v-if="user.positions.length === 0" align="center" justify="center">
+      <v-col lg="12">
+        <v-alert border="top" colored-border type="warning" dismissible>
+          소환사님의 포지션을 선택해주세요.
+        </v-alert>
+      </v-col>
+    </v-row>
+
     <v-dialog v-model="leaveDialog" max-width="290">
       <v-card>
         <v-card-title class="headline">확인</v-card-title>
@@ -115,6 +123,25 @@
               </v-row>
 
               <v-row dense>
+                <v-col lg="12">
+                  <v-select
+                    v-model="positions"
+                    prepend-icon="fas fa-search-location"
+                    :items="positionsData"
+                    label="포지션"
+                    multiple
+                    chips
+                    :rules="[
+                      v =>
+                        v.length > 0 ||
+                        '최소 하나의 포지션을 선택해주셔야 합니다.'
+                    ]"
+                    required
+                  ></v-select>
+                </v-col>
+              </v-row>
+
+              <v-row dense>
                 <v-col lg="6" class="text-right">
                   <v-btn
                     color="error"
@@ -153,7 +180,9 @@ export default {
       alterPassword: "",
       summonerName: "",
       leaveDialog: false,
-      loading: { alter: false, leave: false }
+      loading: { alter: false, leave: false },
+      positionsData: ["Top", "Jungle", "Mid", "AD", "Support"],
+      positions: []
     };
   },
   computed: {
@@ -164,6 +193,7 @@ export default {
   created() {
     this.nickname = this.user.nickname;
     this.summonerName = this.user.summonerName;
+    this.positions = this.user.positions;
   },
   methods: {
     checkNickname() {
@@ -215,17 +245,27 @@ export default {
         throw new TypeError(errorMessage);
       }
     },
+    checkPosition() {
+      if (this.positions.length === 0) {
+        let errorMessage = "최소 하나의 포지션을 선택해주셔야 합니다.";
+
+        alert(errorMessage);
+        throw new TypeError(errorMessage);
+      }
+    },
     ...mapActions(["alterUser", "leaveUser"]),
     alter() {
       this.checkNickname();
       this.checkPassword();
       this.checkSummonerName();
+      this.checkPosition();
 
       this.alterUser({
         nickname: this.nickname,
         currentPassword: this.currentPassword,
         alterPassword: this.alterPassword,
         summonerName: this.summonerName,
+        positions: this.positions,
         loading: this.loading
       });
     },

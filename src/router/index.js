@@ -22,11 +22,39 @@ const routes = [
   {
     path: "/",
     name: "home",
+    beforeEnter: (from, to, next) => {
+      let user = store.getters.getUser;
+
+      if (user !== null) {
+        console.log(user);
+        if (user.positions.length === 0) {
+          next("/user");
+        } else {
+          next();
+        }
+      } else {
+        next();
+      }
+    },
     component: Home
   },
   {
     path: "/intro",
     name: "intro",
+    beforeEnter: (from, to, next) => {
+      let user = store.getters.getUser;
+
+      if (user !== null) {
+        console.log(user);
+        if (user.positions.length === 0) {
+          next("/user");
+        } else {
+          next();
+        }
+      } else {
+        next();
+      }
+    },
     component: Intro
   },
   {
@@ -37,11 +65,39 @@ const routes = [
   {
     path: "/member",
     name: "member",
+    beforeEnter: (from, to, next) => {
+      let user = store.getters.getUser;
+
+      if (user !== null) {
+        console.log(user);
+        if (user.positions.length === 0) {
+          next("/user");
+        } else {
+          next();
+        }
+      } else {
+        next();
+      }
+    },
     component: Member
   },
   {
     path: "/custom-game",
     name: "custom-game",
+    beforeEnter: (from, to, next) => {
+      let user = store.getters.getUser;
+
+      if (user !== null) {
+        console.log(user);
+        if (user.positions.length === 0) {
+          next("/user");
+        } else {
+          next();
+        }
+      } else {
+        next();
+      }
+    },
     component: CustomGame
   },
   {
@@ -52,21 +108,77 @@ const routes = [
   {
     path: "/league",
     name: "league",
+    beforeEnter: (from, to, next) => {
+      let user = store.getters.getUser;
+
+      if (user !== null) {
+        console.log(user);
+        if (user.positions.length === 0) {
+          next("/user");
+        } else {
+          next();
+        }
+      } else {
+        next();
+      }
+    },
     component: League
   },
   {
     path: "/league-result",
     name: "league-result",
+    beforeEnter: (from, to, next) => {
+      let user = store.getters.getUser;
+
+      if (user !== null) {
+        console.log(user);
+        if (user.positions.length === 0) {
+          next("/user");
+        } else {
+          next();
+        }
+      } else {
+        next();
+      }
+    },
     component: LeagueResult
   },
   {
     path: "/league-statistics",
     name: "league-statistics",
+    beforeEnter: (from, to, next) => {
+      let user = store.getters.getUser;
+
+      if (user !== null) {
+        console.log(user);
+        if (user.positions.length === 0) {
+          next("/user");
+        } else {
+          next();
+        }
+      } else {
+        next();
+      }
+    },
     component: LeagueStatistics
   },
   {
     path: "/league-statistics-pick",
     name: "league-statistics-pick",
+    beforeEnter: (from, to, next) => {
+      let user = store.getters.getUser;
+
+      if (user !== null) {
+        console.log(user);
+        if (user.positions.length === 0) {
+          next("/user");
+        } else {
+          next();
+        }
+      } else {
+        next();
+      }
+    },
     component: LeagueStatisticsPick
   },
   {

@@ -13,7 +13,7 @@ export default {
       return state.user;
     },
     getUserEmail(state) {
-      return state.userInfo.email;
+      return state.user.email;
     },
     getAccessToken(state) {
       return state.accessToken;

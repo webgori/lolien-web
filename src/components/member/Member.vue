@@ -69,6 +69,7 @@ export default {
           value: "nickname"
         },
         { text: "소환사명", align: "center", value: "summonerName" },
+        { text: "포지션", align: "center", value: "positions" },
         {
           text: "티어",
           align: "center",
