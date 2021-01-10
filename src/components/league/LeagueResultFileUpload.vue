@@ -117,7 +117,7 @@ export default {
       let formData = this.getFormData();
 
       axios
-        .post("https://api.lolien.kr/v1/leagues/result/files", formData, {
+        .post("/v1/leagues/result/files", formData, {
           headers: {
             "Content-Type": "multipart/form-data"
           }

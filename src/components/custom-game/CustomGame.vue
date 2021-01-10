@@ -1,6 +1,6 @@
 <template>
   <v-app class="px-5">
-    <v-row v-if="login">
+    <v-row v-if="user">
       <v-col lg="12" class="text-lg-right">
         <v-btn icon color="black" @click="showFileUploadDialog()">
           <v-icon>fas fa-plus</v-icon>
@@ -117,7 +117,7 @@ export default {
   computed: {
     ...mapGetters({
       loading: "getLoading",
-      login: "getLogin"
+      user: "getUser"
     })
   },
   created() {
@@ -139,7 +139,7 @@ export default {
 
         if (_this.summonerName == null) {
           axios
-            .get("https://api.lolien.kr/v1/custom-game", {
+            .get("/v1/custom-game", {
               params: {
                 page: _this.page - 1,
                 size: _this.size
@@ -162,7 +162,7 @@ export default {
             });
         } else {
           axios
-            .get("https://api.lolien.kr/v1/custom-game/" + _this.summonerName, {
+            .get("/v1/custom-game/" + _this.summonerName, {
               params: {
                 page: _this.page - 1,
                 size: _this.size
@@ -208,10 +208,7 @@ export default {
       var _this = this;
 
       axios
-        .delete(
-          "https://api.lolien.kr/v1/custom-game/result/" +
-            this.deleteResultGameId
-        )
+        .delete("/v1/custom-game/result/" + this.deleteResultGameId)
         .then(response => {
           let status = response.status;
 

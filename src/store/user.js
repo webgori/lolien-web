@@ -1,17 +1,16 @@
 import api from "../api/api";
 import router from "../router";
-import Cookies from "js-cookie";
 
 export default {
   state: {
-    userInfo: null,
-    login: false,
+    user: null,
     accessToken: null,
-    refreshToken: null
+    refreshToken: null,
+    refreshInterval: null
   },
   getters: {
-    getUserInfo(state) {
-      return state.userInfo;
+    getUser(state) {
+      return state.user;
     },
     getUserEmail(state) {
       return state.userInfo.email;
@@ -22,8 +21,8 @@ export default {
     getRefreshToken(state) {
       return state.refreshToken;
     },
-    getLogin(state) {
-      return state.login;
+    getRefreshInterval(state) {
+      return state.refreshInterval;
     }
   },
   mutations: {
@@ -40,52 +39,66 @@ export default {
     setRefreshToken(state, refreshToken) {
       state.refreshToken = refreshToken;
     },
-    setLogin(state, login) {
-      state.login = login;
+    setUser(state, user) {
+      state.user = user;
     },
-    setUserInfo(state, userInfo) {
-      state.userInfo = userInfo;
+    setRefreshInterval(state, refreshInterval) {
+      state.refreshInterval = refreshInterval;
     }
   },
   actions: {
-    register: request => {
-      return api.register(request);
+    registerUser: ({ dispatch }, request) => {
+      return api
+        .register(request)
+        .then(() => {
+          dispatch("getUserInfo");
+        })
+        .catch(error => {
+          if (error.response) {
+            let status = error.response.status;
+
+            if (status === 400) {
+              let message = error.response.data.message;
+              alert(message);
+            }
+          }
+        });
     },
     login: ({ commit, dispatch }, request) => {
       return api
         .login(request)
         .then(response => {
           let accessToken = response.data.accessToken;
-          Cookies.set("accessToken", accessToken);
+          localStorage.setItem("accessToken", accessToken);
           //localStorage.setItem("accessToken", accessToken);
           commit("setAccessToken", accessToken);
 
           let refreshToken = response.data.refreshToken;
-          Cookies.set("refreshToken", refreshToken);
+          localStorage.setItem("refreshToken", refreshToken);
           // localStorage.setItem("refreshToken", refreshToken);
           // commit("setRefreshToken", refreshToken);
-
-          commit("setLogin", true);
 
           dispatch("getUserInfo");
 
           router.push("/");
 
           let rememberEmail = request.rememberEmail;
-          Cookies.set("rememberEmail", rememberEmail);
+          localStorage.setItem("rememberEmail", rememberEmail);
 
           if (rememberEmail) {
             let email = request.email;
-            Cookies.set("email", email);
+            localStorage.setItem("email", email);
           } else {
-            Cookies.remove("email");
+            localStorage.removeItem("email");
           }
 
           let autoLogin = request.autoLogin;
 
           if (autoLogin) {
-            Cookies.set("autoLogin", autoLogin, "30");
+            localStorage.setItem("autoLogin", autoLogin, "30");
           }
+
+          dispatch("intervalRefresh");
         })
         .catch(error => {
           // handle error
@@ -102,24 +115,31 @@ export default {
       return api
         .getUserInfo()
         .then(response => {
-          commit("setLogin", true);
-          commit("setUserInfo", response.data.userInfo);
+          commit("setUser", response.data.userInfo);
         })
         .catch(error => {
-          console.log(error);
-          Cookies.remove("accessToken");
+          if (error.response) {
+            let status = error.response.status;
+
+            if (status === 401) {
+              let message = error.response.data.message;
+              alert(message);
+            }
+          }
+
+          localStorage.removeItem("accessToken");
         });
     },
     generateAccessToken: ({ dispatch }, request) => {
       return api.generateAccessToken(request).then(response => {
         let accessToken = response.data.accessToken;
-        Cookies.set("accessToken", accessToken);
+        localStorage.setItem("accessToken", accessToken);
         // commit("setAccessToken", accessToken);
 
         dispatch("getUserInfo");
       });
     },
-    logout: ({ commit }) => {
+    logout: ({ state, commit }) => {
       let currentRouteName = router.currentRoute.name;
 
       return api.logout().then(() => {
@@ -129,10 +149,12 @@ export default {
         localStorage.removeItem("refreshToken");
         commit("setRefreshToken", null);
 
-        commit("setLogin", false);
-        commit("setUserInfo", null);
+        commit("setUser", null);
 
-        Cookies.remove("autoLogin");
+        localStorage.removeItem("autoLogin");
+
+        var refreshInterval = state.refreshInterval;
+        clearInterval(refreshInterval);
 
         if (currentRouteName != "home") {
           router.push("/");
@@ -148,6 +170,52 @@ export default {
         alert(errorMessage);
         throw new TypeError(errorMessage);
       }
+    },
+    intervalRefresh: ({ commit, dispatch }) => {
+      var millisecondsPerMinute = 60000;
+
+      var refreshInterval = setInterval(function() {
+        let email = localStorage.getItem("email");
+
+        if (email !== null) {
+          let refreshToken = localStorage.getItem("refreshToken");
+
+          dispatch("generateAccessToken", {
+            email: email,
+            refreshToken: refreshToken
+          });
+        }
+      }, millisecondsPerMinute * 30);
+
+      commit("setRefreshInterval", refreshInterval);
+    },
+    alterUser: ({ dispatch }, request) => {
+      request.loading.alter = true;
+
+      return api
+        .alter(request)
+        .then(() => {
+          request.loading.alter = false;
+          alert("회원 정보가 수정되었습니다.");
+          dispatch("getUserInfo");
+        })
+        .catch(error => {
+          request.loading.alter = false;
+
+          if (error.response) {
+            let status = error.response.status;
+
+            if (status === 400) {
+              let message = error.response.data.message;
+              alert(message);
+            }
+          }
+        });
+    },
+    leaveUser: ({ dispatch }, request) => {
+      return api.leave(request).then(() => {
+        dispatch("logout");
+      });
     }
   }
 };

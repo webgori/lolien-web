@@ -57,17 +57,7 @@
 
               <v-row dense>
                 <v-col lg="12" class="text-right">
-                  <v-btn
-                    color="primary"
-                    block
-                    @click="
-                      login({
-                        email: email,
-                        password: password,
-                        rememberEmail: rememberEmail,
-                        autoLogin: autoLogin
-                      })
-                    "
+                  <v-btn color="primary" block @click="keyupEnter()"
                     >확인</v-btn
                   >
                 </v-col></v-row
@@ -80,11 +70,8 @@
           <v-card-actions class="login-sub-btn">
             <v-row dense>
               <v-col lg="6">
-                <span class="ml-2"
-                  ><a href="#" @click="goToFindIdOrPassword">아이디 찾기</a> |
-                  <a href="#" @click="goToFindIdOrPassword"
-                    >비밀번호 찾기</a
-                  ></span
+                <span class="ml-2">
+                  <a href="#" @click="goToFindPassword">비밀번호 찾기</a></span
                 >
               </v-col>
 
@@ -129,35 +116,26 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
-import Cookies from "js-cookie";
+import { mapActions, mapMutations } from "vuex";
 
 export default {
   data() {
     return {
       email: "",
       password: "",
-      rules: {
-        emailCounter: value =>
-          value.length <= 50 || "이메일은 최대 50자까지 사용 가능합니다.",
-        passwordMinCounter: value =>
-          value.length >= 6 || "비밀번호는 최소 6자부터 사용 가능합니다.",
-        passwordMaxCounter: value =>
-          value.length <= 20 || "비밀번호는 최대 20자까지 사용 가능합니다.",
-        email: value => {
-          const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-          return pattern.test(value) || "올바른 이메일 형식이 아닙니다.";
-        }
-      },
       rememberEmail: false,
       autoLogin: false
     };
   },
   created() {
-    this.getRememberEmailFromCookie();
+    this.getRememberEmail();
   },
   methods: {
     ...mapActions(["login"]),
+
+    ...mapMutations({
+      setLogin: "setLogin"
+    }),
     keyupEnter() {
       this.checkEmail();
       this.checkPassword();
@@ -197,24 +175,34 @@ export default {
         throw new TypeError(errorMessage);
       }
     },
-    goToFindIdOrPassword() {
-      this.$router.push("/");
+    goToFindPassword() {
+      this.$router.push("/find-password");
       event.preventDefault();
     },
     goToRegister() {
       this.$router.push("/register");
       event.preventDefault();
     },
-    getRememberEmailFromCookie() {
-      let rememberEmail = Cookies.get("rememberEmail") === "true";
+    getRememberEmail() {
+      let rememberEmail = localStorage.getItem("rememberEmail");
+
+      if (rememberEmail === null) {
+        rememberEmail = false;
+      }
+
       this.rememberEmail = rememberEmail;
 
       if (rememberEmail) {
-        this.getEmailFromCookie();
+        this.getEmail();
       }
     },
-    getEmailFromCookie() {
-      let email = Cookies.get("email");
+    getEmail() {
+      let email = localStorage.getItem("email");
+
+      if (email === null) {
+        email = "";
+      }
+
       this.email = email;
     }
   }

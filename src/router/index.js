@@ -12,6 +12,8 @@ import LeagueStatistics from "@/views/league/Statistics";
 import LeagueStatisticsPick from "@/views/league/StatisticsPick";
 import Login from "@/views/Login";
 import Register from "@/views/Register";
+import User from "@/views/User";
+import FindPassword from "@/views/FindPassword";
 import store from "../store";
 
 Vue.use(VueRouter);
@@ -85,15 +87,43 @@ const routes = [
     path: "/register",
     name: "register",
     beforeEnter: (from, to, next) => {
-      let userInfo = store.getters.getUserInfo;
+      let user = store.getters.getUser;
 
-      if (userInfo == null) {
+      if (user === null) {
         next();
       } else {
         next("/");
       }
     },
     component: Register
+  },
+  {
+    path: "/user",
+    name: "user",
+    beforeEnter: (from, to, next) => {
+      let user = store.getters.getUser;
+
+      if (user === null) {
+        next("/");
+      } else {
+        next();
+      }
+    },
+    component: User
+  },
+  {
+    path: "/find-password",
+    name: "findPassword",
+    beforeEnter: (from, to, next) => {
+      let user = store.getters.getUser;
+
+      if (user === null) {
+        next();
+      } else {
+        next("/");
+      }
+    },
+    component: FindPassword
   }
 ];
 

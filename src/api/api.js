@@ -1,7 +1,5 @@
 import axios from "axios";
-import Cookies from "js-cookie";
 
-const BASE_URL = "https://api.lolien.kr";
 const REFRESH_TOKEN_END_POINT_LIST = ["/v1/users/access-token"];
 const NONE_AUTH_END_POINT_LIST = [
   "/v1/users/register",
@@ -11,25 +9,25 @@ const NONE_AUTH_END_POINT_LIST = [
 
 axios.interceptors.request.use(function(config) {
   let requestUrl = config.url;
-  let endPoint = requestUrl.replace(BASE_URL, "");
 
-  if (REFRESH_TOKEN_END_POINT_LIST.includes(endPoint)) {
-    let refreshToken = Cookies.get("refreshToken");
+  if (requestUrl.includes(REFRESH_TOKEN_END_POINT_LIST)) {
+    let refreshToken = localStorage.getItem("refreshToken");
     config.headers.Authorization = "Bearer " + refreshToken;
   } else {
-    if (!NONE_AUTH_END_POINT_LIST.includes(endPoint)) {
-      let accessToken = Cookies.get("accessToken");
-      config.headers.Authorization = "Bearer " + accessToken;
-    }
+    NONE_AUTH_END_POINT_LIST.forEach(ep => {
+      if (!requestUrl.includes(ep)) {
+        let accessToken = localStorage.getItem("accessToken");
+        config.headers.Authorization = "Bearer " + accessToken;
+      }
+    });
   }
 
   return config;
 });
 
 export default {
-  BASE_URL: "https://api.lolien.kr",
   register(request) {
-    return axios.post(this.BASE_URL + "/v1/users/register", {
+    return axios.post("/v1/users/register", {
       email: request.email,
       emailAuthNumber: request.emailAuthNumber,
       nickname: request.nickname,
@@ -40,23 +38,39 @@ export default {
     });
   },
   login(request) {
-    return axios.post(this.BASE_URL + "/v1/users/login", {
+    return axios.post("/v1/users/login", {
       email: request.email,
       password: request.password
     });
   },
   generateAccessToken(request) {
-    return axios.post(this.BASE_URL + "/v1/users/access-token", {
+    return axios.post("/v1/users/access-token", {
       email: request.email
     });
   },
   logout() {
-    return axios.post(this.BASE_URL + "/v1/users/logout", {
-      accessToken: Cookies.get("accessToken"),
-      refreshToken: Cookies.get("refreshToken")
+    return axios.post("/v1/users/logout", {
+      accessToken: localStorage.getItem("accessToken"),
+      refreshToken: localStorage.getItem("refreshToken")
     });
   },
   getUserInfo() {
-    return axios.get(this.BASE_URL + "/v1/users/info");
+    return axios.get("/v1/users/info");
+  },
+  alter(request) {
+    return axios.patch("/v1/users", {
+      nickname: request.nickname,
+      currentPassword: request.currentPassword,
+      alterPassword: request.alterPassword,
+      summonerName: request.summonerName
+    });
+  },
+  leave() {
+    return axios.delete("/v1/users");
+  },
+  tempPassword(request) {
+    return axios.post("/v1/users/temp-password", {
+      email: request.email
+    });
   }
 };

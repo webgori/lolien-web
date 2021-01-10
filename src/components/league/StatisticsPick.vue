@@ -75,7 +75,7 @@ export default {
         _this.setLoading(true);
 
         axios
-          .get("https://api.lolien.kr/v1/leagues/2/statistics/pick")
+          .get("/v1/leagues/2/statistics/pick")
           .then(response => {
             resolve(response);
           })

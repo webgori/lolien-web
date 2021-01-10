@@ -855,7 +855,7 @@ export default {
   }),
   computed: {
     ...mapGetters({
-      login: "getLogin"
+      user: "getUser"
     })
   },
   created() {
@@ -872,7 +872,7 @@ export default {
     getSummonersForParticipation() {
       return new Promise(function(resolve, reject) {
         axios
-          .get("https://api.lolien.kr/v1/leagues/summoners/participation")
+          .get("/v1/leagues/summoners/participation")
           .then(response => {
             resolve(response);
           })
@@ -891,7 +891,7 @@ export default {
       event.preventDefault();
     },
     showFileUploadDialog() {
-      if (this.login) {
+      if (this.user) {
         this.fileUploadDialog = true;
       } else {
         alert("로그인이 필요합니다.");
@@ -910,7 +910,7 @@ export default {
     },
     getTeams() {
       axios
-        .get("https://api.lolien.kr/v1/leagues/team")
+        .get("/v1/leagues/team")
         .then(response => {
           this.teams = response.data.teams;
         })
@@ -926,7 +926,7 @@ export default {
       var _this = this;
 
       axios
-        .get("https://api.lolien.kr/v1/leagues/schedule")
+        .get("/v1/leagues/schedule")
         .then(response => {
           this.schedules = response.data.schedules;
         })

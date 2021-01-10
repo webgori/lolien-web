@@ -165,18 +165,16 @@
       </v-toolbar-items>
 
       <template>
-        <v-btn v-if="login" text color="white" @click="logout">
-          <v-icon left>fas fa-sign-out-alt</v-icon> Logout
+        <v-btn v-if="user" text to="/user" color="white">
+          <v-icon left>fas fa-user</v-icon>
+        </v-btn>
+
+        <v-btn v-if="user" text color="white" @click="logout">
+          <v-icon left>fas fa-sign-out-alt</v-icon>
         </v-btn>
         <v-btn v-else text to="/login" color="white">
-          <v-icon left>fas fa-sign-in-alt</v-icon> Login
+          <v-icon left>fas fa-sign-in-alt</v-icon>
         </v-btn>
-        <!-- <v-btn icon>
-          <v-icon>mdi-delete-circle</v-icon>
-        </v-btn>
-        <v-btn icon>
-          <v-icon>mdi-plus-circle</v-icon>
-        </v-btn> -->
       </template>
     </v-app-bar>
 
@@ -257,8 +255,7 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import Cookies from "js-cookie";
-import VueJwtDecode from "vue-jwt-decode";
+import jwt from "jwt-simple";
 import moment from "moment";
 
 export default {
@@ -310,14 +307,85 @@ export default {
   computed: {
     ...mapGetters({
       loading: "getLoading",
-      login: "getLogin",
-      accessToken: "getAccessToken"
+      user: "getUser"
     })
   },
   created() {
-    this.autoLogin();
+    this.auth();
   },
   methods: {
+    auth() {
+      var autoLogin = this.isAutoLogin();
+
+      if (autoLogin) {
+        var requireRefresh = this.requireRefresh();
+
+        if (requireRefresh) {
+          let email = localStorage.getItem("email");
+
+          if (email !== null) {
+            let refreshToken = this.getRefreshToken();
+
+            this.generateAccessToken({
+              email: email,
+              refreshToken: refreshToken
+            });
+
+            this.intervalRefresh();
+          }
+        } else {
+          var exp = this.getAccessTokenExpiredTimestamp();
+
+          if (exp > 0) {
+            this.intervalRefresh();
+            this.getUserInfo();
+          }
+        }
+      }
+    },
+    isAutoLogin() {
+      return localStorage.getItem("autoLogin");
+    },
+    getRefreshToken() {
+      if (localStorage.getItem("refreshToken") === null) {
+        return "";
+      }
+
+      return localStorage.getItem("refreshToken");
+    },
+    getAccessToken() {
+      if (localStorage.getItem("accessToken") === null) {
+        return "";
+      }
+
+      return localStorage.getItem("accessToken");
+    },
+    getAccessTokenExpiredTimestamp() {
+      var accessToken = this.getAccessToken();
+
+      if (accessToken === "") {
+        return 0;
+      }
+
+      let jwtInfo = jwt.decode(accessToken, null, "base64");
+      return jwtInfo.exp;
+    },
+    requireRefresh() {
+      var exp = this.getAccessTokenExpiredTimestamp();
+
+      if (exp === 0) {
+        return false;
+      }
+
+      let expire = moment.unix(exp);
+      let now = moment();
+
+      if (expire.isAfter(now)) {
+        return false;
+      } else {
+        return true;
+      }
+    },
     openKakao: function() {
       window.open("https://open.kakao.com/o/g2FEzQ5");
       return;
@@ -328,40 +396,12 @@ export default {
       );
       return;
     },
-    ...mapActions(["getUserInfo", "generateAccessToken", "logout"]),
-    autoLogin() {
-      let autoLogin = Cookies.get("autoLogin") === "true";
-
-      if (this.login == false && autoLogin) {
-        let accessToken = Cookies.get("accessToken");
-
-        if (accessToken == null) {
-          let email = Cookies.get("email");
-          let refreshToken = Cookies.get("refreshToken");
-
-          this.generateAccessToken({
-            email: email,
-            refreshToken: refreshToken
-          });
-        } else {
-          let jwt = VueJwtDecode.decode(accessToken);
-          let expire = moment.unix(jwt.exp);
-          let now = moment();
-
-          if (expire.isAfter(now)) {
-            this.getUserInfo();
-          } else {
-            let email = Cookies.get("email");
-            let refreshToken = Cookies.get("refreshToken");
-
-            this.generateAccessToken({
-              email: email,
-              refreshToken: refreshToken
-            });
-          }
-        }
-      }
-    }
+    ...mapActions([
+      "getUserInfo",
+      "generateAccessToken",
+      "logout",
+      "intervalRefresh"
+    ])
   }
 };
 </script>

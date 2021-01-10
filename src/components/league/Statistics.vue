@@ -431,7 +431,7 @@ export default {
       var _this = this;
       return new Promise(function(resolve, reject) {
         axios
-          .get("https://api.lolien.kr/v1/summoners/" + summonerName, {
+          .get("/v1/summoners/" + summonerName, {
             params: {
               page: _this.page - 1,
               size: _this.size
@@ -478,7 +478,7 @@ export default {
         _this.setLoading(true);
 
         axios
-          .get("https://api.lolien.kr/v1/leagues/statistics")
+          .get("/v1/leagues/statistics")
           .then(response => {
             resolve(response);
           })

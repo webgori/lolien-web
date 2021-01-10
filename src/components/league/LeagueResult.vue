@@ -133,7 +133,7 @@ export default {
         _this.setLoading(true);
 
         axios
-          .get("https://api.lolien.kr/v1/leagues")
+          .get("/v1/leagues")
           .then(response => {
             resolve(response);
           })
@@ -165,7 +165,7 @@ export default {
         _this.setLoading(true);
 
         axios
-          .get("https://api.lolien.kr/v1/leagues/" + _this.league.idx, {
+          .get("/v1/leagues/" + _this.league.idx, {
             params: {
               scheduleIdx: schedule1.idx,
               page: _this.page - 1,
@@ -199,9 +199,7 @@ export default {
       var _this = this;
 
       axios
-        .delete(
-          "https://api.lolien.kr/v1/leagues/result/" + this.deleteResultGameId
-        )
+        .delete("/v1/leagues/result/" + this.deleteResultGameId)
         .then(response => {
           let status = response.status;
 
@@ -241,7 +239,7 @@ export default {
 
       return new Promise(function(resolve, reject) {
         axios
-          .get("https://api.lolien.kr/v1/leagues/schedule")
+          .get("/v1/leagues/schedule")
           .then(response => {
             resolve(response);
           })

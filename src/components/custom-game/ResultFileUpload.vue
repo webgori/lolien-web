@@ -86,6 +86,8 @@
 <script>
 import FileUpload from "vue-upload-component";
 import axios from "axios";
+import { mapActions } from "vuex";
+import Cookies from "js-cookie";
 
 export default {
   name: "Member",
@@ -98,17 +100,20 @@ export default {
       { text: "리플레이 파일 이름", value: "name" },
       { text: "파일 크기", value: "size" }
     ],
-    addedResultDialog: false
+    addedResultDialog: false,
+    updateRetryCount: 0
   }),
   created() {},
   methods: {
+    ...mapActions(["generateAccessToken"]),
     resultFileUpload() {
       //업로드 처리로직
 
       let formData = this.getFormData();
+      let _this = this;
 
       axios
-        .post("https://api.lolien.kr/v1/custom-game/result/files", formData, {
+        .post("/v1/custom-game/result/files", formData, {
           headers: {
             "Content-Type": "multipart/form-data"
           }
@@ -117,6 +122,7 @@ export default {
           let status = response.status;
 
           if (status === 200) {
+            this.updateRetryCount = 0;
             this.addedResultDialog = true;
             this.$eventBus.$emit("hideFileUploadDialog");
           }
@@ -125,10 +131,30 @@ export default {
           // handle error
           if (error.response) {
             let status = error.response.status;
+            console.log(_this.updateRetryCount);
 
             if (status === 400) {
               let message = error.response.data.message;
               alert(message);
+
+              _this.updateRetryCount = 0;
+            } else if (status === 401) {
+              if (_this.updateRetryCount < 1) {
+                let email = Cookies.get("email");
+                let refreshToken = Cookies.get("refreshToken");
+
+                this.generateAccessToken({
+                  email: email,
+                  refreshToken: refreshToken
+                });
+
+                setTimeout(() => {
+                  _this.updateRetryCount += 1;
+                  _this.resultFileUpload();
+                }, 1000);
+              } else {
+                _this.updateRetryCount = 0;
+              }
             }
           }
         })

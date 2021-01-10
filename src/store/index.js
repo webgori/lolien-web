@@ -36,7 +36,7 @@ export default new Vuex.Store({
       this.loading = true;
 
       axios
-        .get("https://api.lolien.kr/v1/leagues/" + this.state.leagueIndex, {
+        .get("/v1/leagues/" + this.state.leagueIndex, {
           params: {
             page: this.page - 1,
             size: this.size

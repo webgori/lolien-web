@@ -18,7 +18,7 @@
                     type="text"
                     autocomplete="off"
                     :disabled="requestedVerifyEmail"
-                    @keyup.enter="keyupEnter()"
+                    @keyup.enter="register()"
                   ></v-text-field>
                 </v-col>
 
@@ -45,7 +45,7 @@
                     label="이메일 인증 번호"
                     type="text"
                     autocomplete="off"
-                    @keyup.enter="keyupEnter()"
+                    @keyup.enter="register()"
                   ></v-text-field>
                 </v-col>
               </v-row>
@@ -59,7 +59,7 @@
                     label="닉네임"
                     type="text"
                     autocomplete="off"
-                    @keyup.enter="keyupEnter()"
+                    @keyup.enter="register()"
                   ></v-text-field>
                 </v-col>
               </v-row>
@@ -74,7 +74,7 @@
                     label="비밀번호"
                     type="password"
                     autocomplete="off"
-                    @keyup.enter="keyupEnter()"
+                    @keyup.enter="register()"
                   ></v-text-field>
                 </v-col>
               </v-row>
@@ -89,7 +89,7 @@
                     label="비밀번호 확인"
                     type="password"
                     autocomplete="off"
-                    @keyup.enter="keyupEnter()"
+                    @keyup.enter="register()"
                   ></v-text-field>
                 </v-col>
               </v-row>
@@ -104,7 +104,7 @@
                     type="text"
                     autocomplete="off"
                     :disabled="requestedVerifyClienId"
-                    @keyup.enter="keyupEnter()"
+                    @keyup.enter="register()"
                   ></v-text-field>
                 </v-col>
 
@@ -131,7 +131,7 @@
                     label="클리앙 인증 번호"
                     type="text"
                     autocomplete="off"
-                    @keyup.enter="keyupEnter()"
+                    @keyup.enter="register()"
                   ></v-text-field>
                 </v-col>
               </v-row>
@@ -145,7 +145,7 @@
                     label="소환사 이름"
                     type="text"
                     autocomplete="off"
-                    @keyup.enter="keyupEnter()"
+                    @keyup.enter="register()"
                     @keydown.space="event => event.preventDefault()"
                   ></v-text-field>
                 </v-col>
@@ -172,7 +172,7 @@
 
 <script>
 import axios from "axios";
-import router from "../../router";
+import { mapActions } from "vuex";
 
 export default {
   data() {
@@ -190,35 +190,12 @@ export default {
       clienIdAuthNumber: "",
       summonerName: "",
       loadingRegister: false,
-      rules: {
-        emailCounter: value =>
-          value.length <= 50 || "이메일은 최대 50자까지 사용 가능합니다.",
-        passwordMinCounter: value =>
-          value.length >= 6 || "비밀번호는 최소 6자부터 사용 가능합니다.",
-        passwordMaxCounter: value =>
-          value.length <= 20 || "비밀번호는 최대 20자까지 사용 가능합니다.",
-        email: value => {
-          const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-          return pattern.test(value) || "올바른 이메일 형식이 아닙니다.";
-        }
-      },
       rememberEmail: false,
       autoLogin: false
     };
   },
   created() {},
   methods: {
-    keyupEnter() {
-      this.register({
-        email: this.email,
-        emailAuthNumber: this.emailAuthNumber,
-        nickname: this.nickname,
-        password: this.password,
-        clienId: this.clienId,
-        clienIdAuthNumber: this.clienIdAuthNumber,
-        summonerName: this.summonerName
-      });
-    },
     checkEmail() {
       let pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -299,7 +276,7 @@ export default {
       var _this = this;
 
       axios
-        .post("https://api.lolien.kr/v1/users/register/verify/email", {
+        .post("/v1/users/register/verify/email", {
           email: this.email
         })
         .then(response => {
@@ -333,7 +310,7 @@ export default {
       var _this = this;
 
       axios
-        .post("https://api.lolien.kr/v1/users/register/verify/clien-id", {
+        .post("/v1/users/register/verify/clien-id", {
           clienId: this.clienId
         })
         .then(response => {
@@ -368,45 +345,17 @@ export default {
       this.checkPassword();
       this.checkSummonerName();
 
-      this.loadingRegister = true;
-
-      var _this = this;
-
-      axios
-        .post("https://api.lolien.kr/v1/users/register", {
-          email: this.email,
-          emailAuthNumber: this.emailAuthNumber,
-          nickname: this.nickname,
-          password: this.password,
-          clienId: this.clienId,
-          clienIdAuthNumber: this.clienIdAuthNumber,
-          summonerName: this.summonerName
-        })
-        .then(response => {
-          // handle success
-          let status = response.status;
-
-          if (status === 204) {
-            alert("회원가입이 성공하였습니다.");
-            router.push("/");
-          }
-        })
-        .catch(error => {
-          // handle error
-          let status = error.response.status;
-
-          if (status === 400) {
-            let message = error.response.data.message;
-            alert(message);
-          } else if (status === 404) {
-            alert("서버에 문제가 발생하였습니다. 관리자에게 문의해주세요.");
-          }
-        })
-        .then(function() {
-          // always executed
-          _this.loadingRegister = false;
-        });
-    }
+      this.registerUser({
+        email: this.email,
+        emailAuthNumber: this.emailAuthNumber,
+        nickname: this.nickname,
+        password: this.password,
+        clienId: this.clienId,
+        clienIdAuthNumber: this.clienIdAuthNumber,
+        summonerName: this.summonerName
+      });
+    },
+    ...mapActions(["registerUser"])
   }
 };
 </script>

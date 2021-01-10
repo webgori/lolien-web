@@ -47,7 +47,7 @@ export default {
   computed: {
     ...mapGetters({
       loading: "getLoading",
-      login: "getLogin"
+      user: "getUser"
     }),
     headerProps() {
       return {
@@ -304,7 +304,7 @@ export default {
       var _this = this;
 
       axios
-        .get("https://api.lolien.kr/v1/users")
+        .get("/v1/users")
         .then(response => {
           this.users = response.data.users;
         })

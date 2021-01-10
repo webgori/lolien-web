@@ -9,20 +9,14 @@ import "./assets/js/script.js";
 import VueMoment from "vue-moment";
 import moment from "moment";
 import VueChartJs from "vue-chartjs";
-
+import axios from "axios";
 Vue.config.productionTip = false;
 
 moment.locale("ko");
 
 Vue.use(VueMoment, { moment });
 
-// export const eventBus = new Vue({
-//   methods: {
-//     updatePage(page) {
-//       this.$emit("updatePage", page);
-//     }
-//   }
-// });
+axios.defaults.baseURL = process.env.VUE_APP_BASE_URL;
 
 Vue.prototype.$eventBus = new Vue();
 

@@ -125,7 +125,7 @@ export default {
         _this.setLoading(true);
 
         axios
-          .get("https://api.lolien.kr/v1/leagues")
+          .get("/v1/leagues")
           .then(response => {
             resolve(response);
           })
