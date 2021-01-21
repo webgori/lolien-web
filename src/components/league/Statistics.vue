@@ -1,11 +1,22 @@
 <template>
-  <v-container class="back" fluid fill-height>
-    <v-row>
-      <v-col lg="12"
-        ><p class="text-center font-weight-bold display-1">
-          LLL Winter 2020
-        </p></v-col
-      >
+  <v-app>
+    <v-row dense>
+      <v-col lg="12">
+        <v-row dense>
+          <v-col cols="12" lg="2" offset-lg="10">
+            <v-select
+              v-model="league"
+              dense
+              :items="leagues"
+              solo
+              item-text="title"
+              item-value="idx"
+              return-object
+              @change="onChangeLeague($event)"
+            ></v-select>
+          </v-col>
+        </v-row>
+      </v-col>
     </v-row>
 
     <v-row>
@@ -184,7 +195,7 @@
         </statistics-card>
       </v-col>
     </v-row>
-  </v-container>
+  </v-app>
 </template>
 
 <script>
@@ -205,6 +216,8 @@ export default {
     }
   },
   data: () => ({
+    league: {},
+    leagues: [],
     page: 1,
     totalPages: null,
     size: 3,
@@ -331,100 +344,144 @@ export default {
     }
   }),
   created() {
-    this.getStatistics()
-      .then(response => {
-        this.startDateOfMonth = response.data.startDateOfMonth;
-        this.endDateOfMonth = response.data.endDateOfMonth;
+    this.getLeagues().then(response => {
+      this.leagues = response.data.leagues;
 
-        this.matchesChartData.labels = response.data.matches.map(
-          m => m.gameCreation
-        );
-        this.matchesChartData.datasets[0].data = response.data.matches.map(
-          m => m.matchCount
-        );
+      if (this.leagues.length > 0) {
+        this.league = this.leagues[this.leagues.length - 1];
 
-        this.mostBannedChampionName =
-          response.data.mostBannedList[0].championName;
-        this.mostBannedChampionUrl =
-          response.data.mostBannedList[0].championUrl;
-        this.mostBannedCount = response.data.mostBannedList[0].count + " 회";
+        this.getStatistics()
+          .then(response => {
+            let matches = response.data.matches;
 
-        this.mostPlayedChampionName =
-          response.data.mostPlayedChampionList[0].championName;
-        this.mostPlayedChampionUrl =
-          response.data.mostPlayedChampionList[0].championUrl;
-        this.mostPlayedCount =
-          response.data.mostPlayedChampionList[0].count + " 회";
+            if (matches.length > 0) {
+              this.startDateOfMonth = response.data.startDateOfMonth;
+              this.endDateOfMonth = response.data.endDateOfMonth;
 
-        this.mostWinningChampionName =
-          response.data.mostWinningList[0].championName;
-        this.mostWinningChampionUrl =
-          response.data.mostWinningList[0].championUrl;
-        this.mostWinningWinRate =
-          response.data.mostWinningList[0].winRate + " %";
+              this.matchesChartData.labels = response.data.matches.map(
+                m => m.gameCreation
+              );
+              this.matchesChartData.datasets[0].data = response.data.matches.map(
+                m => m.matchCount
+              );
 
-        this.mostPlayedSummonerName =
-          response.data.mostPlayedSummonerList[0].summonerName;
-        this.mostPlayedSummonerDetail =
-          response.data.mostPlayedSummonerList[0].count + " 회";
+              this.mostBannedChampionName =
+                response.data.mostBannedList[0].championName;
+              this.mostBannedChampionUrl =
+                response.data.mostBannedList[0].championUrl;
+              this.mostBannedCount =
+                response.data.mostBannedList[0].count + " 회";
 
-        this.mostKdaSummonerName =
-          response.data.mostKillDeathAssistList[0].summonerName;
-        this.mostKdaSummonerDetail =
-          "KDA " + response.data.mostKillDeathAssistList[0].kda;
+              this.mostPlayedChampionName =
+                response.data.mostPlayedChampionList[0].championName;
+              this.mostPlayedChampionUrl =
+                response.data.mostPlayedChampionList[0].championUrl;
+              this.mostPlayedCount =
+                response.data.mostPlayedChampionList[0].count + " 회";
 
-        this.mostKillSummonerName = response.data.mostKill.summonerName;
-        this.mostKillSummonerDetail = response.data.mostKill.kills.toString();
+              this.mostWinningChampionName =
+                response.data.mostWinningList[0].championName;
+              this.mostWinningChampionUrl =
+                response.data.mostWinningList[0].championUrl;
+              this.mostWinningWinRate =
+                response.data.mostWinningList[0].winRate + " %";
 
-        this.mostDeathSummonerName = response.data.mostDeath.summonerName;
-        this.mostDeathSummonerDetail = response.data.mostDeath.deaths.toString();
+              this.mostPlayedSummonerName =
+                response.data.mostPlayedSummonerList[0].summonerName;
+              this.mostPlayedSummonerDetail =
+                response.data.mostPlayedSummonerList[0].count + " 회";
 
-        this.mostAssistSummonerName = response.data.mostAssist.summonerName;
-        this.mostAssistSummonerDetail = response.data.mostAssist.assists.toString();
+              this.mostKdaSummonerName =
+                response.data.mostKillDeathAssistList[0].summonerName;
+              this.mostKdaSummonerDetail =
+                "KDA " + response.data.mostKillDeathAssistList[0].kda;
 
-        this.mostVisionScoreSummonerName =
-          response.data.mostVisionScore.summonerName;
-        this.mostVisionScoreSummonerDetail = response.data.mostVisionScore.visionScore.toString();
+              this.mostKillSummonerName = response.data.mostKill.summonerName;
+              this.mostKillSummonerDetail = response.data.mostKill.kills.toString();
 
-        this.mostTotalDamageDealtToChampionsSummonerName =
-          response.data.mostTotalDamageDealtToChampions.summonerName;
-        this.mostTotalDamageDealtToChampionsSummonerDetail = this.numberWithCommas(
-          response.data.mostTotalDamageDealtToChampions
-            .totalDamageDealtToChampions
-        );
+              this.mostDeathSummonerName = response.data.mostDeath.summonerName;
+              this.mostDeathSummonerDetail = response.data.mostDeath.deaths.toString();
 
-        this.mostTotalDamageTakenSummonerName =
-          response.data.mostTotalDamageTaken.summonerName;
-        this.mostTotalDamageTakenSummonerDetail = this.numberWithCommas(
-          response.data.mostTotalDamageTaken.totalDamageTaken
-        );
+              this.mostAssistSummonerName =
+                response.data.mostAssist.summonerName;
+              this.mostAssistSummonerDetail = response.data.mostAssist.assists.toString();
 
-        this.mostGoldEarnedSummonerName =
-          response.data.mostGoldEarned.summonerName;
-        this.mostGoldEarnedSummonerDetail = this.numberWithCommas(
-          response.data.mostGoldEarned.goldEarned
-        );
+              this.mostVisionScoreSummonerName =
+                response.data.mostVisionScore.summonerName;
+              this.mostVisionScoreSummonerDetail = response.data.mostVisionScore.visionScore.toString();
 
-        this.mostNeutralMinionsKilledSummonerName =
-          response.data.mostNeutralMinionsKilled.summonerName;
-        this.mostNeutralMinionsKilledSummonerDetail = response.data.mostNeutralMinionsKilled.neutralMinionsKilled.toString();
+              this.mostTotalDamageDealtToChampionsSummonerName =
+                response.data.mostTotalDamageDealtToChampions.summonerName;
+              this.mostTotalDamageDealtToChampionsSummonerDetail = this.numberWithCommas(
+                response.data.mostTotalDamageDealtToChampions
+                  .totalDamageDealtToChampions
+              );
 
-        this.mostFirstBloodKillSummonerName =
-          response.data.mostFirstBloodKill.summonerName;
-        this.mostFirstBloodKillSummonerDetail =
-          response.data.mostFirstBloodKill.count + " 회";
+              this.mostTotalDamageTakenSummonerName =
+                response.data.mostTotalDamageTaken.summonerName;
+              this.mostTotalDamageTakenSummonerDetail = this.numberWithCommas(
+                response.data.mostTotalDamageTaken.totalDamageTaken
+              );
 
-        this.mostFirstTowerKillSummonerName =
-          response.data.mostFirstTowerKill.summonerName;
-        this.mostFirstTowerKillSummonerDetail =
-          response.data.mostFirstTowerKill.count + " 회";
-      })
-      .catch(error => {
-        // handle error
-        console.log(error);
-      });
+              this.mostGoldEarnedSummonerName =
+                response.data.mostGoldEarned.summonerName;
+              this.mostGoldEarnedSummonerDetail = this.numberWithCommas(
+                response.data.mostGoldEarned.goldEarned
+              );
+
+              this.mostNeutralMinionsKilledSummonerName =
+                response.data.mostNeutralMinionsKilled.summonerName;
+              this.mostNeutralMinionsKilledSummonerDetail = response.data.mostNeutralMinionsKilled.neutralMinionsKilled.toString();
+
+              this.mostFirstBloodKillSummonerName =
+                response.data.mostFirstBloodKill.summonerName;
+              this.mostFirstBloodKillSummonerDetail =
+                response.data.mostFirstBloodKill.count + " 회";
+
+              this.mostFirstTowerKillSummonerName =
+                response.data.mostFirstTowerKill.summonerName;
+              this.mostFirstTowerKillSummonerDetail =
+                response.data.mostFirstTowerKill.count + " 회";
+            }
+          })
+          .catch(error => {
+            // handle error
+            console.log(error);
+          });
+
+        /*this.getSchedules().then(response => {
+          this.schedules = response.data.schedules;
+
+          if (this.schedules.length > 0) {
+            this.schedule = this.schedules[0];
+            this.getLeagueResult();
+          }
+        });*/
+      }
+    });
   },
   methods: {
+    getLeagues() {
+      var _this = this;
+
+      return new Promise(function(resolve, reject) {
+        _this.setLoading(true);
+
+        axios
+          .get("/v1/leagues")
+          .then(response => {
+            resolve(response);
+          })
+          .catch(error => {
+            // handle error
+            console.log(error);
+            reject(error);
+          })
+          .then(function() {
+            // always executed
+          });
+      });
+    },
     checkSummonerName() {
       let summonerName = this.summonerName.replace(/\s/g, "");
 
@@ -478,7 +535,7 @@ export default {
         _this.setLoading(true);
 
         axios
-          .get("/v1/leagues/statistics")
+          .get("/v1/leagues/" + _this.league.idx + "/statistics")
           .then(response => {
             resolve(response);
           })
@@ -498,6 +555,154 @@ export default {
     },
     numberWithCommas(x) {
       return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    },
+    onChangeLeague(event) {
+      this.league = event;
+
+      this.getStatistics()
+        .then(response => {
+          this.summonerName = "";
+          this.startDateOfMonth = "";
+          this.endDateOfMonth = "";
+          this.mostBannedChampionName = "";
+          this.mostBannedChampionUrl = "";
+          this.mostBannedCount = "";
+          this.mostPlayedChampionName = "";
+          this.mostPlayedChampionUrl = "";
+          this.mostPlayedCount = "";
+          this.mostWinningChampionName = "";
+          this.mostWinningChampionUrl = "";
+          this.mostWinningWinRate = "";
+          this.mostPlayedSummonerName = "";
+          this.mostPlayedSummonerDetail = "";
+          this.mostKdaSummonerName = "";
+          this.mostKdaSummonerDetail = "";
+
+          this.mostKillSummonerName = "";
+          this.mostKillSummonerDetail = "";
+
+          this.mostDeathSummonerName = "";
+          this.mostDeathSummonerDetail = "";
+
+          this.mostAssistSummonerName = "";
+          this.mostAssistSummonerDetail = "";
+
+          this.mostVisionScoreSummonerName = "";
+          this.mostVisionScoreSummonerDetail = "";
+
+          this.mostTotalDamageDealtToChampionsSummonerName = "";
+          this.mostTotalDamageDealtToChampionsSummonerDetail = "";
+
+          this.mostTotalDamageTakenSummonerName = "";
+          this.mostTotalDamageTakenSummonerDetail = "";
+
+          this.mostGoldEarnedSummonerName = "";
+          this.mostGoldEarnedSummonerDetail = "";
+
+          this.mostNeutralMinionsKilledSummonerName = "";
+          this.mostNeutralMinionsKilledSummonerDetail = "";
+
+          this.mostFirstTowerKillSummonerName = "";
+          this.mostFirstTowerKillSummonerDetail = "";
+
+          this.mostFirstBloodKillSummonerName = "";
+          this.mostFirstBloodKillSummonerDetail = "";
+
+          let matches = response.data.matches;
+
+          if (matches.length > 0) {
+            this.startDateOfMonth = response.data.startDateOfMonth;
+            this.endDateOfMonth = response.data.endDateOfMonth;
+
+            this.matchesChartData.labels = response.data.matches.map(
+              m => m.gameCreation
+            );
+            this.matchesChartData.datasets[0].data = response.data.matches.map(
+              m => m.matchCount
+            );
+
+            this.mostBannedChampionName =
+              response.data.mostBannedList[0].championName;
+            this.mostBannedChampionUrl =
+              response.data.mostBannedList[0].championUrl;
+            this.mostBannedCount =
+              response.data.mostBannedList[0].count + " 회";
+
+            this.mostPlayedChampionName =
+              response.data.mostPlayedChampionList[0].championName;
+            this.mostPlayedChampionUrl =
+              response.data.mostPlayedChampionList[0].championUrl;
+            this.mostPlayedCount =
+              response.data.mostPlayedChampionList[0].count + " 회";
+
+            this.mostWinningChampionName =
+              response.data.mostWinningList[0].championName;
+            this.mostWinningChampionUrl =
+              response.data.mostWinningList[0].championUrl;
+            this.mostWinningWinRate =
+              response.data.mostWinningList[0].winRate + " %";
+
+            this.mostPlayedSummonerName =
+              response.data.mostPlayedSummonerList[0].summonerName;
+            this.mostPlayedSummonerDetail =
+              response.data.mostPlayedSummonerList[0].count + " 회";
+
+            this.mostKdaSummonerName =
+              response.data.mostKillDeathAssistList[0].summonerName;
+            this.mostKdaSummonerDetail =
+              "KDA " + response.data.mostKillDeathAssistList[0].kda;
+
+            this.mostKillSummonerName = response.data.mostKill.summonerName;
+            this.mostKillSummonerDetail = response.data.mostKill.kills.toString();
+
+            this.mostDeathSummonerName = response.data.mostDeath.summonerName;
+            this.mostDeathSummonerDetail = response.data.mostDeath.deaths.toString();
+
+            this.mostAssistSummonerName = response.data.mostAssist.summonerName;
+            this.mostAssistSummonerDetail = response.data.mostAssist.assists.toString();
+
+            this.mostVisionScoreSummonerName =
+              response.data.mostVisionScore.summonerName;
+            this.mostVisionScoreSummonerDetail = response.data.mostVisionScore.visionScore.toString();
+
+            this.mostTotalDamageDealtToChampionsSummonerName =
+              response.data.mostTotalDamageDealtToChampions.summonerName;
+            this.mostTotalDamageDealtToChampionsSummonerDetail = this.numberWithCommas(
+              response.data.mostTotalDamageDealtToChampions
+                .totalDamageDealtToChampions
+            );
+
+            this.mostTotalDamageTakenSummonerName =
+              response.data.mostTotalDamageTaken.summonerName;
+            this.mostTotalDamageTakenSummonerDetail = this.numberWithCommas(
+              response.data.mostTotalDamageTaken.totalDamageTaken
+            );
+
+            this.mostGoldEarnedSummonerName =
+              response.data.mostGoldEarned.summonerName;
+            this.mostGoldEarnedSummonerDetail = this.numberWithCommas(
+              response.data.mostGoldEarned.goldEarned
+            );
+
+            this.mostNeutralMinionsKilledSummonerName =
+              response.data.mostNeutralMinionsKilled.summonerName;
+            this.mostNeutralMinionsKilledSummonerDetail = response.data.mostNeutralMinionsKilled.neutralMinionsKilled.toString();
+
+            this.mostFirstBloodKillSummonerName =
+              response.data.mostFirstBloodKill.summonerName;
+            this.mostFirstBloodKillSummonerDetail =
+              response.data.mostFirstBloodKill.count + " 회";
+
+            this.mostFirstTowerKillSummonerName =
+              response.data.mostFirstTowerKill.summonerName;
+            this.mostFirstTowerKillSummonerDetail =
+              response.data.mostFirstTowerKill.count + " 회";
+          }
+        })
+        .catch(error => {
+          // handle error
+          console.log(error);
+        });
     },
     ...mapMutations({
       setLoading: "setLoading"

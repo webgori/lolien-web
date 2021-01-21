@@ -782,6 +782,15 @@
       <p>특별상 포함시 (최소 5,250 최대 6,450RP)</p>
       <p>총 45,450RP (최소 44,250RP)</p>
     </v-col>
+
+    <v-col v-else-if="leagueIndex == 3" lg="12">
+      <p class="display-1 mb-0">LLL Spring 2021</p>
+      <v-divider class="mb-2"></v-divider>
+
+      <p>LOLIEN LUPIN LEAGUE Spring 2021</p>
+      <p>롤리앙 내전 리그제</p>
+    </v-col>
+
     <v-col cols="12" lg="12">
       <v-dialog v-model="fileUploadDialog" max-width="900px">
         <v-card>

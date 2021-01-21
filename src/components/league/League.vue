@@ -17,14 +17,14 @@
             </v-col>
             <v-col cols="12" lg="2" offset-lg="8">
               <v-select
-                v-model="leagues[leagues.length - 1]"
+                v-model="league"
                 dense
                 :items="leagues"
                 solo
                 item-text="title"
                 item-value="idx"
                 return-object
-                @input="changeLeague(leagues[leagues.length - 1])"
+                @change="onChangeLeague($event)"
               ></v-select>
             </v-col>
           </v-row>
@@ -34,13 +34,13 @@
         <v-col cols="12" lg="12">
           <LeagueIntro
             v-if="!resultComponent"
-            :league-index="currentLeagueIndex"
+            :league-index="league.idx"
             @showResult="showResult"
           />
 
           <LeagueResult
             v-if="resultComponent"
-            :league-index="currentLeagueIndex"
+            :league-index="league.idx"
             :schedule-index="scheduleIndex"
             @goToIntro="goToIntro"
           />
@@ -71,7 +71,7 @@
                     style="position: relative; border:1px solid #2196F3; border-style:dashed; "
                   >
                     <LeagueResultFileUpload
-                      :league-index="currentLeagueIndex"
+                      :league-index="league.idx"
                       :sub-menu-index="subMenuIndex"
                       @addedLeagueResult="addedLeagueResult"
                     />
@@ -99,8 +99,8 @@ export default {
   props: {},
   data: () => ({
     subMenuIndex: null,
+    league: {},
     leagues: [],
-    currentLeagueIndex: null,
     fileUploadDialog: false,
     resultComponent: false
   }),
@@ -114,7 +114,10 @@ export default {
 
     this.getLeagues().then(response => {
       this.leagues = response.data.leagues;
-      this.currentLeagueIndex = this.leagues[this.leagues.length - 1].idx;
+
+      if (this.leagues.length > 0) {
+        this.league = this.leagues[this.leagues.length - 1];
+      }
     });
   },
   methods: {
@@ -139,8 +142,8 @@ export default {
           });
       });
     },
-    changeLeague(league) {
-      this.currentLeagueIndex = league.idx;
+    onChangeLeague(event) {
+      this.league = event;
     },
     setSubMenuIndex(subMenuIndex) {
       this.subMenuIndex = subMenuIndex;

@@ -1,11 +1,22 @@
 <template>
-  <v-container class="back" fluid fill-height>
-    <v-row>
-      <v-col lg="12"
-        ><p class="text-center font-weight-bold display-1">
-          LLL Winter 2020
-        </p></v-col
-      >
+  <v-app>
+    <v-row dense>
+      <v-col lg="12">
+        <v-row dense>
+          <v-col cols="12" lg="2" offset-lg="10">
+            <v-select
+              v-model="league"
+              dense
+              :items="leagues"
+              solo
+              item-text="title"
+              item-value="idx"
+              return-object
+              @change="onChangeLeague($event)"
+            ></v-select>
+          </v-col>
+        </v-row>
+      </v-col>
     </v-row>
 
     <v-row v-for="team in statisticsPick.teams" :key="team.teamName">
@@ -42,7 +53,7 @@
           </v-simple-table> </p
       ></v-col>
     </v-row>
-  </v-container>
+  </v-app>
 </template>
 
 <script>
@@ -55,27 +66,59 @@ export default {
   components: {},
   props: {},
   data: () => ({
+    league: {},
+    leagues: [],
     statisticsPick: {}
   }),
   created() {
-    this.getStatisticsPick()
-      .then(response => {
-        this.statisticsPick = response.data;
-      })
-      .catch(error => {
-        // handle error
-        console.log(error);
-      });
+    this.getLeagues().then(response => {
+      this.leagues = response.data.leagues;
+
+      if (this.leagues.length > 0) {
+        this.league = this.leagues[this.leagues.length - 1];
+
+        this.getStatisticsPick()
+          .then(response => {
+            this.statisticsPick = response.data;
+          })
+          .catch(error => {
+            // handle error
+            console.log(error);
+          });
+      }
+    });
   },
   methods: {
-    getStatisticsPick() {
+    getLeagues() {
       var _this = this;
 
       return new Promise(function(resolve, reject) {
         _this.setLoading(true);
 
         axios
-          .get("/v1/leagues/2/statistics/pick")
+          .get("/v1/leagues")
+          .then(response => {
+            resolve(response);
+          })
+          .catch(error => {
+            // handle error
+            console.log(error);
+            reject(error);
+          })
+          .then(function() {
+            // always executed
+          });
+      });
+    },
+    getStatisticsPick() {
+      this.statisticsPick = {};
+      var _this = this;
+
+      return new Promise(function(resolve, reject) {
+        _this.setLoading(true);
+
+        axios
+          .get("/v1/leagues/" + _this.league.idx + "/statistics/pick")
           .then(response => {
             resolve(response);
           })
@@ -89,6 +132,18 @@ export default {
             _this.setLoading(false);
           });
       });
+    },
+    onChangeLeague(event) {
+      this.league = event;
+
+      this.getStatisticsPick()
+        .then(response => {
+          this.statisticsPick = response.data;
+        })
+        .catch(error => {
+          // handle error
+          console.log(error);
+        });
     },
     ...mapMutations({
       setLoading: "setLoading"

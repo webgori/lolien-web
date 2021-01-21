@@ -12,6 +12,7 @@
               item-text="title"
               item-value="idx"
               return-object
+              @change="onChangeLeague($event)"
             ></v-select>
           </v-col>
 
@@ -89,7 +90,6 @@ export default {
     return {
       league: {},
       leagues: [],
-      currentLeagueIndex: 0,
       page: 1,
       totalPages: null,
       size: 3,
@@ -110,7 +110,7 @@ export default {
       this.leagues = response.data.leagues;
 
       if (this.leagues.length > 0) {
-        this.league = this.leagues[0];
+        this.league = this.leagues[this.leagues.length - 1];
 
         this.getSchedules().then(response => {
           this.schedules = response.data.schedules;
@@ -254,8 +254,17 @@ export default {
           });
       });
     },
-    changeLeague(league) {
-      this.currentLeagueIndex = league.idx;
+    onChangeLeague(event) {
+      this.league = event;
+
+      this.getSchedules().then(response => {
+        this.schedules = response.data.schedules;
+
+        if (this.schedules.length > 0) {
+          this.schedule = this.schedules[0];
+          this.getLeagueResult();
+        }
+      });
     },
     onChangeSchedule(event) {
       this.schedule = event;

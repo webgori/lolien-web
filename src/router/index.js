@@ -26,7 +26,6 @@ const routes = [
       let user = store.getters.getUser;
 
       if (user !== null) {
-        console.log(user);
         if (user.positions.length === 0) {
           next("/user");
         } else {
@@ -45,7 +44,6 @@ const routes = [
       let user = store.getters.getUser;
 
       if (user !== null) {
-        console.log(user);
         if (user.positions.length === 0) {
           next("/user");
         } else {
@@ -69,7 +67,6 @@ const routes = [
       let user = store.getters.getUser;
 
       if (user !== null) {
-        console.log(user);
         if (user.positions.length === 0) {
           next("/user");
         } else {
@@ -88,7 +85,6 @@ const routes = [
       let user = store.getters.getUser;
 
       if (user !== null) {
-        console.log(user);
         if (user.positions.length === 0) {
           next("/user");
         } else {
@@ -112,7 +108,6 @@ const routes = [
       let user = store.getters.getUser;
 
       if (user !== null) {
-        console.log(user);
         if (user.positions.length === 0) {
           next("/user");
         } else {
@@ -131,7 +126,6 @@ const routes = [
       let user = store.getters.getUser;
 
       if (user !== null) {
-        console.log(user);
         if (user.positions.length === 0) {
           next("/user");
         } else {
@@ -150,7 +144,6 @@ const routes = [
       let user = store.getters.getUser;
 
       if (user !== null) {
-        console.log(user);
         if (user.positions.length === 0) {
           next("/user");
         } else {
@@ -169,7 +162,6 @@ const routes = [
       let user = store.getters.getUser;
 
       if (user !== null) {
-        console.log(user);
         if (user.positions.length === 0) {
           next("/user");
         } else {
