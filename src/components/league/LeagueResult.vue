@@ -91,7 +91,7 @@ export default {
       league: {},
       leagues: [],
       page: 1,
-      totalPages: null,
+      totalPages: 0,
       size: 3,
       clientVersions: [],
       customGamesVersion: [],
@@ -110,7 +110,7 @@ export default {
       this.leagues = response.data.leagues;
 
       if (this.leagues.length > 0) {
-        this.league = this.leagues[this.leagues.length - 1];
+        this.league = this.leagues[0];
 
         this.getSchedules().then(response => {
           this.schedules = response.data.schedules;
@@ -234,12 +234,27 @@ export default {
 
       return text;
     },
+    onChangeLeague(event) {
+      this.leagueResults = [];
+      this.totalPages = 0;
+
+      this.league = event;
+
+      this.getSchedules().then(response => {
+        this.schedules = response.data.schedules;
+
+        if (this.schedules.length > 0) {
+          this.schedule = this.schedules[0];
+          this.getLeagueResult();
+        }
+      });
+    },
     getSchedules() {
       var _this = this;
 
       return new Promise(function(resolve, reject) {
         axios
-          .get("/v1/leagues/schedule")
+          .get("/v1/leagues/" + _this.league.idx + "/schedule?order=desc")
           .then(response => {
             resolve(response);
           })
@@ -252,18 +267,6 @@ export default {
             // always executed
             _this.setLoading(false);
           });
-      });
-    },
-    onChangeLeague(event) {
-      this.league = event;
-
-      this.getSchedules().then(response => {
-        this.schedules = response.data.schedules;
-
-        if (this.schedules.length > 0) {
-          this.schedule = this.schedules[0];
-          this.getLeagueResult();
-        }
       });
     },
     onChangeSchedule(event) {

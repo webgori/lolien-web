@@ -348,7 +348,7 @@ export default {
       this.leagues = response.data.leagues;
 
       if (this.leagues.length > 0) {
-        this.league = this.leagues[this.leagues.length - 1];
+        this.league = this.leagues[0];
 
         this.getStatistics()
           .then(response => {

@@ -789,6 +789,158 @@
 
       <p>LOLIEN LUPIN LEAGUE Spring 2021</p>
       <p>롤리앙 내전 리그제</p>
+
+      <p class="title font-weight-bold mb-0">개최 인사말</p>
+      <v-divider class="mb-2"></v-divider>
+      <p></p>
+
+      <p class="title font-weight-bold mb-0">리그 개막전</p>
+      <v-divider class="mb-2"></v-divider>
+
+      <v-row v-if="schedules.length > 0">
+        <v-col lg="4">
+          <v-simple-table class="pt-0 pb-3">
+            <template v-slot:default>
+              <thead>
+                <tr>
+                  <th
+                    v-if="$vuetify.breakpoint.xs"
+                    class="text-center"
+                    width="35%"
+                    >경기 날짜</th
+                  >
+                  <th
+                    v-if="$vuetify.breakpoint.xs"
+                    class="text-center"
+                    width="65%"
+                    >대진</th
+                  >
+
+                  <th
+                    v-if="$vuetify.breakpoint.smAndUp"
+                    class="text-center"
+                    width="30%"
+                    >경기 날짜</th
+                  >
+                  <th
+                    v-if="$vuetify.breakpoint.smAndUp"
+                    class="text-center"
+                    width="40%"
+                    >대진</th
+                  >
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="text-center">{{
+                    schedules[0].matchDateTime | moment("YYYY-MM-DD a hh:mm:ss")
+                  }}</td>
+                  <td class="text-center">
+                    <img
+                      v-if="schedules[0].team.englishName === 'Demacia'"
+                      class="pt-0"
+                      src="https://vignette.wikia.nocookie.net/leagueoflegends/images/e/e3/Demacia_Crest_icon.png/revision/latest/scale-to-width-down/15?cb=20190720005456"
+                    />
+
+                    <img
+                      v-if="schedules[0].team.englishName === 'Noxus'"
+                      class="pt-0"
+                      src="https://vignette.wikia.nocookie.net/leagueoflegends/images/3/38/Noxus_Crest_icon.png/revision/latest/scale-to-width-down/15?cb=20161117055828"
+                    />
+
+                    <img
+                      v-if="schedules[0].team.englishName === 'Freljord'"
+                      class="pt-0"
+                      src="https://vignette.wikia.nocookie.net/leagueoflegends/images/4/4e/Freljord_Crest_icon.png/revision/latest/scale-to-width-down/15?cb=20190720005359"
+                    />
+
+                    <img
+                      v-if="schedules[0].team.englishName === 'Shadow Isles'"
+                      class="pt-0"
+                      src="https://vignette.wikia.nocookie.net/leagueoflegends/images/7/72/Shadow_Isles_Crest_icon.png/revision/latest/scale-to-width-down/15?cb=20190720005424"
+                    />
+
+                    <span>{{ schedules[0].team.koreanName }}</span>
+
+                    vs
+
+                    <img
+                      v-if="schedules[0].enemyTeam.englishName === 'Demacia'"
+                      class="pt-0"
+                      src="https://vignette.wikia.nocookie.net/leagueoflegends/images/e/e3/Demacia_Crest_icon.png/revision/latest/scale-to-width-down/15?cb=20190720005456"
+                    />
+
+                    <img
+                      v-if="schedules[0].enemyTeam.englishName === 'Noxus'"
+                      class="pt-0"
+                      src="https://vignette.wikia.nocookie.net/leagueoflegends/images/3/38/Noxus_Crest_icon.png/revision/latest/scale-to-width-down/15?cb=20161117055828"
+                    />
+
+                    <img
+                      v-if="schedules[0].enemyTeam.englishName === 'Freljord'"
+                      class="pt-0"
+                      src="https://vignette.wikia.nocookie.net/leagueoflegends/images/4/4e/Freljord_Crest_icon.png/revision/latest/scale-to-width-down/15?cb=20190720005359"
+                    />
+
+                    <img
+                      v-if="
+                        schedules[0].enemyTeam.englishName === 'Shadow Isles'
+                      "
+                      class="pt-0"
+                      src="https://vignette.wikia.nocookie.net/leagueoflegends/images/7/72/Shadow_Isles_Crest_icon.png/revision/latest/scale-to-width-down/15?cb=20190720005424"
+                    />
+
+                    <span>{{ schedules[0].enemyTeam.koreanName }}</span></td
+                  >
+                </tr>
+              </tbody>
+            </template>
+          </v-simple-table>
+        </v-col>
+      </v-row>
+
+      <p class="title font-weight-bold mb-0">리그 기간</p>
+      <v-divider class="mb-2"></v-divider>
+      <p>2021년 02월</p>
+
+      <p class="title font-weight-bold mb-0">리그 참가 자격</p>
+      <v-divider class="mb-2"></v-divider>
+
+      <ol>
+        <li>lolien.kr 회원가입 필수</li>
+        <li>당원명부 등록</li>
+        <li>오픈채팅 입장</li>
+        <li>소환사명. 카카오톡 오픈채팅 닉 통일</li>
+        <li>경고 및 정지 받지 않은 당원</li>
+        <li
+          >2019년 이전 가입 한 당원 (2021년 내전참여횟수 5회 이상 ,
+          2019~2020년(2021년 포함) 내전참여횟수 40회 이상)</li
+        >
+        <li>2020년 이후 가입 신규 당원 (2021년 내전참여횟수 10회 이상)</li>
+      </ol>
+
+      <p v-if="!isEntryConditionReadMore"
+        ><a class="" href="#" @click="setEntryConditionReadMore(true, $event)">
+          올해 (2021년) 당원별 내전 참여 횟수
+        </a>
+      </p>
+
+      <div v-if="isEntryConditionReadMore">
+        <ul>
+          <li
+            v-for="summonerForParticipation in summonersForParticipation"
+            :key="summonerForParticipation.summonerName"
+            class="mb-0 ml-2"
+            >{{ summonerForParticipation.summonerName }} ({{
+              summonerForParticipation.numberOfParticipation
+            }}
+            회)</li
+          >
+        </ul>
+        <a class="" href="#" @click="setEntryConditionReadMore(false, $event)">
+          접기
+        </a></div
+      >
     </v-col>
 
     <v-col cols="12" lg="12">
@@ -867,21 +1019,45 @@ export default {
       user: "getUser"
     })
   },
+  watch: {
+    leagueIndex() {
+      if (this.leagueIndex > 0) {
+        this.getSummonersForParticipation().then(response => {
+          this.summonersForParticipation = response.data.summoners;
+        });
+
+        this.getTeams();
+        this.getSchedules();
+      }
+    }
+  },
   created() {
     this.$eventBus.$on("hideFileUploadDialog", this.hideFileUploadDialog);
 
-    this.getSummonersForParticipation().then(response => {
-      this.summonersForParticipation = response.data.summoners;
-    });
+    if (this.leagueIndex > 0) {
+      this.getSummonersForParticipation().then(response => {
+        this.summonersForParticipation = response.data.summoners;
+      });
 
-    this.getTeams();
-    this.getSchedules();
+      this.getTeams();
+      this.getSchedules();
+    }
   },
   methods: {
     getSummonersForParticipation() {
+      var _this = this;
+
       return new Promise(function(resolve, reject) {
+        let startDate = _this.getParticipationStartDate();
+        let endDate = _this.getParticipationEndDate();
+
         axios
-          .get("/v1/leagues/summoners/participation")
+          .get(
+            "/v1/leagues/summoners/participation?startDate=" +
+              startDate +
+              "&endDate=" +
+              endDate
+          )
           .then(response => {
             resolve(response);
           })
@@ -894,6 +1070,20 @@ export default {
             // always executed
           });
       });
+    },
+    getParticipationStartDate() {
+      if (this.leagueIndex == 2) {
+        return "2020-01-01";
+      } else if (this.leagueIndex == 3) {
+        return "2021-01-01";
+      }
+    },
+    getParticipationEndDate() {
+      if (this.leagueIndex == 2) {
+        return "2021-01-01";
+      } else if (this.leagueIndex == 3) {
+        return "2022-01-01";
+      }
     },
     setEntryConditionReadMore(isEntryConditionReadMore, event) {
       this.isEntryConditionReadMore = isEntryConditionReadMore;
@@ -935,7 +1125,7 @@ export default {
       var _this = this;
 
       axios
-        .get("/v1/leagues/schedule")
+        .get("/v1/leagues/" + _this.leagueIndex + "/schedule?order=asc")
         .then(response => {
           this.schedules = response.data.schedules;
         })
