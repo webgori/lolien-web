@@ -16,13 +16,22 @@
         </div>
       </v-col>
 
-      <v-col
-        v-if="customGame.deleteAble"
-        cols="12"
-        lg="4"
-        class="text-lg-right"
-      >
-        <v-btn icon color="pink" @click="deleteResult(customGame.gameId)">
+      <v-col cols="12" lg="1" class="text-lg-right">
+        <v-btn
+          v-if="customGame.replayData != ''"
+          icon
+          color="blue"
+          @click="downloadReplay(customGame.replayData)"
+        >
+          <v-icon>fas fa-file-download</v-icon>
+        </v-btn>
+
+        <v-btn
+          v-if="customGame.deleteAble"
+          icon
+          color="pink"
+          @click="deleteResult(customGame.gameId)"
+        >
           <v-icon>fas fa-trash-alt</v-icon>
         </v-btn>
       </v-col>
@@ -844,6 +853,17 @@ export default {
     },
     goToIntro() {
       this.$emit("goToIntro");
+    },
+    downloadReplay(replayData) {
+      console.log(replayData);
+
+      let link = document.createElement("a");
+      link.href = window.URL.createObjectURL(replayData);
+      link.download = "sample.png";
+
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     }
   }
 };
