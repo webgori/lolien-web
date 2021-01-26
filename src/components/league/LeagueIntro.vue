@@ -238,7 +238,7 @@
 
       <p>
         <img
-          src="@/assets/images/demaciaTeam.jpg"
+          src="@/assets/images/leagues/2/demaciaTeam.jpg"
           :class="{ 'image-fit': $vuetify.breakpoint.xs }"
         />
       </p>
@@ -253,7 +253,7 @@
 
       <p>
         <img
-          src="@/assets/images/noxusTeam.jpg"
+          src="@/assets/images/leagues/2/noxusTeam.jpg"
           :class="{ 'image-fit': $vuetify.breakpoint.xs }"
         />
       </p>
@@ -268,7 +268,7 @@
 
       <p>
         <img
-          src="@/assets/images/freljordTeam.jpg"
+          src="@/assets/images/leagues/2/freljordTeam.jpg"
           :class="{ 'image-fit': $vuetify.breakpoint.xs }"
         />
       </p>
@@ -283,48 +283,10 @@
 
       <p>
         <img
-          src="@/assets/images/shadowIslesTeam.jpg"
+          src="@/assets/images/leagues/2/shadowIslesTeam.jpg"
           :class="{ 'image-fit': $vuetify.breakpoint.xs }"
         />
       </p>
-
-      <!--
-      <div v-for="team in teams" :key="team.idx">
-        <p>{{ team.englishName }} ({{ team.koreanName }})</p>
-
-        <ul v-if="team.englishName == 'Demacia'" class="pb-5">
-          <li>꿈꾸는발라당</li>
-          <li>크로누스</li>
-          <li>하르크</li>
-          <li>bom 네드베드</li>
-          <li>Malkuth</li>
-        </ul>
-
-        <ul v-if="team.englishName == 'Noxus'" class="pb-5">
-          <li>용찐찌</li>
-          <li>MFC ATL Module</li>
-          <li>IF YeTam</li>
-          <li>kkomi kim</li>
-          <li>Zella Day</li>
-        </ul>
-
-        <ul v-if="team.englishName == 'Freljord'" class="pb-5">
-          <li>뭐하는고니</li>
-          <li>아미스시마</li>
-          <li>영블러드</li>
-          <li>LUNA 에릭</li>
-          <li>Shee</li>
-        </ul>
-
-        <ul v-if="team.englishName == 'Shadow Isles'" class="pb-5">
-          <li>역시수저</li>
-          <li>Cooltea</li>
-          <li>Jajoon</li>
-          <li>Range of Xerath</li>
-          <li>김갓난</li>
-        </ul>
-      </div>
-      -->
 
       <p class="title font-weight-bold mb-0">대진표</p>
       <v-divider class="mb-2"></v-divider>
@@ -940,6 +902,267 @@
         <a class="" href="#" @click="setEntryConditionReadMore(false, $event)">
           접기
         </a></div
+      >
+
+      <p class="title font-weight-bold mb-0">신청</p>
+      <v-divider class="mb-2"></v-divider>
+
+      <p
+        >아래의 양식에 맞춰
+        <a
+          href="https://www.clien.net/service/board/cm_lol/15786442"
+          target="_blank"
+          >신청 게시글</a
+        >에 댓글로 작성</p
+      >
+
+      <p>2021-01-15 오전10시 부터 댓글 신청 써주세요.</p>
+
+      <p>소환사이름/현 티어(언랭시 2020티어)/희망 포지션</p>
+
+      <p>예: KURI KAME / 실버 / 미드</p>
+
+      <p>포지션 제한 들어있는 리그 이므로 포지션 선착순입니다.</p>
+
+      <p>탑 4명, 미드 4명, 정글 4명, 원딜 4명, 서폿 4명</p>
+
+      <p class="title font-weight-bold mb-0">신청 마감</p>
+      <v-divider class="mb-2"></v-divider>
+
+      <p
+        ><v-icon>far fa-clock</v-icon> 2월 12일(금) 밤 11시 59분 (선착순 자리 다
+        채울시 마감)</p
+      >
+
+      <p class="title font-weight-bold mb-0">운영자 및 해설</p>
+      <v-divider class="mb-2"></v-divider>
+
+      <p
+        >당원명부에 추가되어 있으시고, LOLien 오픈방 채팅에 참여하고 계시다면
+        누구든지 운영자 및 해설을 하실 수 있습니다.</p
+      >
+
+      <p
+        >자세한 내용은
+        <a
+          href="https://www.clien.net/service/board/cm_lol/15369237"
+          target="_blank"
+          >해당 글</a
+        >을 참고 해주세요.</p
+      >
+
+      <p class="title font-weight-bold mb-0">팀</p>
+      <v-divider class="mb-2"></v-divider>
+
+      <p>
+        <img src="@/assets/images/demacia.png" />
+      </p>
+
+      <p class="font-weight-bold">
+        데마시아팀
+      </p>
+
+      <p>
+        <img
+          src="@/assets/images/leagues/3/demaciaTeam.jpg"
+          :class="{ 'image-fit': $vuetify.breakpoint.xs }"
+        />
+      </p>
+
+      <p>
+        <img src="@/assets/images/noxus.png" />
+      </p>
+
+      <p class="font-weight-bold">
+        녹서스팀
+      </p>
+
+      <p>
+        <img
+          src="@/assets/images/leagues/3/noxusTeam.jpg"
+          :class="{ 'image-fit': $vuetify.breakpoint.xs }"
+        />
+      </p>
+
+      <p>
+        <img src="@/assets/images/freljord.png" />
+      </p>
+
+      <p class="font-weight-bold">
+        프렐요드팀
+      </p>
+
+      <p>
+        <img
+          src="@/assets/images/leagues/3/freljordTeam.jpg"
+          :class="{ 'image-fit': $vuetify.breakpoint.xs }"
+        />
+      </p>
+
+      <p>
+        <img src="@/assets/images/shadowIsles.png" />
+      </p>
+
+      <p class="font-weight-bold">
+        그림자 군도팀
+      </p>
+
+      <p>
+        <img
+          src="@/assets/images/leagues/3/shadowIslesTeam.jpg"
+          :class="{ 'image-fit': $vuetify.breakpoint.xs }"
+        />
+      </p>
+
+      <p class="title font-weight-bold mb-0">대진표</p>
+      <v-divider class="mb-2"></v-divider>
+
+      <v-row>
+        <v-col lg="8" cols="12">
+          <v-simple-table class="pt-0 pb-3">
+            <template v-slot:default>
+              <thead>
+                <tr>
+                  <th
+                    v-if="$vuetify.breakpoint.xs"
+                    class="text-center"
+                    width="35%"
+                    >경기 날짜</th
+                  >
+                  <th
+                    v-if="$vuetify.breakpoint.xs"
+                    class="text-center"
+                    width="45%"
+                    >대진</th
+                  >
+
+                  <th
+                    v-if="$vuetify.breakpoint.smAndUp"
+                    class="text-center"
+                    width="20%"
+                    >경기 날짜</th
+                  >
+                  <th
+                    v-if="$vuetify.breakpoint.smAndUp"
+                    class="text-center"
+                    width="25%"
+                    >대진</th
+                  >
+                  <th
+                    v-if="$vuetify.breakpoint.smAndUp"
+                    class="text-center"
+                    width="15%"
+                    >방송</th
+                  >
+                  <th
+                    v-if="$vuetify.breakpoint.smAndUp"
+                    class="text-center"
+                    width="20%"
+                    >해설</th
+                  >
+                  <th
+                    v-if="$vuetify.breakpoint.smAndUp"
+                    class="text-center"
+                    width="20%"
+                    >심판</th
+                  >
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="schedule in schedules" :key="schedule.idx">
+                  <td class="text-center">{{
+                    schedule.matchDateTime | moment("YYYY-MM-DD a hh:mm:ss")
+                  }}</td>
+                  <td class="text-center">
+                    <img
+                      v-if="schedule.team.englishName === 'Demacia'"
+                      class="pt-0"
+                      src="https://vignette.wikia.nocookie.net/leagueoflegends/images/e/e3/Demacia_Crest_icon.png/revision/latest/scale-to-width-down/15?cb=20190720005456"
+                    />
+
+                    <img
+                      v-if="schedule.team.englishName === 'Noxus'"
+                      class="pt-0"
+                      src="https://vignette.wikia.nocookie.net/leagueoflegends/images/3/38/Noxus_Crest_icon.png/revision/latest/scale-to-width-down/15?cb=20161117055828"
+                    />
+
+                    <img
+                      v-if="schedule.team.englishName === 'Freljord'"
+                      class="pt-0"
+                      src="https://vignette.wikia.nocookie.net/leagueoflegends/images/4/4e/Freljord_Crest_icon.png/revision/latest/scale-to-width-down/15?cb=20190720005359"
+                    />
+
+                    <img
+                      v-if="schedule.team.englishName === 'Shadow Isles'"
+                      class="pt-0"
+                      src="https://vignette.wikia.nocookie.net/leagueoflegends/images/7/72/Shadow_Isles_Crest_icon.png/revision/latest/scale-to-width-down/15?cb=20190720005424"
+                    />
+
+                    <span>{{ schedule.team.koreanName }}</span>
+
+                    vs
+
+                    <img
+                      v-if="schedule.enemyTeam.englishName === 'Demacia'"
+                      class="pt-0"
+                      src="https://vignette.wikia.nocookie.net/leagueoflegends/images/e/e3/Demacia_Crest_icon.png/revision/latest/scale-to-width-down/15?cb=20190720005456"
+                    />
+
+                    <img
+                      v-if="schedule.enemyTeam.englishName === 'Noxus'"
+                      class="pt-0"
+                      src="https://vignette.wikia.nocookie.net/leagueoflegends/images/3/38/Noxus_Crest_icon.png/revision/latest/scale-to-width-down/15?cb=20161117055828"
+                    />
+
+                    <img
+                      v-if="schedule.enemyTeam.englishName === 'Freljord'"
+                      class="pt-0"
+                      src="https://vignette.wikia.nocookie.net/leagueoflegends/images/4/4e/Freljord_Crest_icon.png/revision/latest/scale-to-width-down/15?cb=20190720005359"
+                    />
+
+                    <img
+                      v-if="schedule.enemyTeam.englishName === 'Shadow Isles'"
+                      class="pt-0"
+                      src="https://vignette.wikia.nocookie.net/leagueoflegends/images/7/72/Shadow_Isles_Crest_icon.png/revision/latest/scale-to-width-down/15?cb=20190720005424"
+                    />
+
+                    <span>{{ schedule.enemyTeam.koreanName }}</span></td
+                  >
+                  <td v-if="$vuetify.breakpoint.smAndUp" class="text-center">{{
+                    schedule.description1
+                  }}</td>
+
+                  <td v-if="$vuetify.breakpoint.smAndUp" class="text-center">{{
+                    schedule.description2
+                  }}</td>
+
+                  <td v-if="$vuetify.breakpoint.smAndUp" class="text-center">{{
+                    schedule.description3
+                  }}</td>
+                </tr>
+              </tbody>
+            </template>
+          </v-simple-table>
+        </v-col>
+      </v-row>
+
+      <p class="title font-weight-bold mb-0">LLL Spring 2021 플레이오프</p>
+      <v-divider class="mb-2"></v-divider>
+
+      <p></p>
+
+      <p class="title font-weight-bold mb-0">LLL Spring 2021 롤리앙 시리즈</p>
+      <v-divider class="mb-2"></v-divider>
+
+      <p></p>
+
+      <p class="title font-weight-bold mb-0">리그 결과</p>
+      <v-divider class="mb-2"></v-divider>
+
+      <p
+        >리그 경기 진행 후
+        <a href="#" @click="showFileUploadDialog()">리그 결과 등록</a>을 눌러서
+        리플레이 파일을 등록하면 됩니다.</p
       >
     </v-col>
 

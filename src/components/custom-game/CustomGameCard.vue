@@ -21,7 +21,7 @@
           v-if="customGame.replayData != ''"
           icon
           color="blue"
-          @click="downloadReplay(customGame.replayData)"
+          @click="downloadReplay(customGame)"
         >
           <v-icon>fas fa-file-download</v-icon>
         </v-btn>
@@ -854,16 +854,13 @@ export default {
     goToIntro() {
       this.$emit("goToIntro");
     },
-    downloadReplay(replayData) {
-      console.log(replayData);
+    downloadReplay(customGame) {
+      let matchIndex = customGame.idx;
+      let baseApiUrl = process.env.VUE_APP_BASE_URL;
 
-      let link = document.createElement("a");
-      link.href = window.URL.createObjectURL(replayData);
-      link.download = "sample.png";
-
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      window.open(
+        baseApiUrl + "/v1/custom-game/replay?match-index=" + matchIndex
+      );
     }
   }
 };

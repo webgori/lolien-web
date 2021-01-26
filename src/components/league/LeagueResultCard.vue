@@ -16,13 +16,22 @@
         </div>
       </v-col>
 
-      <v-col
-        v-if="leagueResult.deleteAble"
-        cols="12"
-        lg="4"
-        class="text-lg-right"
-      >
-        <v-btn icon color="pink" @click="deleteResult(leagueResult.gameId)">
+      <v-col cols="12" lg="1" class="text-lg-right">
+        <v-btn
+          v-if="leagueResult.replayData != ''"
+          icon
+          color="blue"
+          @click="downloadReplay(leagueResult)"
+        >
+          <v-icon>fas fa-file-download</v-icon>
+        </v-btn>
+
+        <v-btn
+          v-if="leagueResult.deleteAble"
+          icon
+          color="pink"
+          @click="deleteResult(leagueResult.gameId)"
+        >
           <v-icon>fas fa-trash-alt</v-icon>
         </v-btn>
       </v-col>
@@ -890,6 +899,12 @@ export default {
     },
     goToIntro() {
       this.$emit("goToIntro");
+    },
+    downloadReplay(leagueResult) {
+      let matchIndex = leagueResult.idx;
+      let baseApiUrl = process.env.VUE_APP_BASE_URL;
+
+      window.open(baseApiUrl + "/v1/leagues/replay?match-index=" + matchIndex);
     }
   }
 };
