@@ -18,7 +18,7 @@
 
       <v-col cols="12" lg="1" class="text-lg-right">
         <v-btn
-          v-if="customGame.replayData != ''"
+          v-if="customGame.gameId > 4944683019"
           icon
           color="blue"
           @click="downloadReplay(customGame)"
