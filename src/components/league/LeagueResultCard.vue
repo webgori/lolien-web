@@ -18,7 +18,7 @@
 
       <v-col cols="12" lg="1" class="text-lg-right">
         <v-btn
-          v-if="leagueResult.gameCreation > 1611416926163"
+          v-if="leagueResult.replayDownloadable"
           icon
           color="blue"
           @click="downloadReplay(leagueResult)"
