@@ -18,7 +18,7 @@
 
       <v-col cols="12" lg="1" class="text-lg-right">
         <v-btn
-          v-if="customGame.replayDownloadable"
+          v-if="customGame.replayDownloadable === true"
           icon
           color="blue"
           @click="downloadReplay(customGame)"
