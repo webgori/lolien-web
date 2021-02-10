@@ -152,6 +152,25 @@
               </v-row>
 
               <v-row dense>
+                <v-col lg="12">
+                  <v-select
+                    v-model="positions"
+                    prepend-icon="fas fa-search-location"
+                    :items="positionsData"
+                    label="포지션"
+                    multiple
+                    chips
+                    :rules="[
+                      v =>
+                        v.length > 0 ||
+                        '최소 하나의 포지션을 선택해주셔야 합니다.'
+                    ]"
+                    required
+                  ></v-select>
+                </v-col>
+              </v-row>
+
+              <v-row dense>
                 <v-col lg="12" class="text-right">
                   <v-btn
                     color="primary"
@@ -191,7 +210,9 @@ export default {
       summonerName: "",
       loadingRegister: false,
       rememberEmail: false,
-      autoLogin: false
+      autoLogin: false,
+      positionsData: ["Top", "Jungle", "Mid", "AD", "Support"],
+      positions: []
     };
   },
   created() {},
@@ -263,6 +284,14 @@ export default {
         throw new TypeError(errorMessage);
       } else if (this.summonerName.length > 20) {
         let errorMessage = "소환사 이름은 최대 20자까지 사용 가능합니다.";
+
+        alert(errorMessage);
+        throw new TypeError(errorMessage);
+      }
+    },
+    checkPosition() {
+      if (this.positions.length === 0) {
+        let errorMessage = "최소 하나의 포지션을 선택해주셔야 합니다.";
 
         alert(errorMessage);
         throw new TypeError(errorMessage);
@@ -344,6 +373,7 @@ export default {
       this.checkNickname();
       this.checkPassword();
       this.checkSummonerName();
+      this.checkPosition();
 
       this.registerUser({
         email: this.email,
@@ -352,7 +382,8 @@ export default {
         password: this.password,
         clienId: this.clienId,
         clienIdAuthNumber: this.clienIdAuthNumber,
-        summonerName: this.summonerName
+        summonerName: this.summonerName,
+        positions: this.positions
       });
     },
     ...mapActions(["registerUser"])
