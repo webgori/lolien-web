@@ -34,7 +34,8 @@ export default {
       password: request.password,
       clienId: request.clienId,
       clienIdAuthNumber: request.clienIdAuthNumber,
-      summonerName: request.summonerName
+      summonerName: request.summonerName,
+      positions: request.positions
     });
   },
   login(request) {
