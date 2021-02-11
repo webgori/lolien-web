@@ -21,7 +21,7 @@
           v-if="customGame.replayDownloadable === true"
           icon
           color="blue"
-          @click="downloadReplay(customGame)"
+          :href="'https://lolien.kr/replay/KR-' + customGame.gameId + '.rofl'"
         >
           <v-icon>fas fa-file-download</v-icon>
         </v-btn>
