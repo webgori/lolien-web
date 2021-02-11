@@ -853,14 +853,6 @@ export default {
     },
     goToIntro() {
       this.$emit("goToIntro");
-    },
-    downloadReplay(customGame) {
-      let matchIndex = customGame.idx;
-      let baseApiUrl = process.env.VUE_APP_BASE_URL;
-
-      window.open(
-        baseApiUrl + "/v1/custom-game/replay?match-index=" + matchIndex
-      );
     }
   }
 };

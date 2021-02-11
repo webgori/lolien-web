@@ -21,7 +21,7 @@
           v-if="leagueResult.replayDownloadable === true"
           icon
           color="blue"
-          @click="downloadReplay(leagueResult)"
+          :href="'https://lolien.kr/replay/KR-' + leagueResult.gameId + '.rofl'"
         >
           <v-icon>fas fa-file-download</v-icon>
         </v-btn>
@@ -899,12 +899,6 @@ export default {
     },
     goToIntro() {
       this.$emit("goToIntro");
-    },
-    downloadReplay(leagueResult) {
-      let matchIndex = leagueResult.idx;
-      let baseApiUrl = process.env.VUE_APP_BASE_URL;
-
-      window.open(baseApiUrl + "/v1/leagues/replay?match-index=" + matchIndex);
     }
   }
 };
