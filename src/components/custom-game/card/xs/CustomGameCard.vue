@@ -83,7 +83,7 @@
                 />
 
                 <CustomGameCardTotalMinionsKilled
-                  class="mx-5"
+                  class="mx-3"
                   :summoner="getTeamSummoner(tabName, customGame, index)"
                 />
                 <CustomGameCardGoldEarned
@@ -120,7 +120,6 @@
                   :summoner="getTeamSummoner(tabName, customGame, index)"
                   :number="7"
                 />
-
                 <CustomGameCardTotalDamage
                   class="ml-5"
                   :custom-game="customGame"

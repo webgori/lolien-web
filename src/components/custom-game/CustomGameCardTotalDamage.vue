@@ -1,5 +1,5 @@
 <template>
-  <v-col cols="5" sm="2" md="2" lg="2" xl="2">
+  <v-col cols="3" sm="2" md="2" lg="2" xl="2">
     <v-tooltip top>
       <template v-slot:activator="{ on, attrs }">
         <v-progress-linear
