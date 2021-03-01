@@ -81,14 +81,6 @@
                 <CustomGameCardSummonerNameAndKillDeathAssists
                   :summoner="getTeamSummoner(tabName, customGame, index)"
                 />
-
-                <CustomGameCardTotalMinionsKilled
-                  class="mx-3"
-                  :summoner="getTeamSummoner(tabName, customGame, index)"
-                />
-                <CustomGameCardGoldEarned
-                  :summoner="getTeamSummoner(tabName, customGame, index)"
-                />
               </v-row>
 
               <v-row dense align="center" no-gutters>
@@ -120,11 +112,6 @@
                   :summoner="getTeamSummoner(tabName, customGame, index)"
                   :number="7"
                 />
-                <CustomGameCardTotalDamage
-                  class="ml-5"
-                  :custom-game="customGame"
-                  :summoner="getTeamSummoner(tabName, customGame, index)"
-                />
               </v-row>
             </v-row>
           </v-card-text>
@@ -141,9 +128,6 @@ import CustomGameCardSpell from "@/components/custom-game/CustomGameCardSpell";
 import CustomGameCardRune from "@/components/custom-game/CustomGameCardRune";
 import CustomGameCardSummonerNameAndKillDeathAssists from "@/components/custom-game/CustomGameCardSummonerNameAndKillDeathAssists";
 import CustomGameCardItem from "@/components/custom-game/CustomGameCardItem";
-import CustomGameCardTotalMinionsKilled from "@/components/custom-game/CustomGameCardTotalMinionsKilled";
-import CustomGameCardGoldEarned from "@/components/custom-game/CustomGameCardGoldEarned";
-import CustomGameCardTotalDamage from "@/components/custom-game/CustomGameCardTotalDamage";
 
 export default {
   components: {
@@ -152,10 +136,7 @@ export default {
     CustomGameCardSpell,
     CustomGameCardRune,
     CustomGameCardSummonerNameAndKillDeathAssists,
-    CustomGameCardItem,
-    CustomGameCardTotalMinionsKilled,
-    CustomGameCardGoldEarned,
-    CustomGameCardTotalDamage
+    CustomGameCardItem
   },
   props: {
     customGame: { type: Object },

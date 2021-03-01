@@ -1,5 +1,5 @@
 <template>
-  <v-col class="text-center" cols="3" sm="2" lg="2">
+  <v-col class="text-center" cols="5" sm="2" lg="2">
     <v-btn
       v-if="$vuetify.breakpoint.lgAndUp"
       text
