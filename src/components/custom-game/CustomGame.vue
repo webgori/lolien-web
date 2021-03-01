@@ -1,102 +1,149 @@
 <template>
   <v-app class="px-5">
-    <v-row v-if="user">
-      <v-col lg="12" class="text-lg-right">
-        <v-btn icon color="black" @click="showFileUploadDialog()">
-          <v-icon>fas fa-plus</v-icon>
-        </v-btn>
-      </v-col>
-    </v-row>
-    <v-row dense>
-      <v-col cols="12" lg="12">
-        <v-dialog v-model="fileUploadDialog" max-width="900px">
-          <v-card>
-            <v-card-title>
-              <template>
-                <v-icon style="margin-right:10px;" large color="light-blue"
-                  >fas fa-cloud-upload-alt</v-icon
-                >
-                <span class="headline" large>리플레이 파일 업로드</span>
-              </template>
-              <v-spacer></v-spacer>
-              <v-btn icon @click="hideFileUploadDialog()">
-                <v-icon>fas fa-times</v-icon>
-              </v-btn>
-            </v-card-title>
-            <v-card-text>
-              <v-row>
-                <v-col
-                  cols="12"
-                  sm="12"
-                  md="12"
-                  style="position: relative; border:1px solid #2196F3; border-style:dashed; "
-                >
-                  <ResultFileUpload />
-                </v-col>
-              </v-row>
-            </v-card-text>
-          </v-card>
-        </v-dialog>
-      </v-col>
-      <v-col>
-        <v-dialog v-model="deleteResultDialog" max-width="290">
-          <v-card>
-            <v-card-title class="headline">확인</v-card-title>
+    <v-container>
+      <v-row v-if="user">
+        <v-col lg="12" class="text-lg-right">
+          <v-btn icon color="black" @click="showFileUploadDialog()">
+            <v-icon>fas fa-plus</v-icon>
+          </v-btn>
+        </v-col>
+      </v-row>
+      <v-row dense justify="center">
+        <v-col v-if="fileUploadDialog">
+          <v-dialog v-model="fileUploadDialog" max-width="900px">
+            <v-card>
+              <v-card-title>
+                <template>
+                  <v-icon style="margin-right:10px;" large color="light-blue"
+                    >fas fa-cloud-upload-alt</v-icon
+                  >
+                  <span class="headline" large>리플레이 파일 업로드</span>
+                </template>
+                <v-spacer></v-spacer>
+                <v-btn icon @click="hideFileUploadDialog()">
+                  <v-icon>fas fa-times</v-icon>
+                </v-btn>
+              </v-card-title>
+              <v-card-text>
+                <v-row>
+                  <v-col
+                    cols="12"
+                    sm="12"
+                    md="12"
+                    style="position: relative; border:1px solid #2196F3; border-style:dashed; "
+                  >
+                    <ResultFileUpload />
+                  </v-col>
+                </v-row>
+              </v-card-text>
+            </v-card>
+          </v-dialog>
+        </v-col>
+        <v-col v-if="deleteResultDialog">
+          <v-dialog v-model="deleteResultDialog" max-width="290">
+            <v-card>
+              <v-card-title class="headline">확인</v-card-title>
 
-            <v-card-text>
-              내전 결과를 삭제하시겠습니까?
-            </v-card-text>
+              <v-card-text>
+                내전 결과를 삭제하시겠습니까?
+              </v-card-text>
 
-            <v-card-actions>
-              <v-spacer></v-spacer>
+              <v-card-actions>
+                <v-spacer></v-spacer>
 
-              <v-btn color="green darken-1" text @click="acceptDeleteResult">
-                예
-              </v-btn>
+                <v-btn color="green darken-1" text @click="acceptDeleteResult">
+                  예
+                </v-btn>
 
-              <v-btn color="green darken-1" text @click="cancelDeleteResult">
-                아니요
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
-      </v-col>
-      <v-col
-        v-for="customGame in customGames"
-        :key="customGame.idx"
-        cols="12"
-        lg="12"
-      >
-        <CustomGameCard
-          :custom-game="customGame"
-          :summoner-name="summonerName"
-          @searchBySummonerName="searchBySummonerName"
-          @setDeleteResultDialog="setDeleteResultDialog"
-        />
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col cols="12" lg="12">
-        <CustomGamePagination
-          v-show="!loading"
-          :total-pages="totalPages"
-          @updatePage="updatePage"
-        />
-      </v-col>
-    </v-row>
+                <v-btn color="green darken-1" text @click="cancelDeleteResult">
+                  아니요
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </v-col>
+        <v-col
+          v-for="customGame in customGames"
+          :key="customGame.idx"
+          cols="12"
+          sm="12"
+          md="12"
+          lg="10"
+          xl="10"
+        >
+          <CustomGameCardXs
+            v-if="$vuetify.breakpoint.xs"
+            :custom-game="customGame"
+            :summoner-name="summonerName"
+            @searchBySummonerName="searchBySummonerName"
+            @setDeleteResultDialog="setDeleteResultDialog"
+          />
+          <CustomGameCardSm
+            v-else-if="$vuetify.breakpoint.sm"
+            :custom-game="customGame"
+            :summoner-name="summonerName"
+            @searchBySummonerName="searchBySummonerName"
+            @setDeleteResultDialog="setDeleteResultDialog"
+          />
+          <CustomGameCardMd
+            v-else-if="$vuetify.breakpoint.md"
+            :custom-game="customGame"
+            :summoner-name="summonerName"
+            @searchBySummonerName="searchBySummonerName"
+            @setDeleteResultDialog="setDeleteResultDialog"
+          />
+          <CustomGameCardLg
+            v-else-if="$vuetify.breakpoint.lg"
+            :custom-game="customGame"
+            :summoner-name="summonerName"
+            @searchBySummonerName="searchBySummonerName"
+            @setDeleteResultDialog="setDeleteResultDialog"
+          />
+          <CustomGameCardXl
+            v-else-if="$vuetify.breakpoint.xl"
+            :custom-game="customGame"
+            :summoner-name="summonerName"
+            @searchBySummonerName="searchBySummonerName"
+            @setDeleteResultDialog="setDeleteResultDialog"
+          />
+          <br />
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="12" lg="12">
+          <CustomGamePagination
+            v-show="!loading"
+            :total-pages="totalPages"
+            @updatePage="updatePage"
+          />
+        </v-col>
+      </v-row>
+    </v-container>
   </v-app>
 </template>
 
 <script>
 import axios from "axios";
-import CustomGameCard from "@/components/custom-game/CustomGameCard";
+import CustomGameCardXs from "@/components/custom-game/card/xs/CustomGameCard";
+import CustomGameCardSm from "@/components/custom-game/card/sm/CustomGameCard";
+import CustomGameCardMd from "@/components/custom-game/card/md/CustomGameCard";
+import CustomGameCardLg from "@/components/custom-game/card/lg/CustomGameCard";
+import CustomGameCardXl from "@/components/custom-game/card/xl/CustomGameCard";
 import CustomGamePagination from "@/components/custom-game/CustomGamePagination";
 import ResultFileUpload from "@/components/custom-game/ResultFileUpload";
 import { mapGetters, mapMutations } from "vuex";
 
 export default {
   name: "Member",
-  components: { CustomGameCard, CustomGamePagination, ResultFileUpload },
+  components: {
+    CustomGameCardXs,
+    CustomGameCardSm,
+    CustomGameCardMd,
+    CustomGameCardLg,
+    CustomGameCardXl,
+    CustomGamePagination,
+    ResultFileUpload
+  },
   props: {},
   data: () => {
     return {
@@ -205,7 +252,7 @@ export default {
       scroll(0, 0);
     },
     acceptDeleteResult() {
-      var _this = this;
+      let _this = this;
 
       axios
         .delete("/v1/custom-game/result/" + this.deleteResultGameId)
@@ -239,7 +286,18 @@ export default {
     },
     ...mapMutations({
       setLoading: "setLoading"
-    })
+    }),
+    getCardGrid(vuetify) {
+      if (vuetify.breakpoint.smOnly) {
+        return 12;
+      } else if (vuetify.breakpoint.mdOnly) {
+        return 11;
+      } else if (vuetify.breakpoint.lgOnly) {
+        return 10;
+      } else if (vuetify.breakpoint.xlOnly) {
+        return 9;
+      }
+    }
   }
 };
 </script>
