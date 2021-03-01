@@ -3,13 +3,17 @@
     <v-toolbar :color="teamColor" dark flat>
       <v-toolbar-title v-if="customGame.blueTeamSummoners[0].win"
         ><span class="text-button">Blue팀</span>
-        <i class="fas fa-trophy" style="margin-left:1vh; color:#fbc02d"></i
-      ></v-toolbar-title>
+        <v-icon small color="#fbc02d" class="ml-1"
+          >fas fa-trophy</v-icon
+        ></v-toolbar-title
+      >
 
       <v-toolbar-title v-if="customGame.redTeamSummoners[0].win"
         ><span class="text-button">Red팀</span>
-        <i class="fas fa-trophy" style="margin-left:1vh; color:#fbc02d"></i
-      ></v-toolbar-title>
+        <v-icon small color="#fbc02d" class="ml-1"
+          >fas fa-trophy</v-icon
+        ></v-toolbar-title
+      >
 
       <v-spacer></v-spacer>
 
