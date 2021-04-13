@@ -1,5 +1,5 @@
 <template>
-  <v-app v-if="$vuetify.breakpoint.smAndDown">
+  <!-- <v-app v-if="$vuetify.breakpoint.smAndDown">
     <v-navigation-drawer v-model="drawer" app>
       <v-list dense>
         <v-list-item link to="/">
@@ -91,10 +91,10 @@
     <v-footer app color="light-blue">
       <span class="white--text">&copy; {{ new Date().getFullYear() }}</span>
     </v-footer>
-  </v-app>
+  </v-app> -->
 
-  <v-app v-else>
-    <v-app-bar app color="light-blue" dense>
+  <v-app>
+    <v-app-bar app color="light-blue" dense min-width="960">
       <v-toolbar-title>
         <router-link to="/">
           <!-- LoLien.kr -->

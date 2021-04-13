@@ -13,6 +13,9 @@ export default new Vuetify({
   },
   icons: {
     iconfont: "fa"
+  },
+  breakpoint: {
+    mobileBreakpoint: "0" // This is equivalent to a value of 960
   }
 });
 
