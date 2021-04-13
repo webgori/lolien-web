@@ -182,15 +182,14 @@
       v-if="
         leagueSubMenus.map(e => e.routeName).includes($router.currentRoute.name)
       "
-      class="grey lighten-5"
+      class="grey lighten-5 ma-0 pa-0"
     >
       <v-progress-linear
         :active="loading"
         color="primary"
         :indeterminate="true"
-        class="ma-0"
         height="5"
-        style="top: 1px;"
+        style="bottom: 22px;"
       />
       <v-container fluid>
         <v-row>
@@ -235,14 +234,13 @@
       </v-container>
     </v-main>
 
-    <v-main v-else>
+    <v-main v-else class="ma-0 pa-0">
       <v-progress-linear
         :active="loading"
         color="primary"
         :indeterminate="true"
-        class="ma-0"
         height="5"
-        style="top: 1px;"
+        style="bottom: 22px;"
       />
       <router-view :key="$route.fullPath" />
     </v-main>
